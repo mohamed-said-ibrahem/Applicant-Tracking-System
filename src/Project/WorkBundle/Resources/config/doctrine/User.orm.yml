@@ -1,0 +1,118 @@
+Project\WorkBundle\Entity\User:
+    type: entity
+    table: null
+    repositoryClass: Project\WorkBundle\Repository\UserRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        first_name:
+            type: string
+            length: 255
+        middle_name:
+            type: string
+            length: 255
+        last_name:
+            type: string
+            length: 255
+        address:
+            type: string
+            length: 255
+        email:
+            type: string
+            length: 255
+            unique: true
+        phone_number:
+            type: string
+            length: '11'
+            nullable: true
+            unique: true
+        id_number:
+           type: string
+           length: '14'
+           unique: true
+        date_available:
+           type: date
+        salary:
+           type: integer
+           length: '10'
+           nullable: true
+        vacancy:
+            type: string
+            length: 255
+        interviewed_before:
+            type: boolean
+        position: 
+            type: string
+            length: 255
+        school:
+            type: string
+            length: 255
+        school_from:
+            type: date
+        school_to:
+            type: date
+        school_degree:
+            type: string
+            length: 255
+        college:
+            type: string
+            length: 255
+        college_from: 
+            type: string
+            length: 255
+        college_to:
+            type: string
+            length: 255
+        graduated:
+            type: boolean
+        graduate_degree:
+            type: string
+            length: 255
+            nullable: true
+        worked_before:
+            type: string
+            length: 255
+            nullable: true
+        signature:
+            type: string
+            length: 255
+        created:
+            type: date
+        gedmo:
+            timestampable:
+            on: create
+        technical_test:
+            type: integer
+            nullable: true
+        iq_test:
+            type: integer
+            nullable: true
+        technical_comments:
+            type: string
+            length: 255
+            nullable: true
+        technical_result:
+            type: string
+            length: 255
+            nullable: true
+        personality_profile:
+            type: string
+            length: 255
+            nullable: true
+        hr_notes:
+            type: string
+            length: 255
+            nullable: true
+        gm_result:
+            type: string
+            length: 255
+            nullable: true
+        final_decision:
+            type: string
+            length: 255
+            nullable: true
+    lifecycleCallbacks: {  }
