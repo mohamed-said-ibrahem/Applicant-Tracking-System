@@ -1,0 +1,36 @@
+Project\WorkBundle\Entity\Degree:
+    type: entity
+    # ...
+    manyToOne:
+        Application:
+            targetEntity: Application
+            inversedBy: Degrees
+            joinColumn:
+                name: application_id
+                referencedColName: id
+    table: null
+    repositoryClass: Project\WorkBundle\Repository\DegreeRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            nullable: true
+        university:
+            type: string
+            length: 255
+            nullable: true
+        degreeFrom:
+            type: date
+            nullable: true
+            column: degree_from
+        degreeTo:
+            type: date
+            nullable: true
+            column: degree_to
+    lifecycleCallbacks: {  }
