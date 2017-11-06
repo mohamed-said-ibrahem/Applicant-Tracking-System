@@ -1,0 +1,65 @@
+WorkBundle\Entity\Position:
+    type: entity
+    # ...
+    manyToOne:
+        Application:
+            targetEntity: Application
+            inversedBy: Positions
+            joinColumn:
+                name: application_id
+                referencedColName: id
+    table: null
+    repositoryClass: WorkBundle\Repository\PositionRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        jobTitle:
+            type: string
+            length: 255
+            nullable: true
+            column: job_title
+        companyName:
+            type: string
+            length: 255
+            nullable: true
+            column: company_name
+        address:
+            type: string
+            length: 255
+            nullable: true
+        reason:
+            type: string
+            length: 255
+            nullable: true
+        responsibilities:
+            type: text
+            nullable: true
+        supervisor:
+            type: string
+            length: 255
+            nullable: true
+        startingSalary:
+            type: integer
+            nullable: true
+            column: starting_salary
+        endingSalary:
+            type: integer
+            nullable: true
+            column: ending_salary
+        fromDate:
+            type: date
+            nullable: true
+            column: from_date
+        toDate:
+            type: date
+            nullable: true
+            column: to_date
+        callSupervisor:
+            type: boolean
+            nullable: true
+            column: call_supervisor
+    lifecycleCallbacks: {  }

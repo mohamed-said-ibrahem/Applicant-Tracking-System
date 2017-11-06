@@ -1,0 +1,110 @@
+WorkBundle\Entity\Application:
+    type: entity
+    oneToMany:
+        Positions:
+            targetEntity: Position
+            mappedBy: Application
+    oneToMany:
+        degrees:
+            targetEntity: Degree
+            mappedBy: Application
+    oneToOne:
+        Education:
+            targetEntity: Education
+            mappedBy: Application
+    table: null
+    repositoryClass: WorkBundle\Repository\UserRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        first_name:
+            type: string
+            length: 255
+        middle_name:
+            type: string
+            length: 255
+        last_name:
+            type: string
+            length: 255
+        address:
+            type: string
+            length: 255
+        email:
+            type: string
+            length: 255
+            unique: true
+        phone_number:
+            type: string
+            length: 11
+            nullable: true
+            unique: true
+        id_card_number:
+           type: string
+           length: 14
+           unique: true
+        date_available:
+           type: date
+        desired_salary:
+           type: integer
+           length: 10
+           nullable: true
+        hiring_way:
+            type: string
+            length: 255
+        interviewed_before:
+            type: boolean
+        applied_position: 
+            type: string
+            length: 255
+        is_worked_before:
+            type: string
+            length: 255
+            nullable: true
+        signature:
+            type: string
+            length: 255
+        technical_test:
+            type: integer
+            nullable: true
+        iq_test:
+            type: integer
+            nullable: true
+        technical_comments:
+            type: string
+            length: 255
+            nullable: true
+        technical_result:
+            type: string
+            length: 255
+            nullable: true
+        personality_profile:
+            type: string
+            length: 255
+            nullable: true
+        hr_notes:
+            type: string
+            length: 255
+            nullable: true
+        gm_result:
+            type: string
+            length: 255
+            nullable: true
+        final_decision:
+            type: string
+            length: 255
+            nullable: true
+        created_at:
+            type: date
+            gedmo:
+              timestampable:
+                on: create
+        updated_at:
+            type: datetime
+            gedmo:
+              timestampable:
+                on: update        
+    lifecycleCallbacks: {  }

@@ -5,3 +5,10 @@ work:
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
+
+api_login_check:
+    path: /api/login_check
+    
+api_test:
+    path: /api/test
+    defaults:  { _controller: WorkBundle:Default:index }
