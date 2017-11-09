@@ -1,0 +1,20 @@
+WorkBundle\Entity\User:
+    type:  entity
+    table: fos_user
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        username:
+            type: string
+            length: 100
+        password:
+            type: string
+            length: 100
+        created_at:
+            type: datetime
+        updated_at:
+            type: datetime
+    lifecycleCallbacks: { }

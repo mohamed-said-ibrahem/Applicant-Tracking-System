@@ -147,7 +147,7 @@ class Degree
     /**
      * Set application
      *
-     * @param  \WorkBundle\Entity\Application $application
+     * @param \WorkBundle\Entity\Application $application
      *
      * @return Degree
      */

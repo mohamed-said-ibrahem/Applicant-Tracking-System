@@ -12,6 +12,10 @@ WorkBundle\Entity\Application:
         Education:
             targetEntity: Education
             mappedBy: Application
+    oneToOne:
+        Employee:
+            targetEntity: Employee
+            mappedBy: Application
     table: null
     repositoryClass: WorkBundle\Repository\UserRepository
     id:

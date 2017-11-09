@@ -8,7 +8,7 @@ namespace WorkBundle\Entity;
 class Employee
 {
     /**
-     * @var int
+     * @var integer
      */
     private $id;
 
@@ -82,11 +82,16 @@ class Employee
      */
     private $currentPosition;
 
+    /**
+     * @var \WorkBundle\Entity\Application
+     */
+    private $Application;
+
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -427,6 +432,30 @@ class Employee
     public function getCurrentPosition()
     {
         return $this->currentPosition;
+    }
+
+    /**
+     * Set application
+     *
+     * @param \WorkBundle\Entity\Application $application
+     *
+     * @return Employee
+     */
+    public function setApplication(\WorkBundle\Entity\Application $application = null)
+    {
+        $this->Application = $application;
+
+        return $this;
+    }
+
+    /**
+     * Get application
+     *
+     * @return \WorkBundle\Entity\Application
+     */
+    public function getApplication()
+    {
+        return $this->Application;
     }
 }
 

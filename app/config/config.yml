@@ -67,6 +67,16 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+fos_user:
+    db_driver: orm 
+    firewall_name: main
+    user_class: WorkBundle\Entity\User
+    # ...
+    from_email:
+        address: you@example.com
+        sender_name: You
+# ...
     
 # jwtAuth Configuration    
 lexik_jwt_authentication:
@@ -77,7 +87,7 @@ lexik_jwt_authentication:
     # ssh key pass phrase
     pass_phrase:         'dfhfdhgdfgdgdfgd'
     # token ttl
-    token_ttl:           3600
+    token_ttl:           10
     # key under which the user identity will be stored in the token payload
     user_identity_field: username
 
@@ -102,3 +112,12 @@ lexik_jwt_authentication:
         query_parameter:           # check token in query string parameter
             enabled: false
             name:    bearer
+            
+gesdinet_jwt_refresh_token:
+    ttl: 2592000
+    ttl_update: true    
+    firewall: api
+    user_provider: security.user.provider.concrete.in_memory
+#    user_provider: fos_user.user_provider.username
+#    refresh_token_entity: WorkBundle\JwtRefreshToken
+#    entity_manager:

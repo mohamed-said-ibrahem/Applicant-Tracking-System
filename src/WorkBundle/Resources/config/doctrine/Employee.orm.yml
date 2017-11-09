@@ -1,5 +1,13 @@
 WorkBundle\Entity\Employee:
     type: entity
+    # ...
+    oneToOne:
+        Application:
+            targetEntity: Application
+            inversedBy: Employee
+            joinColumn:
+                name: application_id
+                referencedColName: id
     table: null
     repositoryClass: WorkBundle\Repository\EmployeeRepository
     id:
