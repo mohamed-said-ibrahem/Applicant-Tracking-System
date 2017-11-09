@@ -74,7 +74,7 @@ fos_user:
     user_class: WorkBundle\Entity\User
     # ...
     from_email:
-        address: you@example.com
+        address: example@example.com
         sender_name: You
 # ...
     
@@ -87,7 +87,7 @@ lexik_jwt_authentication:
     # ssh key pass phrase
     pass_phrase:         'dfhfdhgdfgdgdfgd'
     # token ttl
-    token_ttl:           10
+    token_ttl:           100
     # key under which the user identity will be stored in the token payload
     user_identity_field: username
 
