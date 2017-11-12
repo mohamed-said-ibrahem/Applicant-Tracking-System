@@ -87,7 +87,7 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
-        - { path: ^/applicant/[1-9]/edit$, role: IS_AUTHENTICATED_FULLY }
-        - { path: ^/applicant/[1-9]/delete$, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/applicant/[1-9]+/edit$, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/applicant/[1-9]+/delete$, role: IS_AUTHENTICATED_FULLY }
 
           # ...
