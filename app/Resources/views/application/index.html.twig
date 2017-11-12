@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Applications list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>First_name</th>
+                <th>Middle_name</th>
+                <th>Last_name</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Phone_number</th>
+                <th>Id_card_number</th>
+                <th>Date_available</th>
+                <th>Desired_salary</th>
+                <th>Hiring_way</th>
+                <th>Interviewed_before</th>
+                <th>Applied_position</th>
+                <th>Is_worked_before</th>
+                <th>Signature</th>
+                <th>Technical_test</th>
+                <th>Iq_test</th>
+                <th>Technical_comments</th>
+                <th>Technical_result</th>
+                <th>Personality_profile</th>
+                <th>Hr_notes</th>
+                <th>Gm_result</th>
+                <th>Final_decision</th>
+                <th>Created_at</th>
+                <th>Updated_at</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for application in applications %}
+            <tr>
+                <td><a href="{{ path('applicat_show', { 'id': application.id }) }}">{{ application.id }}</a></td>
+                <td>{{ application.firstname }}</td>
+                <td>{{ application.middlename }}</td>
+                <td>{{ application.lastname }}</td>
+                <td>{{ application.address }}</td>
+                <td>{{ application.email }}</td>
+                <td>{{ application.phonenumber }}</td>
+                <td>{{ application.idcardnumber }}</td>
+                <td>{% if application.dateavailable %}{{ application.dateavailable|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ application.desiredsalary }}</td>
+                <td>{{ application.hiringway }}</td>
+                <td>{% if application.interviewedbefore %}Yes{% else %}No{% endif %}</td>
+                <td>{{ application.appliedposition }}</td>
+                <td>{{ application.isworkedbefore }}</td>
+                <td>{{ application.signature }}</td>
+                <td>{{ application.technicaltest }}</td>
+                <td>{{ application.iqtest }}</td>
+                <td>{{ application.technicalcomments }}</td>
+                <td>{{ application.technicalresult }}</td>
+                <td>{{ application.personalityprofile }}</td>
+                <td>{{ application.hrnotes }}</td>
+                <td>{{ application.gmresult }}</td>
+                <td>{{ application.finaldecision }}</td>
+                <td>{% if application.createdat %}{{ application.createdat|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if application.updatedat %}{{ application.updatedat|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('applicat_show', { 'id': application.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('applicat_edit', { 'id': application.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('applicat_new') }}">Create a new application</a>
+        </li>
+    </ul>
+{% endblock %}

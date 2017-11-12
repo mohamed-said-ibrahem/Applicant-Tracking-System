@@ -1,3 +1,7 @@
+work_applicat:
+    resource: "@WorkBundle/Resources/config/routing/application.yml"
+    prefix:   /applicant
+
 work_homepage:
     path:     /
     defaults: { _controller: WorkBundle:Default:index }

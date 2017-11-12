@@ -110,5 +110,5 @@ WorkBundle\Entity\Application:
             type: datetime
             gedmo:
               timestampable:
-                on: update        
-    lifecycleCallbacks: {  }
+                on: update    
+    lifecycleCallbacks: {}
