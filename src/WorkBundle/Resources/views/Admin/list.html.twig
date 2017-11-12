@@ -1,0 +1,94 @@
+{#{% extends "::base.html.twig" %}
+
+{% block title %}WorkBundle:Admin:list{% endblock %}
+
+{% block body %}
+<h1>Welcome to the Admin:list page</h1>
+{% endblock %}
+#}
+
+
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1 class="ui aligned header">{{ 'task.list.title'|trans }}</h1>
+    
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+    <div class="ui green icon message">
+        <i class="info circle icon"></i>
+        <div class="content">
+            <div class="header">The action was succesful!</div>
+            <p>{{ flashMessage }}</p>
+        </div>
+    </div>
+    {% endfor %}
+
+{#    <div style="float:right;">
+        <a href="{{ path('applicant_new') }}" title="{{ 'user.button.add_user'|trans }}">
+            <button class="large ui icon button"><i class="add user icon"></i></button>
+        </a>
+    </div>#}
+	
+    <h2 class="ui aligned header">{{ 'Application.list.header'|trans }}</h2>
+    <table class="ui compact blue sortable table">
+        <thead>
+            <tr>
+                <th>{{ 'Application.list.id'|trans }}</th>
+                <th>{{ 'Application.list.first_name'|trans }}</th>
+                <th>{{ 'Application.list.second_name'|trans }}</th>
+                <th>{{ 'Application.list.last_name'|trans }}</th>
+                <th>{{ 'Application.list.email'|trans }}</th>
+                <th>{{ 'Application.list.phone_number'|trans }}</th>
+                <th style="width:125px;"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                
+                <td>{{ task.id }}</td>
+                <td>{{ task.firstname }}</td>
+                <td>{{ task.middlename }}</td>
+                <td>{{ task.lastname}}</td>
+                <td>{{ task.email }}</td>
+                <td>{{ task.phonenumber }}</td>
+                <td>
+{#                    <a href="{{ path('edit', {'id': task.id}) }}" title="Edit">
+                        <button class="mini ui icon button"><i class="edit icon"></i></button>#}
+                    </a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="center align"><h3>{{ 'Application.list.notfound'|trans }}</h3>/td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if pager.total_pages > 1 %}
+  <div style="width:100%;text-align:right;">
+    <div class="ui pagination menu">
+      <a class="{% if pager.current_page == 1 %}disabled {% endif %}item" 
+      {% if pager.current_page > 1 %}
+        href="{{ path('list', {'page': (pager.current_page - 1)}) }}"
+      {% endif %}>
+        &lt;
+      </a>
+
+      {% for i in 1..pager.total_pages %}
+        <a class="{% if pager.current_page == loop.index %}active {% endif %}item"
+          href="{{ path('list', {'page': loop.index}) }}">
+            {{ loop.index }}
+        </a>
+      {% endfor %}
+			
+      <a class="{% if pager.current_page == pager.total_pages %}disabled {% endif %}item"
+      {% if pager.current_page < pager.total_pages %}
+        href="{{ path('list', {'page': (pager.current_page + 1)}) }}"
+      {% endif %}>
+        &gt;
+      </a>
+    </div>
+  </div>
+  {% endif %}
+{% endblock %}

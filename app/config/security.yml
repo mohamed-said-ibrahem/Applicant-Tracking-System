@@ -8,8 +8,8 @@ security:
 
         
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: ROLE_ADMIN
+        ROLE_USER:       ROLE_USER
+        ROLE_ADMIN:      ROLE_ADMIN
         
     providers:
         fos_userbundle:
@@ -17,7 +17,9 @@ security:
         in_memory:
             memory:
                 users:
-                    admin: { password: admin }
+                    admin: 
+                      password: admin 
+                      roles: 'ROLE_ADMIN'
 #        custom_provider:
 #            entity:
 #                class: WorkBundle:User
@@ -87,7 +89,6 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
-        - { path: ^/applicant/[1-9]+/edit$, role: IS_AUTHENTICATED_FULLY }
-        - { path: ^/applicant/[1-9]+/delete$, role: IS_AUTHENTICATED_FULLY }
-
+        - { path: ^/applicant/[1-9]+/edit$, role: ROLE_USER }
+        - { path: ^/applicant/[1-9]+/delete$, role: ROLE_ADMIN }
           # ...

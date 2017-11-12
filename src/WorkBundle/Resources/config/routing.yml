@@ -5,3 +5,7 @@ work_applicat:
 work_homepage:
     path:     /
     defaults: { _controller: WorkBundle:Default:index }
+
+list:
+    path:     /list
+    defaults: { _controller: WorkBundle:Admin:list }

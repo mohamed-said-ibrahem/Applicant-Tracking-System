@@ -102,13 +102,10 @@ WorkBundle\Entity\Application:
             length: 255
             nullable: true
         created_at:
-            type: date
-            gedmo:
-              timestampable:
-                on: create
+            type: datetime
         updated_at:
             type: datetime
-            gedmo:
-              timestampable:
-                on: update    
-    lifecycleCallbacks: {}
+            
+    lifecycleCallbacks: 
+        prePersist: [ setTimeStamps ]
+        preUpdate: [ updateTime ]

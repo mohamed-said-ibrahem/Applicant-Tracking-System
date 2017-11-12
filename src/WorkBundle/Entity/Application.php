@@ -1,6 +1,7 @@
 <?php
 
 namespace WorkBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Application
@@ -792,6 +793,22 @@ class Application
     public function getPositions()
     {
         return $this->Positions;
+    }
+    /**
+     * @ORM\PrePersist
+     */
+    public function setTimeStamps()
+    {
+        $this->setCreatedAt(new \DateTime);
+        $this->setUpdatedAt(new \DateTime);
+        }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateTime()
+    {
+        $this->setUpdatedAt(new \DateTime);
     }
 }
 
