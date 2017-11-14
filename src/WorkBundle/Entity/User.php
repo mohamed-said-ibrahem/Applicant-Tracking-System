@@ -10,13 +10,12 @@ use FOS\UserBundle\Model\User as BaseUser;
  */
 class User extends BaseUser
 {
-    
-    public function __construct() {
+    function __construct() {
+        
     parent::__construct();
-    $this->addRole("ROLE_ADMIN");
-    }
-
+    $this->addRole("ROLE_SUPER_ADMIN");
     
+    }
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")

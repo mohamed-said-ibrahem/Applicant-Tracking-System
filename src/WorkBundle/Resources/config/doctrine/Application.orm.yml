@@ -1,21 +1,28 @@
 WorkBundle\Entity\Application:
     type: entity
+    # ...
     oneToMany:
+        Degrees:
+            targetEntity: Degree
+            mappedBy: Application
+            fetch: LAZY
+            
         Positions:
             targetEntity: Position
             mappedBy: Application
-    oneToMany:
-        degrees:
-            targetEntity: Degree
-            mappedBy: Application
-    oneToOne:
-        Education:
-            targetEntity: Education
-            mappedBy: Application
-    oneToOne:
-        Employee:
-            targetEntity: Employee
-            mappedBy: Application
+            fetch: LAZY
+    # ...        
+#    oneToOne:
+##        Education:
+##            targetEntity: Education
+##            mappedBy: Application
+##            fetch: LAZY
+#            
+##        Employee:
+##            targetEntity: Employee
+##            mappedBy: Application
+##            fetch: LAZY
+    # ...
     table: null
     repositoryClass: WorkBundle\Repository\UserRepository
     id:

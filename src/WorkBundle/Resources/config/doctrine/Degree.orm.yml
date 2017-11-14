@@ -5,6 +5,7 @@ WorkBundle\Entity\Degree:
         Application:
             targetEntity: Application
             inversedBy: Degrees
+            fetch: LAZY
             joinColumn:
                 name: application_id
                 referencedColName: id

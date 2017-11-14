@@ -2,7 +2,6 @@
 
 namespace WorkBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Application
  */
@@ -139,6 +138,16 @@ class Application
     private $Education;
 
     /**
+     * @var \WorkBundle\Entity\Employee
+     */
+    private $Employee;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $Degrees;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $Positions;
@@ -148,6 +157,7 @@ class Application
      */
     public function __construct()
     {
+        $this->Degrees = new \Doctrine\Common\Collections\ArrayCollection();
         $this->Positions = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -762,6 +772,64 @@ class Application
     }
 
     /**
+     * Set employee
+     *
+     * @param \WorkBundle\Entity\Employee $employee
+     *
+     * @return Application
+     */
+    public function setEmployee(\WorkBundle\Entity\Employee $employee = null)
+    {
+        $this->Employee = $employee;
+
+        return $this;
+    }
+
+    /**
+     * Get employee
+     *
+     * @return \WorkBundle\Entity\Employee
+     */
+    public function getEmployee()
+    {
+        return $this->Employee;
+    }
+
+    /**
+     * Add degree
+     *
+     * @param \WorkBundle\Entity\Degree $degree
+     *
+     * @return Application
+     */
+    public function addDegree(\WorkBundle\Entity\Degree $degree)
+    {
+        $this->Degrees[] = $degree;
+
+        return $this;
+    }
+
+    /**
+     * Remove degree
+     *
+     * @param \WorkBundle\Entity\Degree $degree
+     */
+    public function removeDegree(\WorkBundle\Entity\Degree $degree)
+    {
+        $this->Degrees->removeElement($degree);
+    }
+
+    /**
+     * Get degrees
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDegrees()
+    {
+        return $this->Degrees;
+    }
+
+    /**
      * Add position
      *
      * @param \WorkBundle\Entity\Position $position
@@ -799,16 +867,16 @@ class Application
      */
     public function setTimeStamps()
     {
-        $this->setCreatedAt(new \DateTime);
-        $this->setUpdatedAt(new \DateTime);
-        }
+        $this->setCreatedAt(new \DateTime());
+        $this->setUpdatedAt(new \DateTime());
+    }
 
     /**
      * @ORM\PreUpdate
      */
     public function updateTime()
     {
-        $this->setUpdatedAt(new \DateTime);
+        $this->setUpdatedAt(new \DateTime());
     }
 }
 

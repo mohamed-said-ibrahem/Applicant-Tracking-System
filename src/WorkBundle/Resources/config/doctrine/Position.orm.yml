@@ -5,6 +5,7 @@ WorkBundle\Entity\Position:
         Application:
             targetEntity: Application
             inversedBy: Positions
+            fetch: LAZY
             joinColumn:
                 name: application_id
                 referencedColName: id

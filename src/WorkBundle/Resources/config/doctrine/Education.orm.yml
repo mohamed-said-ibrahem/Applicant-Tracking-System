@@ -1,10 +1,11 @@
 WorkBundle\Entity\Education:
     type: entity
-     # ...
+    # ...
     oneToOne:
         Application:
             targetEntity: Application
             inversedBy: Education
+            fetch: LAZY
             joinColumn:
                 name: application_id
                 referencedColName: id
