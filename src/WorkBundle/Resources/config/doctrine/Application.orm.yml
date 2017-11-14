@@ -1,5 +1,7 @@
 WorkBundle\Entity\Application:
     type: entity
+    repositoryClass: WorkBundle\Repository\ApplicationRepository
+
     # ...
     oneToMany:
         Degrees:

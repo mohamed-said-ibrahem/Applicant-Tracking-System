@@ -9,3 +9,7 @@ work_homepage:
 list:
     path:     /list
     defaults: { _controller: WorkBundle:Admin:list }
+
+index:
+    path:     /try
+    defaults: { _controller: WorkBundle:Test:index }

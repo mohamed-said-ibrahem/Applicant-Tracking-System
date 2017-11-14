@@ -133,16 +133,6 @@ class Application
     private $updated_at;
 
     /**
-     * @var \WorkBundle\Entity\Education
-     */
-    private $Education;
-
-    /**
-     * @var \WorkBundle\Entity\Employee
-     */
-    private $Employee;
-
-    /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $Degrees;
@@ -748,54 +738,6 @@ class Application
     }
 
     /**
-     * Set education
-     *
-     * @param \WorkBundle\Entity\Education $education
-     *
-     * @return Application
-     */
-    public function setEducation(\WorkBundle\Entity\Education $education = null)
-    {
-        $this->Education = $education;
-
-        return $this;
-    }
-
-    /**
-     * Get education
-     *
-     * @return \WorkBundle\Entity\Education
-     */
-    public function getEducation()
-    {
-        return $this->Education;
-    }
-
-    /**
-     * Set employee
-     *
-     * @param \WorkBundle\Entity\Employee $employee
-     *
-     * @return Application
-     */
-    public function setEmployee(\WorkBundle\Entity\Employee $employee = null)
-    {
-        $this->Employee = $employee;
-
-        return $this;
-    }
-
-    /**
-     * Get employee
-     *
-     * @return \WorkBundle\Entity\Employee
-     */
-    public function getEmployee()
-    {
-        return $this->Employee;
-    }
-
-    /**
      * Add degree
      *
      * @param \WorkBundle\Entity\Degree $degree
@@ -876,7 +818,7 @@ class Application
      */
     public function updateTime()
     {
-        $this->setUpdatedAt(new \DateTime());
+         $this->setUpdatedAt(new \DateTime());
     }
 }
 

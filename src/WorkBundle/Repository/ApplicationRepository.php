@@ -2,6 +2,8 @@
 
 namespace WorkBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
+use WorkBundle\Entity\Application;
 /**
  * UserRepository
  *
@@ -10,4 +12,30 @@ namespace WorkBundle\Repository;
  */
 class ApplicationRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findApplicantByUsernameOrEmail ($username)
+    {
+        $concat = $this->createQueryBuilder('a')
+                ->select()
+                ->where('a.first_name LIKE :username')
+                ->orWhere('a.middle_name LIKE :username')
+                ->orWhere('a.last_name LIKE :username')
+                ->setParameter('username', '%' . $username . '%')
+                ->orWhere('a.email LIKE :email')
+                ->setParameter('email', '%' . $username . '%')
+                ->getQuery()
+                ->getResult();
+        return $concat;
+    }
+    public function findApplicantByPosition ($userposition)
+    {
+        $position = $this->createQueryBuilder('b')
+                ->select()
+                ->where('b.applied_position LIKE :userposition')
+                ->setParameter('userposition', '%' . $userposition . '%')
+                ->getQuery()
+                ->getResult();
+        return $position;
+    }
+    
+
 }
