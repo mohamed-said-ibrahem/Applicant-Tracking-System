@@ -24,8 +24,9 @@ class ApplicationController extends Controller
 //    $em = $this->getDoctrine()->getManager();
 //    $applicantRepo = $em->getRepository('WorkBundle:Application');
 //    //    dump(get_class_methods($applicantRepo));die;
-////        dump($applicantRepo->findApplicantByUsernameOrEmail('mohamed'));die;
-//        dump($applicantRepo->findApplicantByPosition('php'));die;
+// //        dump($applicantRepo->findApplicantByUsernameOrEmail('mohamed'));die;
+//     //    dump($applicantRepo->findByPhone('01004200590'));die;
+
 //    }
     
     

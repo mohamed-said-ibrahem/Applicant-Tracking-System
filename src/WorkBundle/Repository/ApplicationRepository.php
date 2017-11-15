@@ -12,7 +12,8 @@ use WorkBundle\Entity\Application;
  */
 class ApplicationRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findApplicantByUsernameOrEmail ($username)
+    
+    public function findByUserOrEmail($username)
     {
         $concat = $this->createQueryBuilder('a')
                 ->select()
@@ -26,7 +27,8 @@ class ApplicationRepository extends \Doctrine\ORM\EntityRepository
                 ->getResult();
         return $concat;
     }
-    public function findApplicantByPosition ($userposition)
+    
+    public function findByPosition($userposition)
     {
         $position = $this->createQueryBuilder('b')
                 ->select()
@@ -37,5 +39,15 @@ class ApplicationRepository extends \Doctrine\ORM\EntityRepository
         return $position;
     }
     
+    public function findByPhone($phone)
+    {
+        $phone = $this->createQueryBuilder('c')
+                ->select()
+                ->where('c.phone_number = :phone')
+                ->setParameter('phone',$phone)
+                ->getQuery()
+                ->getResult();
+        return $phone;
+    }
 
 }
