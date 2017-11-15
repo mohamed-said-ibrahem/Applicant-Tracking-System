@@ -14,7 +14,19 @@ WorkBundle\Entity\Application:
             mappedBy: Application
             fetch: LAZY
     # ...        
-#    oneToOne:
+    oneToOne:
+        Education:
+            targetEntity: Education
+            fetch: LAZY
+            joinColumn:
+                name: id
+                referencedColName: application_id
+        Employee:
+            targetEntity: Employee
+            fetch: LAZY
+            joinColumn:
+                name: id
+                referencedColName: application_id       
 ##        Education:
 ##            targetEntity: Education
 ##            mappedBy: Application

@@ -1,14 +1,14 @@
 WorkBundle\Entity\Employee:
     type: entity
     # ...
-    oneToOne:
-        Application:
-            targetEntity: Application
-            inversedBy: Employee
-            fetch: LAZY
-            joinColumn:
-                name: application_id
-                referencedColName: id
+#    oneToOne:
+#        Application:
+#            targetEntity: Application
+#            inversedBy: Employee
+#            fetch: LAZY
+#            joinColumn:
+#                name: application_id
+#                referencedColName: id
     table: null
     repositoryClass: WorkBundle\Repository\EmployeeRepository
     id:

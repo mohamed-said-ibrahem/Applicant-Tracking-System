@@ -5,6 +5,7 @@ namespace WorkBundle\Controller;
 use WorkBundle\Entity\Application;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use WorkBundle\Service\ApplicationService;
 
 /**
  * Application controller.
@@ -16,6 +17,19 @@ class ApplicationController extends Controller
      * Lists all application entities.
      *
      */
+    
+    
+//     public function testAction()
+//    {
+//    $em = $this->getDoctrine()->getManager();
+//    $applicantRepo = $em->getRepository('WorkBundle:Application');
+//    //    dump(get_class_methods($applicantRepo));die;
+////        dump($applicantRepo->findApplicantByUsernameOrEmail('mohamed'));die;
+//        dump($applicantRepo->findApplicantByPosition('php'));die;
+//    }
+    
+    
+    
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();

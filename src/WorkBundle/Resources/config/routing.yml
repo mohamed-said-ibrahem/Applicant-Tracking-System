@@ -12,4 +12,4 @@ list:
 
 index:
     path:     /try
-    defaults: { _controller: WorkBundle:Test:index }
+    defaults: { _controller: WorkBundle:Application:test }

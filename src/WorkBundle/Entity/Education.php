@@ -2,6 +2,8 @@
 
 namespace WorkBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Education
  */

@@ -3,6 +3,8 @@
 namespace WorkBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use WorkBundle\Service\ApplicationService;
+
 
 class TestController extends Controller
 {
@@ -14,6 +16,7 @@ class TestController extends Controller
 //    dump($applicantRepo->findApplicantByUsernameOrEmail('mohamed'));die;
 //    dump($applicantRepo->findApplicantByPosition('php'));die;
     
-    
     }
+    
 }
+

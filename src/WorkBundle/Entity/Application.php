@@ -1,7 +1,9 @@
 <?php
 
 namespace WorkBundle\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Application
  */
@@ -131,6 +133,16 @@ class Application
      * @var \DateTime
      */
     private $updated_at;
+
+    /**
+     * @var \WorkBundle\Entity\Education
+     */
+    private $Education;
+
+    /**
+     * @var \WorkBundle\Entity\Employee
+     */
+    private $Employee;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -735,6 +747,54 @@ class Application
     public function getUpdatedAt()
     {
         return $this->updated_at;
+    }
+
+    /**
+     * Set education
+     *
+     * @param \WorkBundle\Entity\Education $education
+     *
+     * @return Application
+     */
+    public function setEducation(\WorkBundle\Entity\Education $education = null)
+    {
+        $this->Education = $education;
+
+        return $this;
+    }
+
+    /**
+     * Get education
+     *
+     * @return \WorkBundle\Entity\Education
+     */
+    public function getEducation()
+    {
+        return $this->Education;
+    }
+
+    /**
+     * Set employee
+     *
+     * @param \WorkBundle\Entity\Employee $employee
+     *
+     * @return Application
+     */
+    public function setEmployee(\WorkBundle\Entity\Employee $employee = null)
+    {
+        $this->Employee = $employee;
+
+        return $this;
+    }
+
+    /**
+     * Get employee
+     *
+     * @return \WorkBundle\Entity\Employee
+     */
+    public function getEmployee()
+    {
+        return $this->Employee;
     }
 
     /**
