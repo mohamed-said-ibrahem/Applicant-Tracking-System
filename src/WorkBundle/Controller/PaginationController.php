@@ -8,18 +8,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-
-class AdminController extends Controller
+class PaginationController extends Controller
 {
     public function listAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        
-        $pu = new PageUtility($request, $em, 'WorkBundle:Application', 2, 'id');
-        return $this->render('WorkBundle:Admin:list.html.twig',[
+        $em = $this->getDoctrine()->getManager();   
+            
+        $pu = new PageUtility($request, $em, 'WorkBundle:Application', 2, 'applied_position');
+        return $this->render('WorkBundle:Pagination:list.html.twig',[
             'tasks' => $pu->getRecords(),
             'pager' => $pu->getDisplayParameters(),
         ]);
     }
-
 }

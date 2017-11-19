@@ -22,17 +22,18 @@ class ApplicationService {
                 ->findByUserOrEmail($input);
     }
     
-    public function findApplicantByPosition($position)
-    {
-        return $this->em->getRepository('WorkBundle:Application')
-                ->findByPosition($position);
-    }
     
     public function findApplicantByPhone($phone)
     {
-        return $this->em->getRepository($entityName)
-                ->findByPhone($phone);
+        return $this->em->getRepository('WorkBundle:Application')
+        ->findByPhone($phone);
     }
     
-    
+    public function filterApplicantsByPosition($position)
+    {
+        return $this->em->getRepository('WorkBundle:Application')
+                ->filterByPosition($position);
+    }
+
+
 }

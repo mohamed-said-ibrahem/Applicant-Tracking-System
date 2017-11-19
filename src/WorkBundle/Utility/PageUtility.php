@@ -34,7 +34,7 @@ class PageUtility {
         $this->totalRecords = $this->getTotal();
         $this->setCurrentPage();
     }
-    
+    //total number of elements
     private function getTotal() {
         $total = $this->em->getRepository($this->entityName)
             ->createQueryBuilder('t')
@@ -44,16 +44,20 @@ class PageUtility {
         return $total;
     }
     
-     private function setCurrentPage() {
+    private function setCurrentPage() {
+         //number of page to set
+         //current page  elements
         $this->currentPage = $this->request->get('page');
+        //default value
         if(empty($this->currentPage)) {
             $this->currentPage = 1;
         }
+        //operation to limit the pags number and get the total pages elements
         $this->totalPages = ceil($this->totalRecords/$this->pageSize);
         if(($this->currentPage * $this->pageSize) > $this->totalRecords) {
             $this->currentPage = $this->totalPages;
         }
-        // Offset for db table
+        // Offset for db table to limit the query
         if($this->currentPage > 1) {
             $this->offset = ($this->currentPage - 1) * $this->pageSize;
         } else {
@@ -61,7 +65,7 @@ class PageUtility {
         }
     }
     
-     public function getRecords() {
+    public function getRecords() {
         $records = $this->em->getRepository($this->entityName)
             ->createQueryBuilder('t')
             ->orderBy('t.' . $this->sortField, 'ASC')

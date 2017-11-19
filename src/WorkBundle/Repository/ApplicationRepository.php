@@ -12,7 +12,7 @@ use WorkBundle\Entity\Application;
  */
 class ApplicationRepository extends \Doctrine\ORM\EntityRepository
 {
-    
+
     public function findByUserOrEmail($username)
     {
         $concat = $this->createQueryBuilder('a')
@@ -23,22 +23,12 @@ class ApplicationRepository extends \Doctrine\ORM\EntityRepository
                 ->setParameter('username', '%' . $username . '%')
                 ->orWhere('a.email LIKE :email')
                 ->setParameter('email', '%' . $username . '%')
+                // ->orderBy('a.first_name', 'ASC')
                 ->getQuery()
                 ->getResult();
         return $concat;
     }
-    
-    public function findByPosition($userposition)
-    {
-        $position = $this->createQueryBuilder('b')
-                ->select()
-                ->where('b.applied_position LIKE :userposition')
-                ->setParameter('userposition', '%' . $userposition . '%')
-                ->getQuery()
-                ->getResult();
-        return $position;
-    }
-    
+     
     public function findByPhone($phone)
     {
         $phone = $this->createQueryBuilder('c')
@@ -49,5 +39,21 @@ class ApplicationRepository extends \Doctrine\ORM\EntityRepository
                 ->getResult();
         return $phone;
     }
+
+    public function filterByPosition($userposition)
+    {
+        $position = $this->createQueryBuilder('b')
+                ->select()
+                ->where('b.applied_position = :userposition')
+                ->setParameter('userposition', $userposition )
+                ->getQuery()
+                ->getResult();
+        return $position;
+    }
+
+    // public function sortByName($arr)
+    // {
+
+    // }
 
 }

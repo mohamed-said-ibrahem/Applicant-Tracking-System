@@ -6,6 +6,7 @@ use WorkBundle\Entity\Application;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use WorkBundle\Service\ApplicationService;
+use WorkBundle\Utility\PageUtility;
 
 /**
  * Application controller.
@@ -18,28 +19,53 @@ class ApplicationController extends Controller
      *
      */
     
-    
-//     public function testAction()
-//    {
-//    $em = $this->getDoctrine()->getManager();
-//    $applicantRepo = $em->getRepository('WorkBundle:Application');
-//    //    dump(get_class_methods($applicantRepo));die;
-// //        dump($applicantRepo->findApplicantByUsernameOrEmail('mohamed'));die;
-//     //    dump($applicantRepo->findByPhone('01004200590'));die;
-
-//    }
-    
-    
-    
-    public function indexAction()
+   public function listAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        //$em = $this->getDoctrine()->getManager();       
+        //$pu = new PageUtility($request, $em, 'WorkBundle:Application', 2, 'id');
+        // return $this->render('WorkBundle:Pagination:list.html.twig',[
+        //     'tasks' => $pu->getRepository('WorkBundle:Application')
+        //     ->findByUserOrEmail('mohamed'),
+        //     //'tasks' => $pu->getRecords(),
+        //     'pager' => $pu->getDisplayParameters(),
+        // ]);
+    }
 
-        $applications = $em->getRepository('WorkBundle:Application')->findAll();
+   public function testAction()
+   {
+   $em = $this->getDoctrine()->getManager();
+   $applicantRepo = $em->getRepository('WorkBundle:Application');
+   //    dump(get_class_methods($applicantRepo));die;
+    //    dump($applicantRepo->findByUserOrEmail('yahoo'));die;
+    $arr = $applicantRepo->findByUserOrEmail('mohamed');
+    dump($arr);
+    // $output = $applicantRepo->sortByName($arr);
+    // dump($output);die;
 
-        return $this->render('application/index.html.twig', array(
-            'applications' => $applications,
-        ));
+   } 
+    
+    public function indexAction(Request $request)
+    {
+        // $em = $this->getDoctrine()->getManager();
+
+        // $applications = $em->getRepository('WorkBundle:Application')->filterByPosition('PHP')
+        // ;
+
+        // //dump($applications);die;
+        // return $this->render('application/index.html.twig', array(
+        //     'applications' => $applications,
+        // ));
+
+        
+        $em = $this->getDoctrine()->getManager();       
+        $pu = new PageUtility($request, $em, 'WorkBundle:Application', 2, 'applied_position');
+        return $this->render('application/index.html.twig',[
+               'applications' => $pu->getRecords(),
+               'pager' => $pu->getDisplayParameters(),
+        ]);
+    
+    
+    
     }
 
     /**

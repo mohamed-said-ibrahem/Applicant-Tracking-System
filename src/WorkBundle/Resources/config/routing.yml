@@ -7,8 +7,8 @@ work_homepage:
     defaults: { _controller: WorkBundle:Default:index }
 
 list:
-    path:     /list
-    defaults: { _controller: WorkBundle:Admin:list }
+    path:     /applicant
+    defaults: { _controller: WorkBundle:Application:index }
 
 index:
     path:     /try
