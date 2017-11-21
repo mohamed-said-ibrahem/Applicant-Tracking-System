@@ -371,3 +371,4 @@ class Position
         return $this->Application;
     }
 }
+

@@ -881,3 +881,4 @@ class Application
          $this->setUpdatedAt(new \DateTime());
     }
 }
+

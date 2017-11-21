@@ -29,8 +29,51 @@ services:
         public: true
         tags: ['controller.service_arguments']
         
-
+    WorkBundle\EventListener\ExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }    
+            
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+
+    app.jwt_token_authenticator:
+        # parent: lexik_jwt_authentication.security.guard.jwt_token_authenticator
+        class: WorkBundle\Security\Guard\JWTAuthenticator
+
+    acme_api.event.jwt_authenticated_listener:
+        class: WorkBundle\EventListener\JWTAuthenticatedListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_authenticated, method: onJWTAuthenticated }
+
+    acme_api.event.authentication_success_listener:
+        class: WorkBundle\EventListener\AuthenticationSuccessListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse } 
+
+    acme_api.event.authentication_failure_listener:
+        class: WorkBundle\EventListener\AuthenticationFailureListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_failure, method: onAuthenticationFailureResponse }
+
+    acme_api.event.jwt_invalid_listener:
+        class: WorkBundle\EventListener\JWTInvalidListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_invalid, method: onJWTInvalid }
+
+    acme_api.event.jwt_invalid_listener:
+        class: WorkBundle\EventListener\JWTInvalidListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_not_found, method: onJWTNotFound }
+
+    acme_api.event.jwt_expired_listener:
+        class: WorkBundle\EventListener\JWTExpiredListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_expired, method: onJWTExpired }
+
+
+
+
+
+

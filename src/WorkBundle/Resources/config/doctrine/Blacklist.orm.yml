@@ -1,0 +1,19 @@
+WorkBundle\Entity\Blacklist:
+    type: entity
+    table: null
+    repositoryClass: WorkBundle\Repository\BlacklistRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        token:
+            type: string
+            length: '1500'
+            unique: true
+        createdAt:
+            type: datetime
+            column: created_at
+    lifecycleCallbacks: {  }

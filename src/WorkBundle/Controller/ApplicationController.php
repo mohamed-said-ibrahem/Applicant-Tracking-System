@@ -21,6 +21,7 @@ class ApplicationController extends Controller
     
    public function listAction(Request $request)
     {
+        
         //$em = $this->getDoctrine()->getManager();       
         //$pu = new PageUtility($request, $em, 'WorkBundle:Application', 2, 'id');
         // return $this->render('WorkBundle:Pagination:list.html.twig',[
@@ -29,6 +30,7 @@ class ApplicationController extends Controller
         //     //'tasks' => $pu->getRecords(),
         //     'pager' => $pu->getDisplayParameters(),
         // ]);
+
     }
 
    public function testAction()

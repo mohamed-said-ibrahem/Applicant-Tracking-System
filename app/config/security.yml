@@ -58,7 +58,9 @@ security:
             anonymous: true
             guard:
                 authenticators:
-                    - lexik_jwt_authentication.jwt_token_authenticator
+                    - app.jwt_token_authenticator
+                    # - lexik_jwt_authentication.jwt_token_authenticator
+ 
         
         refresh:
             pattern:  ^/api/token/refresh
