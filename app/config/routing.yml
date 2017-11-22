@@ -20,3 +20,8 @@ api_test:
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+revoke_token:   
+    path: /api/logout    
+    defaults: { _controller: WorkBundle:Application:logout}
+    methods: [POST]

@@ -1,7 +1,8 @@
 <?php
 
 namespace WorkBundle\Repository;
-
+use WorkBundle\Entity\Blacklist;
+use WorkBundle\Repository\BlacklistRepository;
 /**
  * BlacklistRepository
  *
@@ -10,4 +11,16 @@ namespace WorkBundle\Repository;
  */
 class BlacklistRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function blackToken($token)
+    {       
+            $em = $this->getEntityManager();        
+            $blackObject = new Blacklist;        
+            $blackObject->setToken($token);        
+            $em->persist($blackObject);        
+            $em->flush();
+    }
+    public function isBlack($token)
+    {        
+        return $black = $this->findOneBy(["token" => $token]);  
+    }
 }

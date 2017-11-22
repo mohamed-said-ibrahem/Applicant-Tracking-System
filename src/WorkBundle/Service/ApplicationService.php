@@ -14,14 +14,11 @@ class ApplicationService {
         $this->em = $em;
     }
     
-    
-    
     public function findApplicantByNameOrEmail($input)
     {
         return $this->em->getRepository('WorkBundle:Application')
                 ->findByUserOrEmail($input);
     }
-    
     
     public function findApplicantByPhone($phone)
     {
@@ -34,6 +31,11 @@ class ApplicationService {
         return $this->em->getRepository('WorkBundle:Application')
                 ->filterByPosition($position);
     }
-
+    
+    public function logout($token)
+    {   
+        $repo = $this->em->getRepository("WorkBundle:Blacklist");   
+        $repo->blackToken($token);   
+    }
 
 }

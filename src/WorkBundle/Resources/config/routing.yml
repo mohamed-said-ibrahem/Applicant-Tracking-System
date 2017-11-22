@@ -13,3 +13,4 @@ list:
 index:
     path:     /try
     defaults: { _controller: WorkBundle:Application:test }
+    

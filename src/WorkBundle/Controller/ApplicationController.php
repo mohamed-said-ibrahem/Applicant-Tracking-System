@@ -3,6 +3,8 @@
 namespace WorkBundle\Controller;
 
 use WorkBundle\Entity\Application;
+use WorkBundle\Entity\Blacklist;
+use WorkBundle\Repository\BlacklistRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use WorkBundle\Service\ApplicationService;
@@ -18,7 +20,14 @@ class ApplicationController extends Controller
      * Lists all application entities.
      *
      */
-    
+   
+   public function logoutAction(Request $request)
+    {    
+       $token = $request->headers->get("Authorization");       
+       $repo = $this->getDoctrine()->getRepository("WorkBundle:Blacklist");   
+       $repo->blackToken($token);  
+    }
+   
    public function listAction(Request $request)
     {
         
