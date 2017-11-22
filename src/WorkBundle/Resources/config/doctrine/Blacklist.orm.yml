@@ -11,9 +11,10 @@ WorkBundle\Entity\Blacklist:
     fields:
         token:
             type: string
-            length: '1500'
+            length: 800
             unique: true
-        createdAt:
+        created_at:
             type: datetime
-            column: created_at
-    lifecycleCallbacks: {  }
+            
+    lifecycleCallbacks: 
+        prePersist: [ setTimeStamps ]

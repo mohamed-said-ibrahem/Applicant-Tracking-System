@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Education
  */
-class Education
-{
+class Education {
+
     /**
      * @var integer
      */
@@ -70,8 +70,7 @@ class Education
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -82,8 +81,7 @@ class Education
      *
      * @return Education
      */
-    public function setSchoolName($schoolName)
-    {
+    public function setSchoolName($schoolName) {
         $this->school_name = $schoolName;
 
         return $this;
@@ -94,8 +92,7 @@ class Education
      *
      * @return string
      */
-    public function getSchoolName()
-    {
+    public function getSchoolName() {
         return $this->school_name;
     }
 
@@ -106,8 +103,7 @@ class Education
      *
      * @return Education
      */
-    public function setSchoolFrom($schoolFrom)
-    {
+    public function setSchoolFrom($schoolFrom) {
         $this->school_from = $schoolFrom;
 
         return $this;
@@ -118,8 +114,7 @@ class Education
      *
      * @return \DateTime
      */
-    public function getSchoolFrom()
-    {
+    public function getSchoolFrom() {
         return $this->school_from;
     }
 
@@ -130,8 +125,7 @@ class Education
      *
      * @return Education
      */
-    public function setSchoolTo($schoolTo)
-    {
+    public function setSchoolTo($schoolTo) {
         $this->school_to = $schoolTo;
 
         return $this;
@@ -142,8 +136,7 @@ class Education
      *
      * @return \DateTime
      */
-    public function getSchoolTo()
-    {
+    public function getSchoolTo() {
         return $this->school_to;
     }
 
@@ -154,8 +147,7 @@ class Education
      *
      * @return Education
      */
-    public function setSchoolDegree($schoolDegree)
-    {
+    public function setSchoolDegree($schoolDegree) {
         $this->school_degree = $schoolDegree;
 
         return $this;
@@ -166,8 +158,7 @@ class Education
      *
      * @return string
      */
-    public function getSchoolDegree()
-    {
+    public function getSchoolDegree() {
         return $this->school_degree;
     }
 
@@ -178,8 +169,7 @@ class Education
      *
      * @return Education
      */
-    public function setCollegeName($collegeName)
-    {
+    public function setCollegeName($collegeName) {
         $this->college_name = $collegeName;
 
         return $this;
@@ -190,8 +180,7 @@ class Education
      *
      * @return string
      */
-    public function getCollegeName()
-    {
+    public function getCollegeName() {
         return $this->college_name;
     }
 
@@ -202,8 +191,7 @@ class Education
      *
      * @return Education
      */
-    public function setCollegeFrom($collegeFrom)
-    {
+    public function setCollegeFrom($collegeFrom) {
         $this->college_from = $collegeFrom;
 
         return $this;
@@ -214,8 +202,7 @@ class Education
      *
      * @return string
      */
-    public function getCollegeFrom()
-    {
+    public function getCollegeFrom() {
         return $this->college_from;
     }
 
@@ -226,8 +213,7 @@ class Education
      *
      * @return Education
      */
-    public function setCollegeTo($collegeTo)
-    {
+    public function setCollegeTo($collegeTo) {
         $this->college_to = $collegeTo;
 
         return $this;
@@ -238,8 +224,7 @@ class Education
      *
      * @return string
      */
-    public function getCollegeTo()
-    {
+    public function getCollegeTo() {
         return $this->college_to;
     }
 
@@ -250,8 +235,7 @@ class Education
      *
      * @return Education
      */
-    public function setIsGraduate($isGraduate)
-    {
+    public function setIsGraduate($isGraduate) {
         $this->is_graduate = $isGraduate;
 
         return $this;
@@ -262,8 +246,7 @@ class Education
      *
      * @return boolean
      */
-    public function getIsGraduate()
-    {
+    public function getIsGraduate() {
         return $this->is_graduate;
     }
 
@@ -274,8 +257,7 @@ class Education
      *
      * @return Education
      */
-    public function setGraduateDegree($graduateDegree)
-    {
+    public function setGraduateDegree($graduateDegree) {
         $this->graduate_degree = $graduateDegree;
 
         return $this;
@@ -286,8 +268,7 @@ class Education
      *
      * @return string
      */
-    public function getGraduateDegree()
-    {
+    public function getGraduateDegree() {
         return $this->graduate_degree;
     }
 
@@ -298,8 +279,7 @@ class Education
      *
      * @return Education
      */
-    public function setApplication(\WorkBundle\Entity\Application $application = null)
-    {
+    public function setApplication(\WorkBundle\Entity\Application $application = null) {
         $this->Application = $application;
 
         return $this;
@@ -310,8 +290,8 @@ class Education
      *
      * @return \WorkBundle\Entity\Application
      */
-    public function getApplication()
-    {
+    public function getApplication() {
         return $this->Application;
     }
+
 }

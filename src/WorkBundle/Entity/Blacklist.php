@@ -8,7 +8,7 @@ namespace WorkBundle\Entity;
 class Blacklist
 {
     /**
-     * @var int
+     * @var integer
      */
     private $id;
 
@@ -20,13 +20,13 @@ class Blacklist
     /**
      * @var \DateTime
      */
-    private $createdAt;
+    private $created_at;
 
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -66,7 +66,7 @@ class Blacklist
      */
     public function setCreatedAt($createdAt)
     {
-        $this->createdAt = $createdAt;
+        $this->created_at = $createdAt;
 
         return $this;
     }
@@ -78,6 +78,14 @@ class Blacklist
      */
     public function getCreatedAt()
     {
-        return $this->createdAt;
+        return $this->created_at;
+    }
+    /**
+     * @ORM\PrePersist
+     */
+    public function setTimeStamps()
+    {
+        $this->setCreatedAt(new \DateTime());
     }
 }
+
