@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Application
  */
-class Application {
-
+class Application
+{
     /**
      * @var integer
      */
@@ -135,16 +135,6 @@ class Application {
     private $updated_at;
 
     /**
-     * @var \WorkBundle\Entity\Education
-     */
-    private $Education;
-
-    /**
-     * @var \WorkBundle\Entity\Employee
-     */
-    private $Employee;
-
-    /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $Degrees;
@@ -157,7 +147,8 @@ class Application {
     /**
      * Constructor
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->Degrees = new \Doctrine\Common\Collections\ArrayCollection();
         $this->Positions = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -167,7 +158,8 @@ class Application {
      *
      * @return integer
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -178,7 +170,8 @@ class Application {
      *
      * @return Application
      */
-    public function setFirstName($firstName) {
+    public function setFirstName($firstName)
+    {
         $this->first_name = $firstName;
 
         return $this;
@@ -189,7 +182,8 @@ class Application {
      *
      * @return string
      */
-    public function getFirstName() {
+    public function getFirstName()
+    {
         return $this->first_name;
     }
 
@@ -200,7 +194,8 @@ class Application {
      *
      * @return Application
      */
-    public function setMiddleName($middleName) {
+    public function setMiddleName($middleName)
+    {
         $this->middle_name = $middleName;
 
         return $this;
@@ -211,7 +206,8 @@ class Application {
      *
      * @return string
      */
-    public function getMiddleName() {
+    public function getMiddleName()
+    {
         return $this->middle_name;
     }
 
@@ -222,7 +218,8 @@ class Application {
      *
      * @return Application
      */
-    public function setLastName($lastName) {
+    public function setLastName($lastName)
+    {
         $this->last_name = $lastName;
 
         return $this;
@@ -233,7 +230,8 @@ class Application {
      *
      * @return string
      */
-    public function getLastName() {
+    public function getLastName()
+    {
         return $this->last_name;
     }
 
@@ -244,7 +242,8 @@ class Application {
      *
      * @return Application
      */
-    public function setAddress($address) {
+    public function setAddress($address)
+    {
         $this->address = $address;
 
         return $this;
@@ -255,7 +254,8 @@ class Application {
      *
      * @return string
      */
-    public function getAddress() {
+    public function getAddress()
+    {
         return $this->address;
     }
 
@@ -266,7 +266,8 @@ class Application {
      *
      * @return Application
      */
-    public function setEmail($email) {
+    public function setEmail($email)
+    {
         $this->email = $email;
 
         return $this;
@@ -277,7 +278,8 @@ class Application {
      *
      * @return string
      */
-    public function getEmail() {
+    public function getEmail()
+    {
         return $this->email;
     }
 
@@ -288,7 +290,8 @@ class Application {
      *
      * @return Application
      */
-    public function setPhoneNumber($phoneNumber) {
+    public function setPhoneNumber($phoneNumber)
+    {
         $this->phone_number = $phoneNumber;
 
         return $this;
@@ -299,7 +302,8 @@ class Application {
      *
      * @return string
      */
-    public function getPhoneNumber() {
+    public function getPhoneNumber()
+    {
         return $this->phone_number;
     }
 
@@ -310,7 +314,8 @@ class Application {
      *
      * @return Application
      */
-    public function setIdCardNumber($idCardNumber) {
+    public function setIdCardNumber($idCardNumber)
+    {
         $this->id_card_number = $idCardNumber;
 
         return $this;
@@ -321,7 +326,8 @@ class Application {
      *
      * @return string
      */
-    public function getIdCardNumber() {
+    public function getIdCardNumber()
+    {
         return $this->id_card_number;
     }
 
@@ -332,7 +338,8 @@ class Application {
      *
      * @return Application
      */
-    public function setDateAvailable($dateAvailable) {
+    public function setDateAvailable($dateAvailable)
+    {
         $this->date_available = $dateAvailable;
 
         return $this;
@@ -343,7 +350,8 @@ class Application {
      *
      * @return \DateTime
      */
-    public function getDateAvailable() {
+    public function getDateAvailable()
+    {
         return $this->date_available;
     }
 
@@ -354,7 +362,8 @@ class Application {
      *
      * @return Application
      */
-    public function setDesiredSalary($desiredSalary) {
+    public function setDesiredSalary($desiredSalary)
+    {
         $this->desired_salary = $desiredSalary;
 
         return $this;
@@ -365,7 +374,8 @@ class Application {
      *
      * @return integer
      */
-    public function getDesiredSalary() {
+    public function getDesiredSalary()
+    {
         return $this->desired_salary;
     }
 
@@ -376,7 +386,8 @@ class Application {
      *
      * @return Application
      */
-    public function setHiringWay($hiringWay) {
+    public function setHiringWay($hiringWay)
+    {
         $this->hiring_way = $hiringWay;
 
         return $this;
@@ -387,7 +398,8 @@ class Application {
      *
      * @return string
      */
-    public function getHiringWay() {
+    public function getHiringWay()
+    {
         return $this->hiring_way;
     }
 
@@ -398,7 +410,8 @@ class Application {
      *
      * @return Application
      */
-    public function setInterviewedBefore($interviewedBefore) {
+    public function setInterviewedBefore($interviewedBefore)
+    {
         $this->interviewed_before = $interviewedBefore;
 
         return $this;
@@ -409,7 +422,8 @@ class Application {
      *
      * @return boolean
      */
-    public function getInterviewedBefore() {
+    public function getInterviewedBefore()
+    {
         return $this->interviewed_before;
     }
 
@@ -420,7 +434,8 @@ class Application {
      *
      * @return Application
      */
-    public function setAppliedPosition($appliedPosition) {
+    public function setAppliedPosition($appliedPosition)
+    {
         $this->applied_position = $appliedPosition;
 
         return $this;
@@ -431,7 +446,8 @@ class Application {
      *
      * @return string
      */
-    public function getAppliedPosition() {
+    public function getAppliedPosition()
+    {
         return $this->applied_position;
     }
 
@@ -442,7 +458,8 @@ class Application {
      *
      * @return Application
      */
-    public function setIsWorkedBefore($isWorkedBefore) {
+    public function setIsWorkedBefore($isWorkedBefore)
+    {
         $this->is_worked_before = $isWorkedBefore;
 
         return $this;
@@ -453,7 +470,8 @@ class Application {
      *
      * @return string
      */
-    public function getIsWorkedBefore() {
+    public function getIsWorkedBefore()
+    {
         return $this->is_worked_before;
     }
 
@@ -464,7 +482,8 @@ class Application {
      *
      * @return Application
      */
-    public function setSignature($signature) {
+    public function setSignature($signature)
+    {
         $this->signature = $signature;
 
         return $this;
@@ -475,7 +494,8 @@ class Application {
      *
      * @return string
      */
-    public function getSignature() {
+    public function getSignature()
+    {
         return $this->signature;
     }
 
@@ -486,8 +506,10 @@ class Application {
      *
      * @return Application
      */
-    public function setTechnicalTest($technicalTest) {
+    public function setTechnicalTest($technicalTest)
+    {
         $this->technical_test = $technicalTest;
+
         return $this;
     }
 
@@ -496,7 +518,8 @@ class Application {
      *
      * @return integer
      */
-    public function getTechnicalTest() {
+    public function getTechnicalTest()
+    {
         return $this->technical_test;
     }
 
@@ -507,7 +530,8 @@ class Application {
      *
      * @return Application
      */
-    public function setIqTest($iqTest) {
+    public function setIqTest($iqTest)
+    {
         $this->iq_test = $iqTest;
 
         return $this;
@@ -518,7 +542,8 @@ class Application {
      *
      * @return integer
      */
-    public function getIqTest() {
+    public function getIqTest()
+    {
         return $this->iq_test;
     }
 
@@ -529,8 +554,10 @@ class Application {
      *
      * @return Application
      */
-    public function setTechnicalComments($technicalComments) {
+    public function setTechnicalComments($technicalComments)
+    {
         $this->technical_comments = $technicalComments;
+
         return $this;
     }
 
@@ -539,7 +566,8 @@ class Application {
      *
      * @return string
      */
-    public function getTechnicalComments() {
+    public function getTechnicalComments()
+    {
         return $this->technical_comments;
     }
 
@@ -550,7 +578,8 @@ class Application {
      *
      * @return Application
      */
-    public function setTechnicalResult($technicalResult) {
+    public function setTechnicalResult($technicalResult)
+    {
         $this->technical_result = $technicalResult;
 
         return $this;
@@ -561,7 +590,8 @@ class Application {
      *
      * @return string
      */
-    public function getTechnicalResult() {
+    public function getTechnicalResult()
+    {
         return $this->technical_result;
     }
 
@@ -572,7 +602,8 @@ class Application {
      *
      * @return Application
      */
-    public function setPersonalityProfile($personalityProfile) {
+    public function setPersonalityProfile($personalityProfile)
+    {
         $this->personality_profile = $personalityProfile;
 
         return $this;
@@ -583,7 +614,8 @@ class Application {
      *
      * @return string
      */
-    public function getPersonalityProfile() {
+    public function getPersonalityProfile()
+    {
         return $this->personality_profile;
     }
 
@@ -594,8 +626,10 @@ class Application {
      *
      * @return Application
      */
-    public function setHrNotes($hrNotes) {
+    public function setHrNotes($hrNotes)
+    {
         $this->hr_notes = $hrNotes;
+
         return $this;
     }
 
@@ -604,7 +638,8 @@ class Application {
      *
      * @return string
      */
-    public function getHrNotes() {
+    public function getHrNotes()
+    {
         return $this->hr_notes;
     }
 
@@ -615,7 +650,8 @@ class Application {
      *
      * @return Application
      */
-    public function setGmResult($gmResult) {
+    public function setGmResult($gmResult)
+    {
         $this->gm_result = $gmResult;
 
         return $this;
@@ -626,7 +662,8 @@ class Application {
      *
      * @return string
      */
-    public function getGmResult() {
+    public function getGmResult()
+    {
         return $this->gm_result;
     }
 
@@ -637,7 +674,8 @@ class Application {
      *
      * @return Application
      */
-    public function setFinalDecision($finalDecision) {
+    public function setFinalDecision($finalDecision)
+    {
         $this->final_decision = $finalDecision;
 
         return $this;
@@ -648,7 +686,8 @@ class Application {
      *
      * @return string
      */
-    public function getFinalDecision() {
+    public function getFinalDecision()
+    {
         return $this->final_decision;
     }
 
@@ -659,7 +698,8 @@ class Application {
      *
      * @return Application
      */
-    public function setCreatedAt($createdAt) {
+    public function setCreatedAt($createdAt)
+    {
         $this->created_at = $createdAt;
 
         return $this;
@@ -670,7 +710,8 @@ class Application {
      *
      * @return \DateTime
      */
-    public function getCreatedAt() {
+    public function getCreatedAt()
+    {
         return $this->created_at;
     }
 
@@ -681,7 +722,8 @@ class Application {
      *
      * @return Application
      */
-    public function setUpdatedAt($updatedAt) {
+    public function setUpdatedAt($updatedAt)
+    {
         $this->updated_at = $updatedAt;
 
         return $this;
@@ -692,52 +734,9 @@ class Application {
      *
      * @return \DateTime
      */
-    public function getUpdatedAt() {
+    public function getUpdatedAt()
+    {
         return $this->updated_at;
-    }
-
-    /**
-     * Set education
-     *
-     * @param \WorkBundle\Entity\Education $education
-     *
-     * @return Application
-     */
-    public function setEducation(\WorkBundle\Entity\Education $education = null) {
-        $this->Education = $education;
-
-        return $this;
-    }
-
-    /**
-     * Get education
-     *
-     * @return \WorkBundle\Entity\Education
-     */
-    public function getEducation() {
-        return $this->Education;
-    }
-
-    /**
-     * Set employee
-     *
-     * @param \WorkBundle\Entity\Employee $employee
-     *
-     * @return Application
-     */
-    public function setEmployee(\WorkBundle\Entity\Employee $employee = null) {
-        $this->Employee = $employee;
-
-        return $this;
-    }
-
-    /**
-     * Get employee
-     *
-     * @return \WorkBundle\Entity\Employee
-     */
-    public function getEmployee() {
-        return $this->Employee;
     }
 
     /**
@@ -747,7 +746,8 @@ class Application {
      *
      * @return Application
      */
-    public function addDegree(\WorkBundle\Entity\Degree $degree) {
+    public function addDegree(\WorkBundle\Entity\Degree $degree)
+    {
         $this->Degrees[] = $degree;
 
         return $this;
@@ -758,7 +758,8 @@ class Application {
      *
      * @param \WorkBundle\Entity\Degree $degree
      */
-    public function removeDegree(\WorkBundle\Entity\Degree $degree) {
+    public function removeDegree(\WorkBundle\Entity\Degree $degree)
+    {
         $this->Degrees->removeElement($degree);
     }
 
@@ -767,7 +768,8 @@ class Application {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getDegrees() {
+    public function getDegrees()
+    {
         return $this->Degrees;
     }
 
@@ -778,7 +780,8 @@ class Application {
      *
      * @return Application
      */
-    public function addPosition(\WorkBundle\Entity\Position $position) {
+    public function addPosition(\WorkBundle\Entity\Position $position)
+    {
         $this->Positions[] = $position;
 
         return $this;
@@ -789,7 +792,8 @@ class Application {
      *
      * @param \WorkBundle\Entity\Position $position
      */
-    public function removePosition(\WorkBundle\Entity\Position $position) {
+    public function removePosition(\WorkBundle\Entity\Position $position)
+    {
         $this->Positions->removeElement($position);
     }
 
@@ -798,14 +802,15 @@ class Application {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPositions() {
+    public function getPositions()
+    {
         return $this->Positions;
     }
-
     /**
      * @ORM\PrePersist
      */
-    public function setTimeStamps() {
+    public function setTimeStamps()
+    {
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());
     }
@@ -813,8 +818,9 @@ class Application {
     /**
      * @ORM\PreUpdate
      */
-    public function updateTime() {
+    public function updateTime()
+    {
         $this->setUpdatedAt(new \DateTime());
     }
-
 }
+

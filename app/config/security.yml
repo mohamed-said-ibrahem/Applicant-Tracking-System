@@ -93,4 +93,7 @@ security:
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/applicant/[1-9]+/edit$, role: ROLE_USER }
         - { path: ^/applicant/[1-9]+/delete$, role: ROLE_ADMIN }
+        - { path: ^/applicant, role: ROLE_ADMIN }
+        - { path: ^/employee, role: ROLE_ADMIN }
+        
           # ...

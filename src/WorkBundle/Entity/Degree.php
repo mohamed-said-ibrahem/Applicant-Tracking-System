@@ -5,8 +5,8 @@ namespace WorkBundle\Entity;
 /**
  * Degree
  */
-class Degree {
-
+class Degree
+{
     /**
      * @var integer
      */
@@ -43,7 +43,8 @@ class Degree {
      *
      * @return integer
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -54,7 +55,8 @@ class Degree {
      *
      * @return Degree
      */
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
 
         return $this;
@@ -65,7 +67,8 @@ class Degree {
      *
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
@@ -76,7 +79,8 @@ class Degree {
      *
      * @return Degree
      */
-    public function setUniversity($university) {
+    public function setUniversity($university)
+    {
         $this->university = $university;
 
         return $this;
@@ -87,7 +91,8 @@ class Degree {
      *
      * @return string
      */
-    public function getUniversity() {
+    public function getUniversity()
+    {
         return $this->university;
     }
 
@@ -98,7 +103,8 @@ class Degree {
      *
      * @return Degree
      */
-    public function setDegreeFrom($degreeFrom) {
+    public function setDegreeFrom($degreeFrom)
+    {
         $this->degreeFrom = $degreeFrom;
 
         return $this;
@@ -109,7 +115,8 @@ class Degree {
      *
      * @return \DateTime
      */
-    public function getDegreeFrom() {
+    public function getDegreeFrom()
+    {
         return $this->degreeFrom;
     }
 
@@ -120,7 +127,8 @@ class Degree {
      *
      * @return Degree
      */
-    public function setDegreeTo($degreeTo) {
+    public function setDegreeTo($degreeTo)
+    {
         $this->degreeTo = $degreeTo;
 
         return $this;
@@ -131,7 +139,8 @@ class Degree {
      *
      * @return \DateTime
      */
-    public function getDegreeTo() {
+    public function getDegreeTo()
+    {
         return $this->degreeTo;
     }
 
@@ -142,7 +151,8 @@ class Degree {
      *
      * @return Degree
      */
-    public function setApplication(\WorkBundle\Entity\Application $application = null) {
+    public function setApplication(\WorkBundle\Entity\Application $application = null)
+    {
         $this->Application = $application;
 
         return $this;
@@ -153,8 +163,9 @@ class Degree {
      *
      * @return \WorkBundle\Entity\Application
      */
-    public function getApplication() {
+    public function getApplication()
+    {
         return $this->Application;
     }
-
 }
+

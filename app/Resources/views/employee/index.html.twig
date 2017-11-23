@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Employees list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Namearabic</th>
+                <th>Nameenglish</th>
+                <th>Birthdate</th>
+                <th>Address</th>
+                <th>Homephone</th>
+                <th>Mobilephone</th>
+                <th>Emergencycontactperson</th>
+                <th>Emergencypersonnumber</th>
+                <th>Emailpersonal</th>
+                <th>Idcardnumber</th>
+                <th>Academicdegree</th>
+                <th>Graduationdate</th>
+                <th>Joiningdate</th>
+                <th>Currentposition</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for employee in employees %}
+            <tr>
+                <td><a href="{{ path('employee_show', { 'id': employee.id }) }}">{{ employee.id }}</a></td>
+                <td>{{ employee.nameArabic }}</td>
+                <td>{{ employee.nameEnglish }}</td>
+                <td>{% if employee.birthDate %}{{ employee.birthDate|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ employee.address }}</td>
+                <td>{{ employee.homePhone }}</td>
+                <td>{{ employee.mobilePhone }}</td>
+                <td>{{ employee.emergencyContactPerson }}</td>
+                <td>{{ employee.emergencyPersonNumber }}</td>
+                <td>{{ employee.emailPersonal }}</td>
+                <td>{{ employee.idCardNumber }}</td>
+                <td>{{ employee.academicDegree }}</td>
+                <td>{% if employee.graduationDate %}{{ employee.graduationDate|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if employee.joiningDate %}{{ employee.joiningDate|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ employee.currentPosition }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('employee_show', { 'id': employee.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('employee_edit', { 'id': employee.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('employee_new') }}">Create a new employee</a>
+        </li>
+    </ul>
+
+
+    {% if pager.total_pages > 1 %}
+  <div style="width:100%;text-align:right;">
+    <div class="ui pagination menu">
+      <a class="{% if pager.current_page == 1 %}disabled {% endif %}item" 
+      {% if pager.current_page > 1 %}
+        href="{{ path('list_2', {'page': (pager.current_page - 1)}) }}"
+      {% endif %}>
+        &lt;
+      </a>
+
+      {% for i in 1..pager.total_pages %}
+        <a class="{% if pager.current_page == loop.index %}active {% endif %}item"
+          href="{{ path('list_2', {'page': loop.index}) }}">
+            {{ loop.index }}
+        </a>
+      {% endfor %}
+			
+      <a class="{% if pager.current_page == pager.total_pages %}disabled {% endif %}item"
+      {% if pager.current_page < pager.total_pages %}
+        href="{{ path('list_2', {'page': (pager.current_page + 1)}) }}"
+      {% endif %}>
+        &gt;
+      </a>
+    </div>
+  </div>
+  {% endif %}
+  
+{% endblock %}

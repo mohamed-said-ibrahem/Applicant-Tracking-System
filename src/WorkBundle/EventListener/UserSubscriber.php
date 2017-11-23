@@ -15,7 +15,10 @@ class UserSubscriber implements EventSubscriberInterface {
     }
     
     public function onKernelRequest(GetResponseEvent $event) {
+        // $to = $event->getToken();
+        // dump($to);die;
         $token = $event->getRequest()->headers->get("Authorization");
+        $token = explode("Bearer ", $token);        
         // dump($token);die;
         if($token) {
             $black = $this->em->getRepository("WorkBundle:Blacklist");

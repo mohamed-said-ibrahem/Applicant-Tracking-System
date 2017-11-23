@@ -5,8 +5,8 @@ namespace WorkBundle\Entity;
 /**
  * Position
  */
-class Position {
-
+class Position
+{
     /**
      * @var integer
      */
@@ -78,7 +78,8 @@ class Position {
      *
      * @return integer
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -89,7 +90,8 @@ class Position {
      *
      * @return Position
      */
-    public function setJobTitle($jobTitle) {
+    public function setJobTitle($jobTitle)
+    {
         $this->jobTitle = $jobTitle;
 
         return $this;
@@ -100,7 +102,8 @@ class Position {
      *
      * @return string
      */
-    public function getJobTitle() {
+    public function getJobTitle()
+    {
         return $this->jobTitle;
     }
 
@@ -111,7 +114,8 @@ class Position {
      *
      * @return Position
      */
-    public function setCompanyName($companyName) {
+    public function setCompanyName($companyName)
+    {
         $this->companyName = $companyName;
 
         return $this;
@@ -122,7 +126,8 @@ class Position {
      *
      * @return string
      */
-    public function getCompanyName() {
+    public function getCompanyName()
+    {
         return $this->companyName;
     }
 
@@ -133,7 +138,8 @@ class Position {
      *
      * @return Position
      */
-    public function setAddress($address) {
+    public function setAddress($address)
+    {
         $this->address = $address;
 
         return $this;
@@ -144,7 +150,8 @@ class Position {
      *
      * @return string
      */
-    public function getAddress() {
+    public function getAddress()
+    {
         return $this->address;
     }
 
@@ -155,7 +162,8 @@ class Position {
      *
      * @return Position
      */
-    public function setReason($reason) {
+    public function setReason($reason)
+    {
         $this->reason = $reason;
 
         return $this;
@@ -166,7 +174,8 @@ class Position {
      *
      * @return string
      */
-    public function getReason() {
+    public function getReason()
+    {
         return $this->reason;
     }
 
@@ -177,7 +186,8 @@ class Position {
      *
      * @return Position
      */
-    public function setResponsibilities($responsibilities) {
+    public function setResponsibilities($responsibilities)
+    {
         $this->responsibilities = $responsibilities;
 
         return $this;
@@ -188,7 +198,8 @@ class Position {
      *
      * @return string
      */
-    public function getResponsibilities() {
+    public function getResponsibilities()
+    {
         return $this->responsibilities;
     }
 
@@ -199,7 +210,8 @@ class Position {
      *
      * @return Position
      */
-    public function setSupervisor($supervisor) {
+    public function setSupervisor($supervisor)
+    {
         $this->supervisor = $supervisor;
 
         return $this;
@@ -210,7 +222,8 @@ class Position {
      *
      * @return string
      */
-    public function getSupervisor() {
+    public function getSupervisor()
+    {
         return $this->supervisor;
     }
 
@@ -221,8 +234,10 @@ class Position {
      *
      * @return Position
      */
-    public function setStartingSalary($startingSalary) {
+    public function setStartingSalary($startingSalary)
+    {
         $this->startingSalary = $startingSalary;
+
         return $this;
     }
 
@@ -231,7 +246,8 @@ class Position {
      *
      * @return integer
      */
-    public function getStartingSalary() {
+    public function getStartingSalary()
+    {
         return $this->startingSalary;
     }
 
@@ -242,8 +258,10 @@ class Position {
      *
      * @return Position
      */
-    public function setEndingSalary($endingSalary) {
+    public function setEndingSalary($endingSalary)
+    {
         $this->endingSalary = $endingSalary;
+
         return $this;
     }
 
@@ -252,7 +270,8 @@ class Position {
      *
      * @return integer
      */
-    public function getEndingSalary() {
+    public function getEndingSalary()
+    {
         return $this->endingSalary;
     }
 
@@ -263,8 +282,10 @@ class Position {
      *
      * @return Position
      */
-    public function setFromDate($fromDate) {
+    public function setFromDate($fromDate)
+    {
         $this->fromDate = $fromDate;
+
         return $this;
     }
 
@@ -273,7 +294,8 @@ class Position {
      *
      * @return \DateTime
      */
-    public function getFromDate() {
+    public function getFromDate()
+    {
         return $this->fromDate;
     }
 
@@ -284,8 +306,10 @@ class Position {
      *
      * @return Position
      */
-    public function setToDate($toDate) {
+    public function setToDate($toDate)
+    {
         $this->toDate = $toDate;
+
         return $this;
     }
 
@@ -294,7 +318,8 @@ class Position {
      *
      * @return \DateTime
      */
-    public function getToDate() {
+    public function getToDate()
+    {
         return $this->toDate;
     }
 
@@ -305,8 +330,10 @@ class Position {
      *
      * @return Position
      */
-    public function setCallSupervisor($callSupervisor) {
+    public function setCallSupervisor($callSupervisor)
+    {
         $this->callSupervisor = $callSupervisor;
+
         return $this;
     }
 
@@ -315,7 +342,8 @@ class Position {
      *
      * @return boolean
      */
-    public function getCallSupervisor() {
+    public function getCallSupervisor()
+    {
         return $this->callSupervisor;
     }
 
@@ -326,8 +354,10 @@ class Position {
      *
      * @return Position
      */
-    public function setApplication(\WorkBundle\Entity\Application $application = null) {
+    public function setApplication(\WorkBundle\Entity\Application $application = null)
+    {
         $this->Application = $application;
+
         return $this;
     }
 
@@ -336,8 +366,9 @@ class Position {
      *
      * @return \WorkBundle\Entity\Application
      */
-    public function getApplication() {
+    public function getApplication()
+    {
         return $this->Application;
     }
-
 }
+

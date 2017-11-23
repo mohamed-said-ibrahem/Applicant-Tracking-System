@@ -22,10 +22,13 @@ class ApplicationController extends Controller
      */
    
    public function logoutAction(Request $request)
-    {    
-       $token = $request->headers->get("Authorization");       
+    { 
+       $token = $request->headers->get("Authorization");
+       $token = explode("Bearer ", $token);
+    //    dump($token[1]);die;       
        $repo = $this->getDoctrine()->getRepository("WorkBundle:Blacklist");   
-       $repo->blackToken($token);  
+       $repo->blackToken($token[1]); 
+       return $this->redirectToRoute('thank_you');
     }
    
    public function listAction(Request $request)
@@ -75,9 +78,13 @@ class ApplicationController extends Controller
                'pager' => $pu->getDisplayParameters(),
         ]);
     
-    
-    
     }
+
+    public function submittedAction(Request $request)
+    {
+        return $this->render('WorkBundle:Default:Submitted.html.twig');
+    }
+    
 
     /**
      * Creates a new application entity.
@@ -94,7 +101,7 @@ class ApplicationController extends Controller
             $em->persist($application);
             $em->flush();
 
-            return $this->redirectToRoute('applicat_show', array('id' => $application->getId()));
+            return $this->redirectToRoute('applicat_done');
         }
 
         return $this->render('application/new.html.twig', array(

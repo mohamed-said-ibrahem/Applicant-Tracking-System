@@ -8,11 +8,6 @@ applicat_show:
     defaults: { _controller: "WorkBundle:Application:show" }
     methods:  GET
 
-applicat_new:
-    path:     /new
-    defaults: { _controller: "WorkBundle:Application:new" }
-    methods:  [GET, POST]
-
 applicat_edit:
     path:     /{id}/edit
     defaults: { _controller: "WorkBundle:Application:edit" }
@@ -22,3 +17,7 @@ applicat_delete:
     path:     /{id}/delete
     defaults: { _controller: "WorkBundle:Application:delete" }
     methods:  DELETE
+
+thank_you:
+    path:     /thank_you
+    defaults: { _controller: WorkBundle:Default:thank }

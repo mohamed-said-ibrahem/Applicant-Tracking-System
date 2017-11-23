@@ -2,11 +2,12 @@
 
 namespace WorkBundle\Entity;
 
+use WorkBundle\Entity\Application;
 /**
  * Employee
  */
-class Employee {
-
+class Employee
+{
     /**
      * @var integer
      */
@@ -87,13 +88,15 @@ class Employee {
      */
     private $Application;
 
+    
 
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -104,7 +107,8 @@ class Employee {
      *
      * @return Employee
      */
-    public function setNameArabic($nameArabic) {
+    public function setNameArabic($nameArabic)
+    {
         $this->nameArabic = $nameArabic;
 
         return $this;
@@ -115,7 +119,8 @@ class Employee {
      *
      * @return string
      */
-    public function getNameArabic() {
+    public function getNameArabic()
+    {
         return $this->nameArabic;
     }
 
@@ -126,8 +131,10 @@ class Employee {
      *
      * @return Employee
      */
-    public function setNameEnglish($nameEnglish) {
+    public function setNameEnglish($nameEnglish)
+    {
         $this->nameEnglish = $nameEnglish;
+
         return $this;
     }
 
@@ -136,7 +143,8 @@ class Employee {
      *
      * @return string
      */
-    public function getNameEnglish() {
+    public function getNameEnglish()
+    {
         return $this->nameEnglish;
     }
 
@@ -147,7 +155,8 @@ class Employee {
      *
      * @return Employee
      */
-    public function setBirthDate($birthDate) {
+    public function setBirthDate($birthDate)
+    {
         $this->birthDate = $birthDate;
 
         return $this;
@@ -158,7 +167,8 @@ class Employee {
      *
      * @return \DateTime
      */
-    public function getBirthDate() {
+    public function getBirthDate()
+    {
         return $this->birthDate;
     }
 
@@ -169,7 +179,8 @@ class Employee {
      *
      * @return Employee
      */
-    public function setAddress($address) {
+    public function setAddress($address)
+    {
         $this->address = $address;
 
         return $this;
@@ -180,7 +191,8 @@ class Employee {
      *
      * @return string
      */
-    public function getAddress() {
+    public function getAddress()
+    {
         return $this->address;
     }
 
@@ -191,7 +203,8 @@ class Employee {
      *
      * @return Employee
      */
-    public function setHomePhone($homePhone) {
+    public function setHomePhone($homePhone)
+    {
         $this->homePhone = $homePhone;
 
         return $this;
@@ -202,7 +215,8 @@ class Employee {
      *
      * @return string
      */
-    public function getHomePhone() {
+    public function getHomePhone()
+    {
         return $this->homePhone;
     }
 
@@ -213,7 +227,8 @@ class Employee {
      *
      * @return Employee
      */
-    public function setMobilePhone($mobilePhone) {
+    public function setMobilePhone($mobilePhone)
+    {
         $this->mobilePhone = $mobilePhone;
 
         return $this;
@@ -224,7 +239,8 @@ class Employee {
      *
      * @return string
      */
-    public function getMobilePhone() {
+    public function getMobilePhone()
+    {
         return $this->mobilePhone;
     }
 
@@ -235,7 +251,8 @@ class Employee {
      *
      * @return Employee
      */
-    public function setEmergencyContactPerson($emergencyContactPerson) {
+    public function setEmergencyContactPerson($emergencyContactPerson)
+    {
         $this->emergencyContactPerson = $emergencyContactPerson;
 
         return $this;
@@ -246,7 +263,8 @@ class Employee {
      *
      * @return string
      */
-    public function getEmergencyContactPerson() {
+    public function getEmergencyContactPerson()
+    {
         return $this->emergencyContactPerson;
     }
 
@@ -257,7 +275,8 @@ class Employee {
      *
      * @return Employee
      */
-    public function setEmergencyPersonNumber($emergencyPersonNumber) {
+    public function setEmergencyPersonNumber($emergencyPersonNumber)
+    {
         $this->emergencyPersonNumber = $emergencyPersonNumber;
 
         return $this;
@@ -268,7 +287,8 @@ class Employee {
      *
      * @return string
      */
-    public function getEmergencyPersonNumber() {
+    public function getEmergencyPersonNumber()
+    {
         return $this->emergencyPersonNumber;
     }
 
@@ -279,7 +299,8 @@ class Employee {
      *
      * @return Employee
      */
-    public function setEmailPersonal($emailPersonal) {
+    public function setEmailPersonal($emailPersonal)
+    {
         $this->emailPersonal = $emailPersonal;
 
         return $this;
@@ -290,7 +311,8 @@ class Employee {
      *
      * @return string
      */
-    public function getEmailPersonal() {
+    public function getEmailPersonal()
+    {
         return $this->emailPersonal;
     }
 
@@ -301,7 +323,8 @@ class Employee {
      *
      * @return Employee
      */
-    public function setIdCardNumber($idCardNumber) {
+    public function setIdCardNumber($idCardNumber)
+    {
         $this->idCardNumber = $idCardNumber;
 
         return $this;
@@ -312,7 +335,8 @@ class Employee {
      *
      * @return string
      */
-    public function getIdCardNumber() {
+    public function getIdCardNumber()
+    {
         return $this->idCardNumber;
     }
 
@@ -323,8 +347,10 @@ class Employee {
      *
      * @return Employee
      */
-    public function setAcademicDegree($academicDegree) {
+    public function setAcademicDegree($academicDegree)
+    {
         $this->academicDegree = $academicDegree;
+
         return $this;
     }
 
@@ -333,7 +359,8 @@ class Employee {
      *
      * @return string
      */
-    public function getAcademicDegree() {
+    public function getAcademicDegree()
+    {
         return $this->academicDegree;
     }
 
@@ -344,7 +371,8 @@ class Employee {
      *
      * @return Employee
      */
-    public function setGraduationDate($graduationDate) {
+    public function setGraduationDate($graduationDate)
+    {
         $this->graduationDate = $graduationDate;
 
         return $this;
@@ -355,7 +383,8 @@ class Employee {
      *
      * @return \DateTime
      */
-    public function getGraduationDate() {
+    public function getGraduationDate()
+    {
         return $this->graduationDate;
     }
 
@@ -366,8 +395,10 @@ class Employee {
      *
      * @return Employee
      */
-    public function setJoiningDate($joiningDate) {
+    public function setJoiningDate($joiningDate)
+    {
         $this->joiningDate = $joiningDate;
+
         return $this;
     }
 
@@ -376,7 +407,8 @@ class Employee {
      *
      * @return \DateTime
      */
-    public function getJoiningDate() {
+    public function getJoiningDate()
+    {
         return $this->joiningDate;
     }
 
@@ -387,8 +419,10 @@ class Employee {
      *
      * @return Employee
      */
-    public function setCurrentPosition($currentPosition) {
+    public function setCurrentPosition($currentPosition)
+    {
         $this->currentPosition = $currentPosition;
+
         return $this;
     }
 
@@ -397,7 +431,8 @@ class Employee {
      *
      * @return string
      */
-    public function getCurrentPosition() {
+    public function getCurrentPosition()
+    {
         return $this->currentPosition;
     }
 
@@ -408,9 +443,10 @@ class Employee {
      *
      * @return Employee
      */
-    public function setApplication(\WorkBundle\Entity\Application $application = null) {
+    public function setApplication(\WorkBundle\Entity\Application $application = null)
+    {
         $this->Application = $application;
-
+        
         return $this;
     }
 
@@ -419,8 +455,10 @@ class Employee {
      *
      * @return \WorkBundle\Entity\Application
      */
-    public function getApplication() {
+    public function getApplication()
+    {
         return $this->Application;
     }
 
 }
+

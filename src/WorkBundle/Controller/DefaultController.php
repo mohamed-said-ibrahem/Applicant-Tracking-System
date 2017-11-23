@@ -10,5 +10,10 @@ class DefaultController extends Controller
     {
         return $this->render('WorkBundle:Default:index.html.twig');
     }
+
+    public function thankAction()
+    {
+        return $this->render('WorkBundle:Default:thank.html.twig');
+    }
  
 }

@@ -1,0 +1,19 @@
+employee_index:
+    path:     /
+    defaults: { _controller: "WorkBundle:Employee:index" }
+    methods:  GET
+
+employee_show:
+    path:     /{id}/show
+    defaults: { _controller: "WorkBundle:Employee:show" }
+    methods:  GET
+
+employee_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "WorkBundle:Employee:edit" }
+    methods:  [GET, POST]
+
+employee_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "WorkBundle:Employee:delete" }
+    methods:  DELETE

@@ -34,13 +34,13 @@ WorkBundle\Entity\Employee:
             length: 255
         homePhone:
             type: string
-            length: 255
+            length: 8
             nullable: true
             unique: true
             column: home_phone
         mobilePhone:
             type: string
-            length: 255
+            length: 11
             unique: true
             column: mobile_phone
         emergencyContactPerson:
@@ -49,7 +49,7 @@ WorkBundle\Entity\Employee:
             column: emergency_contact_person
         emergencyPersonNumber:
             type: string
-            length: 255
+            length: 11
             unique: true
             column: emergency_person_number
         emailPersonal:
@@ -59,7 +59,7 @@ WorkBundle\Entity\Employee:
             column: email_personal
         idCardNumber:
             type: string
-            length: 255
+            length: 14
             unique: true
             column: id_card_number
         academicDegree:

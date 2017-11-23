@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Application</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ application.id }}</td>
+            </tr>
+            <tr>
+                <th>First_name</th>
+                <td>{{ application.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Middle_name</th>
+                <td>{{ application.middlename }}</td>
+            </tr>
+            <tr>
+                <th>Last_name</th>
+                <td>{{ application.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ application.address }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ application.email }}</td>
+            </tr>
+            <tr>
+                <th>Phone_number</th>
+                <td>{{ application.phonenumber }}</td>
+            </tr>
+            <tr>
+                <th>Id_card_number</th>
+                <td>{{ application.idcardnumber }}</td>
+            </tr>
+            <tr>
+                <th>Date_available</th>
+                <td>{% if application.dateavailable %}{{ application.dateavailable|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Desired_salary</th>
+                <td>{{ application.desiredsalary }}</td>
+            </tr>
+            <tr>
+                <th>Hiring_way</th>
+                <td>{{ application.hiringway }}</td>
+            </tr>
+            <tr>
+                <th>Interviewed_before</th>
+                <td>{% if application.interviewedbefore %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Applied_position</th>
+                <td>{{ application.appliedposition }}</td>
+            </tr>
+            <tr>
+                <th>Is_worked_before</th>
+                <td>{{ application.isworkedbefore }}</td>
+            </tr>
+            <tr>
+                <th>Signature</th>
+                <td>{{ application.signature }}</td>
+            </tr>
+            <tr>
+                <th>Technical_test</th>
+                <td>{{ application.technicaltest }}</td>
+            </tr>
+            <tr>
+                <th>Iq_test</th>
+                <td>{{ application.iqtest }}</td>
+            </tr>
+            <tr>
+                <th>Technical_comments</th>
+                <td>{{ application.technicalcomments }}</td>
+            </tr>
+            <tr>
+                <th>Technical_result</th>
+                <td>{{ application.technicalresult }}</td>
+            </tr>
+            <tr>
+                <th>Personality_profile</th>
+                <td>{{ application.personalityprofile }}</td>
+            </tr>
+            <tr>
+                <th>Hr_notes</th>
+                <td>{{ application.hrnotes }}</td>
+            </tr>
+            <tr>
+                <th>Gm_result</th>
+                <td>{{ application.gmresult }}</td>
+            </tr>
+            <tr>
+                <th>Final_decision</th>
+                <td>{{ application.finaldecision }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{% if application.createdat %}{{ application.createdat|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Updated_at</th>
+                <td>{% if application.updatedat %}{{ application.updatedat|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('applicat_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('applicat_edit', { 'id': application.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

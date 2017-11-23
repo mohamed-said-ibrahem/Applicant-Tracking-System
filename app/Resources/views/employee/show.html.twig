@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Employee</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ employee.id }}</td>
+            </tr>
+            <tr>
+                <th>Namearabic</th>
+                <td>{{ employee.nameArabic }}</td>
+            </tr>
+            <tr>
+                <th>Nameenglish</th>
+                <td>{{ employee.nameEnglish }}</td>
+            </tr>
+            <tr>
+                <th>Birthdate</th>
+                <td>{% if employee.birthDate %}{{ employee.birthDate|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ employee.address }}</td>
+            </tr>
+            <tr>
+                <th>Homephone</th>
+                <td>{{ employee.homePhone }}</td>
+            </tr>
+            <tr>
+                <th>Mobilephone</th>
+                <td>{{ employee.mobilePhone }}</td>
+            </tr>
+            <tr>
+                <th>Emergencycontactperson</th>
+                <td>{{ employee.emergencyContactPerson }}</td>
+            </tr>
+            <tr>
+                <th>Emergencypersonnumber</th>
+                <td>{{ employee.emergencyPersonNumber }}</td>
+            </tr>
+            <tr>
+                <th>Emailpersonal</th>
+                <td>{{ employee.emailPersonal }}</td>
+            </tr>
+            <tr>
+                <th>Idcardnumber</th>
+                <td>{{ employee.idCardNumber }}</td>
+            </tr>
+            <tr>
+                <th>Academicdegree</th>
+                <td>{{ employee.academicDegree }}</td>
+            </tr>
+            <tr>
+                <th>Graduationdate</th>
+                <td>{% if employee.graduationDate %}{{ employee.graduationDate|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Joiningdate</th>
+                <td>{% if employee.joiningDate %}{{ employee.joiningDate|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Currentposition</th>
+                <td>{{ employee.currentPosition }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('employee_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('employee_edit', { 'id': employee.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

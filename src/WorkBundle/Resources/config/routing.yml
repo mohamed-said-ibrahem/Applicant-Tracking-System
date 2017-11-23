@@ -10,7 +10,29 @@ list:
     path:     /applicant
     defaults: { _controller: WorkBundle:Application:index }
 
+list_2:
+    path:     /employee
+    defaults: { _controller: WorkBundle:Employee:index }
+
 index:
     path:     /try
     defaults: { _controller: WorkBundle:Application:test }
     
+work_employee:
+    resource: "@WorkBundle/Resources/config/routing/employee.yml"
+    prefix:   /employee
+
+applicat_new:
+    path:     /new_application
+    defaults: { _controller: "WorkBundle:Application:new" }
+    methods:  [GET, POST]
+
+applicat_done:
+    path:     /submitted
+    defaults: { _controller: "WorkBundle:Application:submitted" }
+    methods:  GET
+
+employee_new:
+    path:     /new_employee
+    defaults: { _controller: "WorkBundle:Employee:new" }
+    methods:  [GET, POST]
