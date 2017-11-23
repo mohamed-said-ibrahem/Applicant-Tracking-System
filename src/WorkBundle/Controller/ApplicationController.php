@@ -131,7 +131,7 @@ class ApplicationController extends Controller
     public function editAction(Request $request, Application $application)
     {
         $deleteForm = $this->createDeleteForm($application);
-        $editForm = $this->createForm('WorkBundle\Form\ApplicationType', $application);
+        $editForm = $this->createForm('WorkBundle\Form\ApplicationTypeAdmin', $application);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

@@ -1,11 +1,26 @@
-{% extends 'base.html.twig' %}
+<html>
+<head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
+ crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
+ integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" 
+ crossorigin="anonymous">
+</head>
+<body>
 
 {% block body %}
     <h1>Employee creation</h1>
-
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+    {% spaceless %}    
+    {% for label in form %}
+    <div style="margin-left: 10px; padding:3px;">{{ form_row(label) }}</div>
+    {% endfor %}
+    {% endspaceless %}    
+    <input style="margin-left: 10px;" type="submit" value="Create" />
+    {{ form_end(form) }} 
 
 {% endblock %}
+</body>
+</html>
