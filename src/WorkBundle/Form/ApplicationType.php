@@ -5,6 +5,14 @@ namespace WorkBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+
 
 class ApplicationType extends AbstractType
 {
@@ -13,13 +21,22 @@ class ApplicationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('first_name')->add('middle_name')->add('last_name')->add('address')->add('email')->add('phone_number')->add('id_card_number')->add('date_available')->add('desired_salary')->add('hiring_way')->add('interviewed_before')->add('applied_position')->add('is_worked_before')->add('signature');
+        $builder->add('first_name',TextType::class,array('attr'=>array('class'=>'form-control col-xs-10 col-sm-5', 'style' => 'margin-bottom:10px')))
+        ->add('middle_name',TextType::class,array('attr'=>array('class'=>'form-control col-xs-10 col-sm-5', 'style' => 'margin-bottom:10px')))
+        ->add('last_name',TextType::class,array('attr'=>array('class'=>'form-control col-xs-10 col-sm-5', 'style' => 'margin-bottom:10px')))        
+        ->add('address',TextType::class,array('attr'=>array('class'=>'form-control col-xs-10 col-sm-5', 'style' => 'margin-bottom:10px')))
+        ->add('email',EmailType::class,array('attr'=>array('class'=>'form-control col-xs-10 col-sm-5', 'style' => 'margin-bottom:10px')))
+        ->add('phone_number',IntegerType::class,array('attr'=>array('class'=>'form-control col-xs-10 col-sm-5', 'style' => 'margin-bottom:10px')))
+        ->add('id_card_number',IntegerType::class,array('attr'=>array('class'=>'form-control col-xs-10 col-sm-5', 'style' => 'margin-bottom:10px')))        
+        ->add('date_available',DateType::class,array('attr'=>array('class'=>'form-control col-xs-10 col-sm-5', 'style' => 'margin-bottom:10px')))                        
+        ->add('desired_salary',IntegerType::class,array('attr'=>array('class'=>'form-control col-xs-10 col-sm-5', 'style' => 'margin-bottom:10px')))
+        ->add('hiring_way',TextType::class,array('attr'=>array('class'=>'form-control col-xs-10 col-sm-5', 'style' => 'margin-bottom:10px')))        
+        ->add('interviewed_before',CheckboxType::class,array('attr'=>array('class'=>'form-control col-xs-10 col-sm-5', 'style' => 'margin-bottom:10px')))        
+        ->add('applied_position',TextType::class,array('attr'=>array('class'=>'form-control col-xs-10 col-sm-5', 'style' => 'margin-bottom:10px')))
+        ->add('is_worked_before',CheckboxType::class,array('attr'=>array('class'=>'form-control col-xs-10 col-sm-5', 'style' => 'margin-bottom:10px')))                
+        ->add('signature',TextType::class,array('attr'=>array('class'=>'form-control col-xs-10 col-sm-5', 'style' => 'margin-bottom:10px')));
     }
 
-    // public function buildFormAdmin(FormBuilderInterface $builder, array $options)
-    // {
-    //     $builder->add('first_name')->add('middle_name')->add('last_name')->add('address')->add('email')->add('phone_number')->add('id_card_number')->add('date_available')->add('desired_salary')->add('hiring_way')->add('interviewed_before')->add('applied_position')->add('is_worked_before')->add('signature')->add('technical_test')->add('iq_test')->add('technical_comments')->add('technical_result')->add('personality_profile')->add('hr_notes')->add('gm_result')->add('final_decision');
-    // }
     
     /**
      * {@inheritdoc}

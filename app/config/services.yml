@@ -42,6 +42,12 @@ services:
         # parent: lexik_jwt_authentication.security.guard.jwt_token_authenticator
         class: WorkBundle\Security\Guard\JWTAuthenticator
 
+
+    app.form.registration:
+        class: WorkBundle\Form\RegistrationType
+        tags:
+            - { name: form.type, alias: app_user_registration }
+            
 #    acme_api.event.jwt_authenticated_listener:
 #        class: WorkBundle\EventListener\JWTAuthenticatedListener
 #        tags:

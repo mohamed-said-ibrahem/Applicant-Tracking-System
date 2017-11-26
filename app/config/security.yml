@@ -88,10 +88,10 @@ security:
         - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/api/token/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - { path: ^/register, role: ROLE_SUPER_ADMIN }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
-        - { path: ^/applicant/[1-9]+/edit$, role: ROLE_USER }
+        - { path: ^/applicant/[1-9]+/edit$, role: ROLE_ADMIN }
         - { path: ^/applicant/[1-9]+/delete$, role: ROLE_ADMIN }
         - { path: ^/applicant, role: ROLE_ADMIN }
         - { path: ^/employee, role: ROLE_ADMIN }
