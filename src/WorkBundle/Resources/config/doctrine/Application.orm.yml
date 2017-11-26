@@ -82,7 +82,9 @@ WorkBundle\Entity\Application:
             type: string
             length: 255
         interviewed_before:
-            type: boolean
+            type: string
+            length: 255
+            nullable: true
         applied_position: 
             type: string
             length: 255
@@ -127,7 +129,7 @@ WorkBundle\Entity\Application:
             type: datetime
         updated_at:
             type: datetime
-            
+    
     lifecycleCallbacks: 
         prePersist: [ setTimeStamps ]
         preUpdate: [ updateTime ]

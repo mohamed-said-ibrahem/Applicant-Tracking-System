@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use WorkBundle\Service\ApplicationService;
 use WorkBundle\Utility\PageUtility;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Application controller.
@@ -92,18 +93,40 @@ class ApplicationController extends Controller
      */
     public function newAction(Request $request)
     {
-        $application = new Application();
+        try{
+        $application = new Application();        
         $form = $this->createForm('WorkBundle\Form\ApplicationType', $application);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($application);
             $em->flush();
-
             return $this->redirectToRoute('applicat_done');
         }
-
+    }
+    catch(\Doctrine\ORM\ORMException $e){
+        $this->get('session')->getFlashBag()->add('error', 'Your custom message');
+        // or some shortcut that need to be implemented
+        // $this->addFlash('error', 'Custom message');
+        echo "error1";
+        
+        // error logging - need customization
+        $this->get('logger')->error($e->getMessage());
+        //$this->get('logger')->error($e->getTraceAsString());
+        // or some shortcut that need to be implemented
+        // $this->logError($e);
+        echo "error2";
+        // some redirection e. g. to referer
+        return $this->redirect($request->headers->get('referer'));
+      } 
+    catch(\Exception $e){
+        // other exceptions
+        // flash
+        // logger
+        // redirection
+        echo "error3";
+        
+    }
         return $this->render('application/new.html.twig', array(
             'application' => $application,
             'form' => $form->createView(),

@@ -3,6 +3,7 @@
 namespace WorkBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Application
@@ -17,35 +18,91 @@ class Application
     /**
      * @var string
      */
+    /**
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "NAME MUST BE AT LEAST 2 CHARS",
+     *      maxMessage = "NAME MUST BE AT MOST 50 CHARS"
+     * )
+     */
     private $first_name;
 
     /**
      * @var string
+     */
+    /**
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "NAME MUST BE AT LEAST 2 CHARS",
+     *      maxMessage = "NAME MUST BE AT MOST 50 CHARS"
+     * )
      */
     private $middle_name;
 
     /**
      * @var string
      */
+    /**
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "NAME MUST BE AT LEAST 2 CHARS",
+     *      maxMessage = "NAME MUST BE AT MOST 50 CHARS"
+     * )
+     */
     private $last_name;
 
     /**
      * @var string
+     */
+    /**
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 100,
+     *      minMessage = "ADDRESS MUST BE AT LEAST 5 CHARS",
+     *      maxMessage = "ADDRESS MUST BE AT MOST 100 CHARS"
+     * )
      */
     private $address;
 
     /**
      * @var string
      */
+    /**
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 100,
+     *      minMessage = "E-MAIL MUST BE AT LEAST 5 CHARS",
+     *      maxMessage = "E-MAIL MUST BE AT MOST 100 CHARS"
+     * )
+     */
     private $email;
 
     /**
      * @var string
      */
+        /**
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 11,
+     *      minMessage = "NUMBER MUST BE AT LEAST 10 NUMBERS",
+     *      maxMessage = "NUMBER MUST BE AT MOST 11 NUMBERS"
+     * )
+     */
     private $phone_number;
 
     /**
      * @var string
+     */
+    /**
+     * @Assert\Length(
+     *      min = 14,
+     *      max = 14,
+     *      minMessage = "NUMBER MUST BE 14 NUMBERS",
+     *      maxMessage = "NUMBER MUST BE 14 NUMBERS"
+     * )
      */
     private $id_card_number;
 
@@ -57,30 +114,78 @@ class Application
     /**
      * @var integer
      */
+    /**
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 10,
+     *      minMessage = "SALARY MUST BE AT LEAST 1 NUMBERS",
+     *      maxMessage = "SALARY MUST BE AT MOST 10 NUMBERS"
+     * )
+     */
     private $desired_salary;
 
     /**
      * @var string
      */
+    /**
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 200,
+     *      minMessage = "HIRING WAY MUST BE AT LEAST 3 CHARS",
+     *      maxMessage = "HIRING WAY MUST BE AT MOST 200 CHARS"
+     * )
+     */
     private $hiring_way;
 
     /**
-     * @var boolean
+     * @var string
+     */
+        /**
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 3,
+     *      minMessage = "APPLIED POSITION  MUST BE 'YES' OR 'NO'",
+     *      maxMessage = "APPLIED POSITION  MUST BE 'YES' OR 'NO'",
+     * )
      */
     private $interviewed_before;
 
     /**
      * @var string
      */
+    /**
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 200,
+     *      minMessage = "APPLIED POSITION  MUST BE AT LEAST 3 CHARS",
+     *      maxMessage = "APPLIED POSITION  MUST BE AT MOST 200 CHARS",
+     * )
+     */
     private $applied_position;
 
     /**
      * @var string
      */
+        /**
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 3,
+     *      minMessage = "APPLIED POSITION  MUST BE 'YES' OR 'NO'",
+     *      maxMessage = "APPLIED POSITION  MUST BE 'YES' OR 'NO'",
+     * )
+     */
     private $is_worked_before;
 
     /**
      * @var string
+     */
+    /**
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 200,
+     *      minMessage = "SIGNATURE MUST BE AT LEAST 3 CHARS",
+     *      maxMessage = "SIGNATURE MUST BE  AT MOST 200 CHARS",
+     * )
      */
     private $signature;
 
