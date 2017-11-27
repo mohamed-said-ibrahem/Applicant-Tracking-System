@@ -15,217 +15,323 @@ class Application
      */
     private $id;
 
+
     /**
      * @var string
-     */
-    /**
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
      * @Assert\Length(
      *      min = 2,
      *      max = 50,
      *      minMessage = "NAME MUST BE AT LEAST 2 CHARS",
      *      maxMessage = "NAME MUST BE AT MOST 50 CHARS"
+     * )
+     * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
      * )
      */
     private $first_name;
 
+
     /**
      * @var string
-     */
-    /**
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
      * @Assert\Length(
      *      min = 2,
      *      max = 50,
      *      minMessage = "NAME MUST BE AT LEAST 2 CHARS",
      *      maxMessage = "NAME MUST BE AT MOST 50 CHARS"
+     * )
+     * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
      * )
      */
     private $middle_name;
 
+
     /**
      * @var string
-     */
-    /**
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
      * @Assert\Length(
      *      min = 2,
      *      max = 50,
      *      minMessage = "NAME MUST BE AT LEAST 2 CHARS",
      *      maxMessage = "NAME MUST BE AT MOST 50 CHARS"
      * )
+     * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      */
     private $last_name;
 
+
     /**
      * @var string
-     */
-    /**
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
      * @Assert\Length(
      *      min = 5,
      *      max = 100,
      *      minMessage = "ADDRESS MUST BE AT LEAST 5 CHARS",
      *      maxMessage = "ADDRESS MUST BE AT MOST 100 CHARS"
      * )
+     * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      */
     private $address;
 
+
     /**
      * @var string
-     */
-    /**
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
      * @Assert\Length(
      *      min = 5,
      *      max = 100,
      *      minMessage = "E-MAIL MUST BE AT LEAST 5 CHARS",
      *      maxMessage = "E-MAIL MUST BE AT MOST 100 CHARS"
      * )
+     * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      */
     private $email;
 
+
     /**
-     * @var string
-     */
-        /**
+     * @var integer
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
      * @Assert\Length(
      *      min = 10,
      *      max = 11,
-     *      minMessage = "NUMBER MUST BE AT LEAST 10 NUMBERS",
+     *      minMessage = "NUMBER MUST BE AT LEAST 11 NUMBERS",
      *      maxMessage = "NUMBER MUST BE AT MOST 11 NUMBERS"
+     * )
+     * @Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
      * )
      */
     private $phone_number;
 
+
     /**
-     * @var string
-     */
-    /**
+     * @var integer
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
      * @Assert\Length(
      *      min = 14,
      *      max = 14,
      *      minMessage = "NUMBER MUST BE 14 NUMBERS",
      *      maxMessage = "NUMBER MUST BE 14 NUMBERS"
      * )
+     *@Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      */
     private $id_card_number;
+
 
     /**
      * @var \DateTime
      */
     private $date_available;
 
+
     /**
      * @var integer
-     */
-    /**
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
      * @Assert\Length(
      *      min = 1,
      *      max = 10,
      *      minMessage = "SALARY MUST BE AT LEAST 1 NUMBERS",
      *      maxMessage = "SALARY MUST BE AT MOST 10 NUMBERS"
      * )
+     *@Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      */
     private $desired_salary;
 
+
+
     /**
      * @var string
-     */
-    /**
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
      * @Assert\Length(
      *      min = 3,
      *      max = 200,
      *      minMessage = "HIRING WAY MUST BE AT LEAST 3 CHARS",
      *      maxMessage = "HIRING WAY MUST BE AT MOST 200 CHARS"
      * )
+     * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * ) 
      */
     private $hiring_way;
 
-    /**
-     * @var string
-     */
-        /**
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 3,
-     *      minMessage = "APPLIED POSITION  MUST BE 'YES' OR 'NO'",
-     *      maxMessage = "APPLIED POSITION  MUST BE 'YES' OR 'NO'",
-     * )
-     */
-    private $interviewed_before;
 
     /**
      * @var string
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 3,
+     *      minMessage = "INTERVIEWED BEFORE  MUST BE 'YES' OR 'NO'",
+     *      maxMessage = "INTERVIEWED BEFORE  MUST BE 'YES' OR 'NO'",
+     * )
+     * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * ) 
      */
+    private $interviewed_before;
+
+
     /**
+     * @var string
+     * @Assert\NotBlank()
+     * @Assert\NotNull() 
      * @Assert\Length(
      *      min = 3,
      *      max = 200,
      *      minMessage = "APPLIED POSITION  MUST BE AT LEAST 3 CHARS",
      *      maxMessage = "APPLIED POSITION  MUST BE AT MOST 200 CHARS",
      * )
+     * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * ) 
      */
     private $applied_position;
 
-    /**
-     * @var string
-     */
-        /**
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 3,
-     *      minMessage = "APPLIED POSITION  MUST BE 'YES' OR 'NO'",
-     *      maxMessage = "APPLIED POSITION  MUST BE 'YES' OR 'NO'",
-     * )
-     */
-    private $is_worked_before;
 
     /**
      * @var string
+     * @Assert\NotBlank()
+     * @Assert\NotNull() 
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 3,
+     *      minMessage = "IS WORKED BEFORE  MUST BE 'YES' OR 'NO'",
+     *      maxMessage = "IS WORKED BEFORE  MUST BE 'YES' OR 'NO'",
+     * )
+     * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * ) 
      */
+    private $is_worked_before;
+
+
     /**
+     * @var string
+     * @Assert\NotBlank()
+     * @Assert\NotNull()  
      * @Assert\Length(
      *      min = 3,
      *      max = 200,
      *      minMessage = "SIGNATURE MUST BE AT LEAST 3 CHARS",
      *      maxMessage = "SIGNATURE MUST BE  AT MOST 200 CHARS",
      * )
+     * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * ) 
      */
     private $signature;
 
+
     /**
      * @var integer
+     * @Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * ) 
      */
     private $technical_test;
 
+
     /**
      * @var integer
+     * @Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * ) 
      */
     private $iq_test;
 
+
     /**
      * @var string
+     * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * ) 
      */
     private $technical_comments;
 
+
     /**
      * @var string
+     * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * ) 
      */
     private $technical_result;
 
-    /**
-     * @var string
-     */
-    private $personality_profile;
 
     /**
      * @var string
+     * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * ) 
+     */
+    private $personality_profile;
+
+
+    /**
+     * @var string
+     * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * ) 
      */
     private $hr_notes;
 
     /**
      * @var string
+     * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * ) 
      */
     private $gm_result;
 
+
     /**
      * @var string
+     * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * ) 
      */
     private $final_decision;
 

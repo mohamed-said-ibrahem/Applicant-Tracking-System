@@ -64,12 +64,12 @@ WorkBundle\Entity\Application:
             length: 255
             unique: true
         phone_number:
-            type: string
+            type: integer
             length: 11
             nullable: true
             unique: true
         id_card_number:
-           type: string
+           type: integer
            length: 14
            unique: true
         date_available:

@@ -73,7 +73,7 @@ class ApplicationController extends Controller
 
         
         $em = $this->getDoctrine()->getManager();       
-        $pu = new PageUtility($request, $em, 'WorkBundle:Application', 2, 'applied_position');
+        $pu = new PageUtility($request, $em, 'WorkBundle:Application', 10, 'applied_position');
         return $this->render('application/index.html.twig',[
                'applications' => $pu->getRecords(),
                'pager' => $pu->getDisplayParameters(),
@@ -108,15 +108,14 @@ class ApplicationController extends Controller
         $this->get('session')->getFlashBag()->add('error', 'Your custom message');
         // or some shortcut that need to be implemented
         // $this->addFlash('error', 'Custom message');
-        echo "error1";
         
         // error logging - need customization
         $this->get('logger')->error($e->getMessage());
         //$this->get('logger')->error($e->getTraceAsString());
         // or some shortcut that need to be implemented
         // $this->logError($e);
-        echo "error2";
         // some redirection e. g. to referer
+        echo "*There is an error please check your input";
         return $this->redirect($request->headers->get('referer'));
       } 
     catch(\Exception $e){
@@ -124,7 +123,7 @@ class ApplicationController extends Controller
         // flash
         // logger
         // redirection
-        echo "error3";
+        echo "**There is an error please check your input";
         
     }
         return $this->render('application/new.html.twig', array(

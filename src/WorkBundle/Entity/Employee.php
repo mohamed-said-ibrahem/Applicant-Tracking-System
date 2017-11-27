@@ -13,73 +13,219 @@ class Employee
      */
     private $id;
 
-    /**
-     * @var string
-     */
-    private $nameArabic;
 
     /**
      * @var string
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 50,
+     *      minMessage = "NAME MUST BE AT LEAST 5 CHARS",
+     *      maxMessage = "NAME MUST BE AT MOST 50 CHARS"
+     * )
+     * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
+     */
+    private $nameArabic;
+
+
+    /**
+     * @var string
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 50,
+     *      minMessage = "NAME MUST BE AT LEAST 5 CHARS",
+     *      maxMessage = "NAME MUST BE AT MOST 50 CHARS"
+     * )
+     * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      */
     private $nameEnglish;
+
 
     /**
      * @var \DateTime
      */
     private $birthDate;
 
+
     /**
      * @var string
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 100,
+     *      minMessage = "ADDRESS MUST BE AT LEAST 5 CHARS",
+     *      maxMessage = "ADDRESS MUST BE AT MOST 100 CHARS"
+     * )
+     * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      */
     private $address;
 
+
     /**
-     * @var string
+     * @var integer
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     * @Assert\Length(
+     *      min = 6,
+     *      max = 8,
+     *      minMessage = "NUMBER MUST BE AT LEAST 7 NUMBERS",
+     *      maxMessage = "NUMBER MUST BE AT MOST 8 NUMBERS"
+     * )
+     * @Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      */
     private $homePhone;
 
+
     /**
-     * @var string
+     * @var integer
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 11,
+     *      minMessage = "NUMBER MUST BE 11 NUMBERS",
+     *      maxMessage = "NUMBER MUST BE 11 NUMBERS"
+     * )
+     * @Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      */
     private $mobilePhone;
 
+
     /**
      * @var string
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 50,
+     *      minMessage = "NAME MUST BE AT LEAST 5 CHARS",
+     *      maxMessage = "NAME MUST BE AT MOST 50 CHARS"
+     * )
+     * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      */
     private $emergencyContactPerson;
 
+
     /**
-     * @var string
+     * @var integer
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 11,
+     *      minMessage = "NUMBER MUST BE 11 NUMBERS",
+     *      maxMessage = "NUMBER MUST BE 11 NUMBERS"
+     * )
+     * @Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      */
     private $emergencyPersonNumber;
 
+
     /**
      * @var string
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 100,
+     *      minMessage = "E-MAIL MUST BE AT LEAST 5 CHARS",
+     *      maxMessage = "E-MAIL MUST BE AT MOST 100 CHARS"
+     * )
+     * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      */
     private $emailPersonal;
 
+
     /**
-     * @var string
+     * @var integer
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     * @Assert\Length(
+     *      min = 14,
+     *      max = 14,
+     *      minMessage = "NUMBER MUST BE 14 NUMBERS",
+     *      maxMessage = "NUMBER MUST BE 14 NUMBERS"
+     * )
+     *@Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      */
     private $idCardNumber;
 
+
     /**
      * @var string
+     * @Assert\NotBlank()
+     * @Assert\NotNull() 
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 150,
+     *      minMessage = "ACADEMIC DEGREE MUST BE AT LEAST 4 CHARS",
+     *      maxMessage = "ACADEMIC DEGREE MUST BE AT MOST 150 CHARS",
+     * )
+     * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * ) 
      */
     private $academicDegree;
 
+    
     /**
      * @var \DateTime
      */
     private $graduationDate;
+
 
     /**
      * @var \DateTime
      */
     private $joiningDate;
 
+
     /**
      * @var string
+     * @Assert\NotBlank()
+     * @Assert\NotNull() 
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 200,
+     *      minMessage = "CURRENT POSITION  MUST BE AT LEAST 3 CHARS",
+     *      maxMessage = "CURRENT POSITION  MUST BE AT MOST 200 CHARS",
+     * )
+     * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * ) 
      */
     private $currentPosition;
 
