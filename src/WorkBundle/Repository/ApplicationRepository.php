@@ -13,47 +13,61 @@ use WorkBundle\Entity\Application;
 class ApplicationRepository extends \Doctrine\ORM\EntityRepository
 {
 
-    public function findByUserOrEmail($username)
+    public function findByUserOrEmail($input)
     {
-        $concat = $this->createQueryBuilder('a')
+        $applicants = $this->createQueryBuilder('a')
                 ->select()
-                ->where('a.first_name LIKE :username')
-                ->orWhere('a.middle_name LIKE :username')
-                ->orWhere('a.last_name LIKE :username')
-                ->setParameter('username', '%' . $username . '%')
+                ->where('a.first_name LIKE :name')
+                ->orWhere('a.middle_name LIKE :name')
+                ->orWhere('a.last_name LIKE :name')
+                ->setParameter('name', '%' . $input . '%')
                 ->orWhere('a.email LIKE :email')
-                ->setParameter('email', '%' . $username . '%')
-                // ->orderBy('a.first_name', 'ASC')
+                ->setParameter('email', '%' . $input . '%')
+                ->orderBy('a.id', 'ASC')
                 ->getQuery()
                 ->getResult();
-        return $concat;
+        return $applicants;
     }
      
     public function findByPhone($phone)
     {
-        $phone = $this->createQueryBuilder('c')
+        $applicant = $this->createQueryBuilder('b')
                 ->select()
-                ->where('c.phone_number = :phone')
+                ->where('b.phone_number = :phone')
                 ->setParameter('phone',$phone)
                 ->getQuery()
                 ->getResult();
-        return $phone;
+        return $applicant;
     }
 
-    public function filterByPosition($userposition)
+    public function filterByPosition($userPosition)
     {
-        $position = $this->createQueryBuilder('b')
+        $applicants = $this->createQueryBuilder('c')
                 ->select()
-                ->where('b.applied_position = :userposition')
-                ->setParameter('userposition', $userposition )
+                ->where('c.applied_position = :position')
+                ->setParameter('position', $userPosition )
                 ->getQuery()
                 ->getResult();
-        return $position;
+        return $applicants;
+    }
+    
+    public function deleteApplication($applicationId)
+    { 
+        $this->createQueryBuilder('d')
+             ->delete()
+             ->where('d.id = :id')
+             ->setParameter('id',$applicationId)
+             ->getQuery()
+             ->execute();
     }
 
-    // public function sortByName($arr)
-    // {
-
-    // }
-
+    public function getAllApplications()
+    {
+        $applications = $this->createQueryBuilder('e')
+                ->select()
+                ->getQuery()
+                ->getResult();
+        return $applications;
+    }
 }
+

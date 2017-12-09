@@ -10,4 +10,70 @@ namespace WorkBundle\Repository;
  */
 class EmployeeRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findByName($employeeName)
+    {
+        $employees = $this->createQueryBuilder('a')
+                     ->select()
+                     ->where('a.name_arabic LIKE :username')
+                     ->orWhere('a.name_english LIKE :username')
+                     ->setParameter('username', '%' . $employeeName . '%')
+                     ->orderBy('a.id' , 'ASC')
+                     ->getQuery()
+                     ->getResult();
+        return $employees;
+    }
+
+    public function getAllEmployees()
+    {
+        $employess = $this->createQueryBuilder('b')
+                    ->select()
+                    ->getQuery()
+                    ->getResult();
+        return $employees;
+    }
+
+    public function findByPhone($number)
+    {
+        $employee = $this->createQueryBuilder('c')
+                 ->select()
+                 ->where('c.mobile_phone = :phone')
+                 ->orWhere('c.home_phone = :phone')
+                 ->setParameter('phone',$number)
+                 ->getQuery()
+                 ->getResult();
+        return $employee;
+    }
+
+    public function findByPosition($position)
+    {
+        $employees = $this->createQueryBuilder('d')
+                     ->select()
+                     ->where('d.current_position LIKE :position')
+                     ->setParameter('position', '%' . $position . '%')
+                     ->getQuery()
+                     ->getResult();
+        return $employees;
+    }
+
+    public function deleteEmployee($employeeId)
+    { 
+        $this->createQueryBuilder('e')
+             ->delete()
+             ->where('e.id = :id')
+             ->setParameter('id',$employeeId)
+             ->getQuery()
+             ->execute();
+    }
+
+    public function findByEmail($email)
+    {
+        $employees = $this->createQueryBuilder('f')
+                      ->select()
+                      ->where('f.email_personal LIKE :email')
+                      ->setParameter('email', '%' . $email . '%')
+                      ->orderBy('f.id', 'ASC')
+                      ->getQuery()
+                      ->getResult();
+        return $employees;
+    }
 }
