@@ -13,7 +13,9 @@
 {% block body %}
     <h1>Employee creation</h1>
     {{ form_start(form) }}
-    {% spaceless %}    
+    {% spaceless %}
+    <input type="hidden" name="_csrf_token"
+    value="{{ csrf_token('authenticate') }}">    
     {% for label in form %}
     <div style="margin-left: 10px; padding:3px;">{{ form_row(label) }}</div>
     {% endfor %}

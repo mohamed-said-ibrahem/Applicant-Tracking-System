@@ -30,6 +30,13 @@ class Application
      *     type="string",
      *     message="The value {{ value }} is not a valid {{ type }}."
      * )
+     * 
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Your name cannot contain a number"
+     * )
+     * 
      */
     private $first_name;
 
@@ -48,6 +55,12 @@ class Application
      *     type="string",
      *     message="The value {{ value }} is not a valid {{ type }}."
      * )
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Your name cannot contain a number"
+     * )
+     * 
      */
     private $middle_name;
 
@@ -66,6 +79,13 @@ class Application
      *     type="string",
      *     message="The value {{ value }} is not a valid {{ type }}."
      * )
+     * 
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Your name cannot contain a number"
+     * )
+     * 
      */
     private $last_name;
 
@@ -98,9 +118,9 @@ class Application
      *      minMessage = "E-MAIL MUST BE AT LEAST 5 CHARS",
      *      maxMessage = "E-MAIL MUST BE AT MOST 100 CHARS"
      * )
-     * @Assert\Type(
-     *     type="string",
-     *     message="The value {{ value }} is not a valid {{ type }}."
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
      * )
      */
     private $email;
@@ -120,6 +140,11 @@ class Application
      *     type="integer",
      *     message="The value {{ value }} is not a valid {{ type }}."
      * )
+     *     
+     * @Assert\Regex(     
+     * pattern="/^[1-9]\d*$/",
+     * message="please check the input again"
+     * )
      */
     private $phone_number;
 
@@ -134,16 +159,27 @@ class Application
      *      minMessage = "NUMBER MUST BE 14 NUMBERS",
      *      maxMessage = "NUMBER MUST BE 14 NUMBERS"
      * )
+     * 
      *@Assert\Type(
      *     type="integer",
      *     message="The value {{ value }} is not a valid {{ type }}."
      * )
+     * 
+     * @Assert\Regex(     
+     * pattern="/^[1-9]\d*$/",
+     * message="please check the input again"
+     * )
+     * 
      */
     private $id_card_number;
 
 
     /**
+     * 
      * @var \DateTime
+     * 
+     * @Assert\DateTime()
+     * 
      */
     private $date_available;
 
@@ -162,6 +198,12 @@ class Application
      *     type="integer",
      *     message="The value {{ value }} is not a valid {{ type }}."
      * )
+     * 
+     * @Assert\Regex(     
+     * pattern="/^[1-9]\d*$/",
+     * message="please check the input again"
+     * )
+     * 
      */
     private $desired_salary;
 
@@ -180,6 +222,11 @@ class Application
      * @Assert\Type(
      *     type="string",
      *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="hiring way cannot contain a number"
      * ) 
      */
     private $hiring_way;
@@ -198,7 +245,11 @@ class Application
      * @Assert\Type(
      *     type="string",
      *     message="The value {{ value }} is not a valid {{ type }}."
-     * ) 
+     * )
+     * @Assert\Choice(
+     *     choices = { "YES", "NO" },
+     *     message = "*INTERVIEWED BEFORE  MUST BE 'YES' OR 'NO'"
+     * )
      */
     private $interviewed_before;
 
@@ -216,7 +267,12 @@ class Application
      * @Assert\Type(
      *     type="string",
      *     message="The value {{ value }} is not a valid {{ type }}."
-     * ) 
+     * )
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="applied position cannot contain a number"
+     * )  
      */
     private $applied_position;
 
@@ -234,7 +290,13 @@ class Application
      * @Assert\Type(
      *     type="string",
      *     message="The value {{ value }} is not a valid {{ type }}."
-     * ) 
+     * )
+     * 
+     * @Assert\Choice(
+     *     choices = { "YES", "NO" },
+     *     message = "*IS WORKED BEFORE  MUST BE 'YES' OR 'NO'"
+     * )
+     * 
      */
     private $is_worked_before;
 
@@ -252,7 +314,13 @@ class Application
      * @Assert\Type(
      *     type="string",
      *     message="The value {{ value }} is not a valid {{ type }}."
-     * ) 
+     * )
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="signature cannot contain a number"
+     * )
+     *   
      */
     private $signature;
 

@@ -156,9 +156,9 @@ class Employee
      *      minMessage = "E-MAIL MUST BE AT LEAST 5 CHARS",
      *      maxMessage = "E-MAIL MUST BE AT MOST 100 CHARS"
      * )
-     * @Assert\Type(
-     *     type="string",
-     *     message="The value {{ value }} is not a valid {{ type }}."
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
      * )
      */
     private $emailPersonal;

@@ -37,6 +37,4 @@ class UserSubscriber implements EventSubscriberInterface {
         ];
     }
 
-
-
 }

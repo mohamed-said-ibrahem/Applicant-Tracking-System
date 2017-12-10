@@ -12,6 +12,12 @@ use WorkBundle\Entity\Application;
  */
 class ApplicationRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function createApplication($first_name,$middle_name,$last_name,
+        $address,$email,$phone_number,$id_card_number,$date_available,$desired_salary,
+        $hiring_way,$interviewed_before,$applied_position,$is_worked_before,$signature)
+    {
+        
+    }
 
     public function findByUserOrEmail($input)
     {
