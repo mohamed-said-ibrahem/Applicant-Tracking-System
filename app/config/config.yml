@@ -39,7 +39,6 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
-
 # Doctrine Configuration
 doctrine:
     dbal:
@@ -81,6 +80,9 @@ fos_user:
     registration:
         form:
             type: WorkBundle\Form\RegistrationType
+    # profile:
+    #    form:
+    #        type: WorkBundle\Form\ProfileType
             # if you are using Symfony < 2.8 you should use the type name instead
             # type: app_user_registration
     change_password:

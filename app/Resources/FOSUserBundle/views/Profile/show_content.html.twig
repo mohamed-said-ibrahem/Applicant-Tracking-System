@@ -1,0 +1,18 @@
+<html>
+<head>
+<style>
+ p {
+    text-align: center;
+}
+</style>
+</head>
+
+<body>
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="fos_user_user_show">
+    <p>{{ ' USER NAME  '|trans }}: {{ user.username }}</p>
+    <p>{{ ' EMAIL  '|trans }}: {{ user.email }}</p>
+</div>
+</body>
+</html>

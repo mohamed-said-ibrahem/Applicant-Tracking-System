@@ -178,8 +178,6 @@ class Application
      * 
      * @var \DateTime
      * 
-     * @Assert\DateTime()
-     * 
      */
     private $date_available;
 

@@ -21,15 +21,14 @@ class RegistrationType extends AbstractType
     {
         $builder
         ->add('email', LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\EmailType'), array('label' => 'Email: ', 'translation_domain' => 'FOSUserBundle'))
-        ->add('username', null, array('label' => 'User Name: ', 'translation_domain' => 'FOSUserBundle'))
+        ->add('username',  LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\TextType'), array('label' => 'User Name: ', 'translation_domain' => 'FOSUserBundle'))
         ->add('plainPassword', LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\RepeatedType'), array(
             'type' => LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\PasswordType'),
             'options' => array('translation_domain' => 'FOSUserBundle'),
             'first_options' => array('label' => 'Password: '),
             'second_options' => array('label' => 'Password_Confirmation: '),
             'invalid_message' => 'fos_user.password.mismatch',
-        ))
-    ;
+        ));
     }
 
     public function configureOptions(OptionsResolver $resolver)
