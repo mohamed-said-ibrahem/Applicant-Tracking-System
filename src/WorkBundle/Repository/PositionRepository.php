@@ -1,7 +1,8 @@
 <?php
 
 namespace WorkBundle\Repository;
-
+use Doctrine\ORM\EntityRepository;
+use WorkBundle\Entity\Position;
 /**
  * PositionRepository
  *
@@ -10,4 +11,5 @@ namespace WorkBundle\Repository;
  */
 class PositionRepository extends \Doctrine\ORM\EntityRepository
 {
+    
 }

@@ -1,7 +1,8 @@
 <?php
 
 namespace WorkBundle\Repository;
-
+use Doctrine\ORM\EntityRepository;
+use WorkBundle\Entity\Degree;
 /**
  * DegreeRepository
  *
@@ -10,4 +11,40 @@ namespace WorkBundle\Repository;
  */
 class DegreeRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function createDegree($application,$name,$university,$degreeFrom,$degreeTo)
+    {
+        $degree = new Degree();
+
+        $degree->setApplication($application)
+               ->setName($name)
+               ->setUniversity($university)
+               ->setDegreeFrom($degreeFrom)
+               ->setDegreeTo($degreeTo);
+
+        $em = $this->getEntityManager();
+        $em->persist($degree);
+        $em->flush();
+        return $degree;
+    }
+
+    public function deleteDegree($degreeId)
+    {
+        $this->createQueryBuilder('a')
+             ->delete()
+             ->where("a.id = :degreeId")
+             ->setParameter('degreeId', $degreeId)
+             ->getQuery()
+             ->execute();
+    }
+
+    public function findAllApplicationDegree($applicationId)
+    {
+        $degrees = $this->createQueryBuilder('b')
+                        ->select()
+                        ->where('b.Application = :applicationId')
+                        ->setParameter('applicationId',$applicationId)
+                        ->getQuery()
+                        ->execute();
+        return $degrees;
+    }
 }

@@ -17,17 +17,19 @@ class ApplicationRepository extends \Doctrine\ORM\EntityRepository
         $hiringWay,$interviewedBefore,$appliedPosition,$isWorkedBefore,$signature)
     {
         $applicant = new Application();
-        $applicant->setFirstName($firstName)->setMiddleName($middleNmae)
+
+        $applicant->setFirstName($firstName)->setMiddleName($middleName)
                   ->setLastName($lastName)->setAddress($address)->setEmail($email)
                   ->setPhoneNumber($phoneNumber)->setIdCardNumber($idCardNumber)
                   ->setDateAvailable($dateAvailable)->setDesiredSalary($desiredSalary)
                   ->setHiringWay($hiringWay)->setInterviewedBefore($interviewedBefore)
-                  ->setAppliedPosition($appliedPosition)->setIsWorkedBefore($isWordkedBefore)
+                  ->setAppliedPosition($appliedPosition)->setIsWorkedBefore($isWorkedBefore)
                   ->setSignature($signature);
 
-        $em =$this->getEntityManager();
+        $em = $this->getEntityManager();
         $em->persist($applicant);
         $em->flush();
+        return $applicant;
     }
 
     public function findApplicant($id)
@@ -49,6 +51,7 @@ class ApplicationRepository extends \Doctrine\ORM\EntityRepository
                 ->orderBy('a.id', 'ASC')
                 ->getQuery()
                 ->getResult();
+
         return $applicants;
     }
      
@@ -60,6 +63,7 @@ class ApplicationRepository extends \Doctrine\ORM\EntityRepository
                 ->setParameter('phone',$phone)
                 ->getQuery()
                 ->getResult();
+
         return $applicant;
     }
 
@@ -71,6 +75,7 @@ class ApplicationRepository extends \Doctrine\ORM\EntityRepository
                 ->setParameter('position', $userPosition )
                 ->getQuery()
                 ->getResult();
+
         return $applicants;
     }
     
@@ -90,6 +95,7 @@ class ApplicationRepository extends \Doctrine\ORM\EntityRepository
                 ->select()
                 ->getQuery()
                 ->getResult();
+                
         return $applications;
     }
 }

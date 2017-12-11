@@ -1,7 +1,8 @@
 <?php
 
 namespace WorkBundle\Repository;
-
+use Doctrine\ORM\EntityRepository;
+use WorkBundle\Entity\Employee;
 /**
  * EmployeeRepository
  *

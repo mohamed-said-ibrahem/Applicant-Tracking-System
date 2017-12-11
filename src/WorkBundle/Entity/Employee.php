@@ -19,15 +19,22 @@ class Employee
      * @Assert\NotBlank()
      * @Assert\NotNull()
      * @Assert\Length(
-     *      min = 5,
+     *      min = 2,
      *      max = 50,
-     *      minMessage = "NAME MUST BE AT LEAST 5 CHARS",
+     *      minMessage = "NAME MUST BE AT LEAST 2 CHARS",
      *      maxMessage = "NAME MUST BE AT MOST 50 CHARS"
      * )
      * @Assert\Type(
      *     type="string",
      *     message="The value {{ value }} is not a valid {{ type }}."
      * )
+     * 
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Your name cannot contain a number"
+     * )
+     * 
      */
     private $nameArabic;
 
@@ -37,15 +44,22 @@ class Employee
      * @Assert\NotBlank()
      * @Assert\NotNull()
      * @Assert\Length(
-     *      min = 5,
+     *      min = 2,
      *      max = 50,
-     *      minMessage = "NAME MUST BE AT LEAST 5 CHARS",
+     *      minMessage = "NAME MUST BE AT LEAST 2 CHARS",
      *      maxMessage = "NAME MUST BE AT MOST 50 CHARS"
      * )
      * @Assert\Type(
      *     type="string",
      *     message="The value {{ value }} is not a valid {{ type }}."
      * )
+     * 
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Your name cannot contain a number"
+     * )
+     * 
      */
     private $nameEnglish;
 
@@ -81,13 +95,19 @@ class Employee
      * @Assert\Length(
      *      min = 6,
      *      max = 8,
-     *      minMessage = "NUMBER MUST BE AT LEAST 7 NUMBERS",
+     *      minMessage = "NUMBER MUST BE AT LEAST 6 NUMBERS",
      *      maxMessage = "NUMBER MUST BE AT MOST 8 NUMBERS"
      * )
      * @Assert\Type(
      *     type="integer",
      *     message="The value {{ value }} is not a valid {{ type }}."
      * )
+     *     
+     * @Assert\Regex(     
+     * pattern="/^[1-9]\d*$/",
+     * message="please check the input again"
+     * )
+     */
      */
     private $homePhone;
 
@@ -106,6 +126,11 @@ class Employee
      *     type="integer",
      *     message="The value {{ value }} is not a valid {{ type }}."
      * )
+     *     
+     * @Assert\Regex(     
+     * pattern="/^[1-9]\d*$/",
+     * message="please check the input again"
+     * )
      */
     private $mobilePhone;
 
@@ -117,13 +142,20 @@ class Employee
      * @Assert\Length(
      *      min = 5,
      *      max = 50,
-     *      minMessage = "NAME MUST BE AT LEAST 5 CHARS",
+     *      minMessage = "NAME MUST BE AT LEAST 2 CHARS",
      *      maxMessage = "NAME MUST BE AT MOST 50 CHARS"
      * )
      * @Assert\Type(
      *     type="string",
      *     message="The value {{ value }} is not a valid {{ type }}."
      * )
+     * 
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Your name cannot contain a number"
+     * )
+     * 
      */
     private $emergencyContactPerson;
 
@@ -135,12 +167,17 @@ class Employee
      * @Assert\Length(
      *      min = 10,
      *      max = 11,
-     *      minMessage = "NUMBER MUST BE 11 NUMBERS",
-     *      maxMessage = "NUMBER MUST BE 11 NUMBERS"
+     *      minMessage = "NUMBER MUST BE AT LEAST 11 NUMBERS",
+     *      maxMessage = "NUMBER MUST BE AT MOST 11 NUMBERS"
      * )
      * @Assert\Type(
      *     type="integer",
      *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
+     *     
+     * @Assert\Regex(     
+     * pattern="/^[1-9]\d*$/",
+     * message="please check the input again"
      * )
      */
     private $emergencyPersonNumber;
@@ -174,10 +211,17 @@ class Employee
      *      minMessage = "NUMBER MUST BE 14 NUMBERS",
      *      maxMessage = "NUMBER MUST BE 14 NUMBERS"
      * )
+     * 
      *@Assert\Type(
      *     type="integer",
      *     message="The value {{ value }} is not a valid {{ type }}."
      * )
+     * 
+     * @Assert\Regex(     
+     * pattern="/^[1-9]\d*$/",
+     * message="please check the input again"
+     * )
+     * 
      */
     private $idCardNumber;
 
@@ -219,13 +263,18 @@ class Employee
      * @Assert\Length(
      *      min = 3,
      *      max = 200,
-     *      minMessage = "CURRENT POSITION  MUST BE AT LEAST 3 CHARS",
-     *      maxMessage = "CURRENT POSITION  MUST BE AT MOST 200 CHARS",
+     *      minMessage = "APPLIED POSITION  MUST BE AT LEAST 3 CHARS",
+     *      maxMessage = "APPLIED POSITION  MUST BE AT MOST 200 CHARS",
      * )
      * @Assert\Type(
      *     type="string",
      *     message="The value {{ value }} is not a valid {{ type }}."
-     * ) 
+     * )
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="applied position cannot contain a number"
+     * )  
      */
     private $currentPosition;
 

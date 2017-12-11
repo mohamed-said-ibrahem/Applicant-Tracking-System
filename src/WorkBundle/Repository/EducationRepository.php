@@ -1,7 +1,8 @@
 <?php
 
 namespace WorkBundle\Repository;
-
+use Doctrine\ORM\EntityRepository;
+use WorkBundle\Entity\Education;
 /**
  * EducationRepository
  *
@@ -10,8 +11,36 @@ namespace WorkBundle\Repository;
  */
 class EducationRepository extends \Doctrine\ORM\EntityRepository
 {
-     public function addEducation()
+     public function createEducation($application,$schoolName,$schoolFrom,$schoolTo,
+     $schoolDegree,$collegeName,$collegeFrom,$collageTo,$isGraduated,$graduateDegree)
     {
-        
+      $education = new Education();
+
+      $education->setApplication($application)->setSchoolName($schoolName)
+                ->setSchoolFrom($schoolFrom)->setSchoolTo($schoolTo)
+                ->setSchoolDegree($schoolDegree)->setCollegeName($collegeName)
+                ->setCollegeFrom($collegeFrom)->setCollegeTo($collageTo)
+                ->setIsGraduate($isGraduated)->setGraduateDegree($graduateDegree);
+
+      $em = $this->getEntityManager();
+      $em->persist($education);
+      $em->flush();
     }
+
+    public function deleteEducation($educationId)
+    {
+        $this->createQueryBuilder('a')
+             ->delete()
+             ->where('a.id =:educationId')
+             ->setParameter('educationId',$educationId)
+             ->getQuery()
+             ->execute();
+    }
+
+    public function findEducation($educationId)
+    {
+        $education = $this->findOneById($educationId);
+        return $education;
+    }
+
 }

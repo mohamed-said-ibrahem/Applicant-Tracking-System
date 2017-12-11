@@ -3,6 +3,7 @@
 namespace WorkBundle\Controller;
 
 use WorkBundle\Entity\Application;
+use WorkBundle\Entity\Education;
 use WorkBundle\Entity\Blacklist;
 use WorkBundle\Repository\BlacklistRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -61,12 +62,19 @@ class ApplicationController extends Controller
     
     public function indexAction(Request $request)
     {
-        // $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
+        $a = $em->getRepository('WorkBundle:Application');
+        $c = $em->getRepository('WorkBundle:Degree');
+        $sou=$c->findAllApplicationDegree('1');
+        dump($sou);die();
+        $app =$a->createApplication('maomdaaa','moadaama','maodaama','modfamaa','momaassssa@yahoo.com','08888533564',
+        '34234329322432',new \DateTime(),'3000','phone','YES','PHP','NO','MONaAAA');
+       
+        $b = $em->getRepository('WorkBundle:Education')->createEducation($app,
+        'mySCHsssssOL',new \DateTime(),new \DateTime(),
+        'A+','collegesnamdd','1-2-23','1-2-23',1,'A+');
 
-        // $applications = $em->getRepository('WorkBundle:Application')->filterByPosition('PHP')
-        // ;
-
-        // //dump($applications);die;
+        dump($b);die;
         // return $this->render('application/index.html.twig', array(
         //     'applications' => $applications,
         // ));
