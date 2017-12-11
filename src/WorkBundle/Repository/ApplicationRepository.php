@@ -29,6 +29,7 @@ class ApplicationRepository extends \Doctrine\ORM\EntityRepository
         $em = $this->getEntityManager();
         $em->persist($applicant);
         $em->flush();
+
         return $applicant;
     }
 

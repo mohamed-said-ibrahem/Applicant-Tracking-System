@@ -91,9 +91,9 @@ security:
         - { path: ^/register, role: ROLE_SUPER_ADMIN }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
-        - { path: ^/applicant/[1-9]+/edit$, role: ROLE_ADMIN }
-        - { path: ^/applicant/[1-9]+/delete$, role: ROLE_ADMIN }
-        - { path: ^/applicant, role: ROLE_ADMIN }
-        - { path: ^/employee, role: ROLE_ADMIN }
+        - { path: ^/applicant/[1-9]+/edit$, role: [ROLE_ADMIN,ROLE_SUPER_ADMIN] }
+        - { path: ^/applicant/[1-9]+/delete$, role: [ROLE_ADMIN,ROLE_SUPER_ADMIN] }
+        - { path: ^/applicant, role: [ROLE_ADMIN,ROLE_SUPER_ADMIN] }
+        - { path: ^/employee, role: [ROLE_ADMIN,ROLE_SUPER_ADMIN] }
 
           # ...

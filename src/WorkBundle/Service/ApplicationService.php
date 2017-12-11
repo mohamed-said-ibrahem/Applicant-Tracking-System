@@ -14,6 +14,30 @@ class ApplicationService {
         $this->em = $em;
     }
     
+    public function createNewApplicant($firstName,$middleName,$lastName,
+    $address,$email,$phoneNumber,$idCardNumber,$dateAvailable,$desiredSalary,
+    $hiringWay,$interviewedBefore,$appliedPosition,$isWorkedBefore,$signature,
+    $schoolName,$schoolFrom,$schoolTo,$schoolDegree,$collegeName,$collegeFrom,
+    $collageTo,$isGraduated,$graduateDegree)
+    {
+       $employee = $this->em->getRepository('WorkBundle:Application')
+                ->createApplication($firstName,$middleName,$lastName,
+                $address,$email,$phoneNumber,$idCardNumber,$dateAvailable,$desiredSalary,
+                $hiringWay,$interviewedBefore,$appliedPosition,$isWorkedBefore,$signature);
+                
+       $education = $this->em->getRepository('WorkBundle:Education')
+                ->createEducation($employee,$schoolName,$schoolFrom,$schoolTo,
+                $schoolDegree,$collegeName,$collegeFrom,$collageTo,$isGraduated,$graduateDegree);
+                
+        return $education;
+    }
+
+    public function findApplicantById($id)
+    {
+        return $this->em->getRepository('WorkBundle:Application')
+        ->findApplicant($id);
+    }
+
     public function findApplicantByNameOrEmail($input)
     {
         return $this->em->getRepository('WorkBundle:Application')
@@ -32,6 +56,18 @@ class ApplicationService {
                 ->filterByPosition($position);
     }
     
+    public function deleteApplicant($id)
+    {
+        $this->em->getRepository('WorkBundle:Application')
+        ->deleteApplication($id);
+    }
+
+    public function findAllApplicants()
+    {
+        return $this->em->getRepository('WorkBundle:Application')
+        ->findAllApplications();   
+    }
+
     public function logout($token)
     {   
         $repo = $this->em->getRepository("WorkBundle:Blacklist");   

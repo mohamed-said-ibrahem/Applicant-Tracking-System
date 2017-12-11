@@ -11,8 +11,32 @@ use WorkBundle\Entity\Position;
  */
 class PositionRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function createPosition()
+    public function createPosition($application,$jobTitle,$companyName,$address,$reason
+    ,$responsibilities,$supervisor,$startSalary,$endSalary,$fromDate,$toDate,$callSupervisor)
     {
+        $position = new Position();
+
+        $position->setApplication($application)->setJobTitle($jobTitle)
+                 ->setCompanyName($companyName)->setAddress($address)
+                 ->setReason($reason)->setResponsibilities($responsibilities)
+                 ->setSupervisor($supervisor)->setStartingSalary($startSalary)
+                 ->setEndingSalary($endSalary)->setFromDate($fromDate)
+                 ->setToDate($toDate)->setCallSupervisor($callSupervisor);
+
+        $em = $this->getEntityManager();
+        $em->persist($position);
+        $em->flush();
         
+        return $position;
+    }
+
+    public function deletePosition($positionId)
+    {
+        $this->createQueryBuilder('a')
+             ->delete()
+             ->where('a.id =:positionId')
+             ->setParameter('positionId',$positionId)
+             ->getQuery()
+             ->execute();
     }
 }

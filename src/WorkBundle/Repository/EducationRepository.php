@@ -14,17 +14,19 @@ class EducationRepository extends \Doctrine\ORM\EntityRepository
      public function createEducation($application,$schoolName,$schoolFrom,$schoolTo,
      $schoolDegree,$collegeName,$collegeFrom,$collageTo,$isGraduated,$graduateDegree)
     {
-      $education = new Education();
+        $education = new Education();
 
-      $education->setApplication($application)->setSchoolName($schoolName)
-                ->setSchoolFrom($schoolFrom)->setSchoolTo($schoolTo)
-                ->setSchoolDegree($schoolDegree)->setCollegeName($collegeName)
-                ->setCollegeFrom($collegeFrom)->setCollegeTo($collageTo)
-                ->setIsGraduate($isGraduated)->setGraduateDegree($graduateDegree);
+        $education->setApplication($application)->setSchoolName($schoolName)
+                    ->setSchoolFrom($schoolFrom)->setSchoolTo($schoolTo)
+                    ->setSchoolDegree($schoolDegree)->setCollegeName($collegeName)
+                    ->setCollegeFrom($collegeFrom)->setCollegeTo($collageTo)
+                    ->setIsGraduate($isGraduated)->setGraduateDegree($graduateDegree);
 
-      $em = $this->getEntityManager();
-      $em->persist($education);
-      $em->flush();
+        $em = $this->getEntityManager();
+        $em->persist($education);
+        $em->flush();
+
+        return $education;
     }
 
     public function deleteEducation($educationId)

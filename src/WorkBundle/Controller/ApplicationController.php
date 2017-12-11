@@ -62,9 +62,17 @@ class ApplicationController extends Controller
     
     public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $a = $em->getRepository('WorkBundle:Application');
-        $c = $em->getRepository('WorkBundle:Degree');
+       $value = $this->get(ApplicationService::class)->createNewApplicant('maomddfdaaa','moadaadfdfma',
+        'maodasdfama','modfsdfamaa','momaassssdfsa@yahoo.com','78888533564',
+        '34238789322432',new \DateTime(),'3000','phone','YES','PHP','NO','MONaAAAd',
+        'mySCHsssshsOL',new \DateTime(),new \DateTime(),
+         'A+','collegesnagmdd','1-2-23','1-2-23',1,'A+');
+        dump($value);die();
+
+        // $em = $this->getDoctrine()->getManager();
+        // $applicantRepo = $em->getRepository('WorkBundle:Application');
+        // $arr = $applicantRepo->findByUserOrEmail('mohamed');
+        
         // $sou=$c->findAllApplicationDegree('1');
         // dump($sou);die();
         // $app =$a->createApplication('maomdaaa','moadaama','maodaama','modfamaa','momaassssa@yahoo.com','08888533564',

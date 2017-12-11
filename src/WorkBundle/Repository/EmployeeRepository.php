@@ -11,7 +11,7 @@ use WorkBundle\Entity\Employee;
  */
 class EmployeeRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function createNewEmployee($application,$nameArabic,$nameEnglish,$birthDate,
+    public function createEmployee($application,$nameArabic,$nameEnglish,$birthDate,
     $address,$homePhone,$mobilePhone,$emergencyContactPerson,$emergencyPersonNumber,
     $emailPersonal,$idCardNumber,$academicDegree,$graduationDate,$joiningDate)
     {
@@ -27,6 +27,8 @@ class EmployeeRepository extends \Doctrine\ORM\EntityRepository
         $em = $this->getEntityManager();
         $em->persist($employee);
         $em->flush();
+
+        return $employee;
     }
 
     public function findByName($employeeName)
@@ -42,7 +44,7 @@ class EmployeeRepository extends \Doctrine\ORM\EntityRepository
         return $employees;
     }
 
-    public function getAllEmployees()
+    public function findEmployees()
     {
         $employess = $this->createQueryBuilder('b')
                     ->select()
