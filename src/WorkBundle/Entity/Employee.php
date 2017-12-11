@@ -108,7 +108,6 @@ class Employee
      * message="please check the input again"
      * )
      */
-     */
     private $homePhone;
 
 

@@ -11,5 +11,8 @@ use WorkBundle\Entity\Position;
  */
 class PositionRepository extends \Doctrine\ORM\EntityRepository
 {
-    
+    public function createPosition()
+    {
+        
+    }
 }

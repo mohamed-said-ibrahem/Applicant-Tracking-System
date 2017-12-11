@@ -65,16 +65,16 @@ class ApplicationController extends Controller
         $em = $this->getDoctrine()->getManager();
         $a = $em->getRepository('WorkBundle:Application');
         $c = $em->getRepository('WorkBundle:Degree');
-        $sou=$c->findAllApplicationDegree('1');
-        dump($sou);die();
-        $app =$a->createApplication('maomdaaa','moadaama','maodaama','modfamaa','momaassssa@yahoo.com','08888533564',
-        '34234329322432',new \DateTime(),'3000','phone','YES','PHP','NO','MONaAAA');
+        // $sou=$c->findAllApplicationDegree('1');
+        // dump($sou);die();
+        // $app =$a->createApplication('maomdaaa','moadaama','maodaama','modfamaa','momaassssa@yahoo.com','08888533564',
+        // '34234329322432',new \DateTime(),'3000','phone','YES','PHP','NO','MONaAAA');
        
-        $b = $em->getRepository('WorkBundle:Education')->createEducation($app,
-        'mySCHsssssOL',new \DateTime(),new \DateTime(),
-        'A+','collegesnamdd','1-2-23','1-2-23',1,'A+');
+        // $b = $em->getRepository('WorkBundle:Education')->createEducation($app,
+        // 'mySCHsssssOL',new \DateTime(),new \DateTime(),
+        // 'A+','collegesnamdd','1-2-23','1-2-23',1,'A+');
 
-        dump($b);die;
+        // dump($b);die;
         // return $this->render('application/index.html.twig', array(
         //     'applications' => $applications,
         // ));
