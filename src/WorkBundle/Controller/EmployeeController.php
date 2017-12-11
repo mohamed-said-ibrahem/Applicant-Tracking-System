@@ -19,9 +19,10 @@ class EmployeeController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // $em = $this->getDoctrine()->getManager();
+       // $em = $this->getDoctrine()->getManager();
 
-        // $employees = $em->getRepository('WorkBundle:Employee')->findAll();
+       // $employees = $em->getRepository('WorkBundle:Employee')->findByPhone('01004200590');
+       // dump($employees);die;    
 
         // return $this->render('employee/index.html.twig', array(
         //     'employees' => $employees,

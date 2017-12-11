@@ -10,12 +10,30 @@ namespace WorkBundle\Repository;
  */
 class EmployeeRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function createNewEmployee($application,$nameArabic,$nameEnglish,$birthDate,
+    $address,$homePhone,$mobilePhone,$emergencyContactPerson,$emergencyPersonNumber,
+    $emailPersonal,$idCardNumber,$academicDegree,$graduationDate,$joiningDate)
+    {
+        $employee = new Employee();
+        $employee->setApplication($application)->setNameArabic($nameArabic)
+                 ->setNameEnglish($nameEnglish)->setBirthDate($birthDate)
+                 ->setAddress($address)->setHomePhone($homePhone)
+                 ->setMobilePhone($mobilePhone)->setEmergencyContactPerson($emergencyContactPerson)
+                 ->setEmergencyPersonNumber($emergencyPersonNumber)->setEmailPersonal($emailPersonal)
+                 ->setIdCardNumber($idCardNumber)->setAcademicDegree($academicDegree)
+                 ->setGraduationDate($graduationDate)->setJoiningDate($joiningDate);
+        
+        $em = $this->getEntityManager();
+        $em->persist($employee);
+        $em->flush();
+    }
+
     public function findByName($employeeName)
     {
         $employees = $this->createQueryBuilder('a')
                      ->select()
-                     ->where('a.name_arabic LIKE :username')
-                     ->orWhere('a.name_english LIKE :username')
+                     ->where('a.nameArabic LIKE :username')
+                     ->orWhere('a.nameEnglish LIKE :username')
                      ->setParameter('username', '%' . $employeeName . '%')
                      ->orderBy('a.id' , 'ASC')
                      ->getQuery()
@@ -36,8 +54,8 @@ class EmployeeRepository extends \Doctrine\ORM\EntityRepository
     {
         $employee = $this->createQueryBuilder('c')
                  ->select()
-                 ->where('c.mobile_phone = :phone')
-                 ->orWhere('c.home_phone = :phone')
+                 ->where('c.mobilePhone = :phone')
+                 ->orWhere('c.homePhone = :phone')
                  ->setParameter('phone',$number)
                  ->getQuery()
                  ->getResult();
@@ -48,7 +66,7 @@ class EmployeeRepository extends \Doctrine\ORM\EntityRepository
     {
         $employees = $this->createQueryBuilder('d')
                      ->select()
-                     ->where('d.current_position LIKE :position')
+                     ->where('d.currentPosition LIKE :position')
                      ->setParameter('position', '%' . $position . '%')
                      ->getQuery()
                      ->getResult();
@@ -69,7 +87,7 @@ class EmployeeRepository extends \Doctrine\ORM\EntityRepository
     {
         $employees = $this->createQueryBuilder('f')
                       ->select()
-                      ->where('f.email_personal LIKE :email')
+                      ->where('f.emailPersonal LIKE :email')
                       ->setParameter('email', '%' . $email . '%')
                       ->orderBy('f.id', 'ASC')
                       ->getQuery()

@@ -73,7 +73,7 @@ class ApplicationController extends Controller
 
         
         $em = $this->getDoctrine()->getManager();       
-        $pu = new PageUtility($request, $em, 'WorkBundle:Application', 10, 'applied_position');
+        $pu = new PageUtility($request, $em, 'WorkBundle:Application', 10, 'id');
         return $this->render('application/index.html.twig',[
                'applications' => $pu->getRecords(),
                'pager' => $pu->getDisplayParameters(),

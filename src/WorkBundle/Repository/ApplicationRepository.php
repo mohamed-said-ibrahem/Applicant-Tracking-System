@@ -12,11 +12,28 @@ use WorkBundle\Entity\Application;
  */
 class ApplicationRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function createApplication($first_name,$middle_name,$last_name,
-        $address,$email,$phone_number,$id_card_number,$date_available,$desired_salary,
-        $hiring_way,$interviewed_before,$applied_position,$is_worked_before,$signature)
+    public function createApplication($firstName,$middleName,$lastName,
+        $address,$email,$phoneNumber,$idCardNumber,$dateAvailable,$desiredSalary,
+        $hiringWay,$interviewedBefore,$appliedPosition,$isWorkedBefore,$signature)
     {
-        
+        $applicant = new Application();
+        $applicant->setFirstName($firstName)->setMiddleName($middleNmae)
+                  ->setLastName($lastName)->setAddress($address)->setEmail($email)
+                  ->setPhoneNumber($phoneNumber)->setIdCardNumber($idCardNumber)
+                  ->setDateAvailable($dateAvailable)->setDesiredSalary($desiredSalary)
+                  ->setHiringWay($hiringWay)->setInterviewedBefore($interviewedBefore)
+                  ->setAppliedPosition($appliedPosition)->setIsWorkedBefore($isWordkedBefore)
+                  ->setSignature($signature);
+
+        $em =$this->getEntityManager();
+        $em->persist($applicant);
+        $em->flush();
+    }
+
+    public function findApplicant($id)
+    {
+        $applicant = $this->findOneById($id);
+        return $applicant;
     }
 
     public function findByUserOrEmail($input)
@@ -67,7 +84,7 @@ class ApplicationRepository extends \Doctrine\ORM\EntityRepository
              ->execute();
     }
 
-    public function getAllApplications()
+    public function findAllApplications()
     {
         $applications = $this->createQueryBuilder('e')
                 ->select()

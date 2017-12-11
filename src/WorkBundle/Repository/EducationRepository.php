@@ -10,4 +10,8 @@ namespace WorkBundle\Repository;
  */
 class EducationRepository extends \Doctrine\ORM\EntityRepository
 {
+     public function addEducation()
+    {
+        
+    }
 }
