@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CurrencyType;
-
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 
 class ApplicationType extends AbstractType
@@ -38,6 +38,14 @@ class ApplicationType extends AbstractType
         ->add('applied_position',TextType::class,array('attr'=>array('class'=>'form-control col-xs-10 col-sm-5', 'style' => 'margin-bottom:10px')))
         ->add('is_worked_before',TextType::class,array('attr'=>array('class'=>'form-control col-xs-10 col-sm-5', 'style' => 'margin-bottom:10px')))                
         ->add('signature',TextType::class,array('attr'=>array('class'=>'form-control col-xs-10 col-sm-5', 'style' => 'margin-bottom:10px')));
+        // ->add('positions', EntityType::class , [
+        //            'class' => 'WorkBundle:Position',
+        //            'query_builder' => function(\Doctrine\ORM\EntityRepository $repo){
+                       
+        //             dump($repo);die;
+        //            }
+        //        ]);
+   
     }
 
     

@@ -28,11 +28,11 @@ WorkBundle\Entity\Application:
 #                name: id
 #                referencedColName: application_id
     # ...             
-##        Education:
-##            targetEntity: Education
-##            mappedBy: Application
-##            fetch: LAZY
-#            
+##    Education:
+##        targetEntity: Education
+ ##        mappedBy: Application
+ ##        fetch: LAZY
+           
 ##        Employee:
 ##            targetEntity: Employee
 ##            mappedBy: Application

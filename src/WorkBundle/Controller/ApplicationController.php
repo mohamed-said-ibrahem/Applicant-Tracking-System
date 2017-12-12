@@ -54,7 +54,7 @@ class ApplicationController extends Controller
    //    dump(get_class_methods($applicantRepo));die;
     //    dump($applicantRepo->findByUserOrEmail('yahoo'));die;
     $arr = $applicantRepo->findByUserOrEmail('mohamed');
-    dump($arr);
+    // dump($arr);
     // $output = $applicantRepo->sortByName($arr);
     // dump($output);die;
 
@@ -62,12 +62,12 @@ class ApplicationController extends Controller
     
     public function indexAction(Request $request)
     {
-       $value = $this->get(ApplicationService::class)->createNewApplicant('maomddfdaaa','moadaadfdfma',
-        'maodasdfama','modfsdfamaa','momaassssdfsa@yahoo.com','78888533564',
-        '34238789322432',new \DateTime(),'3000','phone','YES','PHP','NO','MONaAAAd',
-        'mySCHsssshsOL',new \DateTime(),new \DateTime(),
-         'A+','collegesnagmdd','1-2-23','1-2-23',1,'A+');
-        dump($value);die();
+    //    $value = $this->get(ApplicationService::class)->createNewApplicant('maomddfdaaa','moadaadfdfma',
+    //     'maodasdfama','modfsdfamaa','momaassssdfsa@yahoo.com','78888533564',
+    //     '34238789322432',new \DateTime(),'3000','phone','YES','PHP','NO','MONaAAAd',
+    //     'mySCHsssshsOL',new \DateTime(),new \DateTime(),
+    //      'A+','collegesnagmdd','1-2-23','1-2-23',1,'A+');
+    //     dump($value);die();
 
         // $em = $this->getDoctrine()->getManager();
         // $applicantRepo = $em->getRepository('WorkBundle:Application');
