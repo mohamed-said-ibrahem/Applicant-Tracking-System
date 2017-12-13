@@ -23,129 +23,52 @@ class ApplicationController extends Controller
      *
      */
    
-   public function logoutAction(Request $request)
-    { 
-       $token = $request->headers->get("Authorization");
-       $token = explode("Bearer ", $token);
-    //    dump($token[1]);die;       
-       $repo = $this->getDoctrine()->getRepository("WorkBundle:Blacklist");   
-       $repo->blackToken($token[1]); 
-       return $this->redirectToRoute('thank_you');
-    }
-   
-   public function listAction(Request $request)
-    {
-        
-        //$em = $this->getDoctrine()->getManager();       
-        //$pu = new PageUtility($request, $em, 'WorkBundle:Application', 2, 'id');
-        // return $this->render('WorkBundle:Pagination:list.html.twig',[
-        //     'tasks' => $pu->getRepository('WorkBundle:Application')
-        //     ->findByUserOrEmail('mohamed'),
-        //     //'tasks' => $pu->getRecords(),
-        //     'pager' => $pu->getDisplayParameters(),
-        // ]);
-
-    }
-
-   public function testAction()
-   {
-   $em = $this->getDoctrine()->getManager();
-   $applicantRepo = $em->getRepository('WorkBundle:Application');
-   //    dump(get_class_methods($applicantRepo));die;
-    //    dump($applicantRepo->findByUserOrEmail('yahoo'));die;
-    $arr = $applicantRepo->findByUserOrEmail('mohamed');
-    // dump($arr);
-    // $output = $applicantRepo->sortByName($arr);
-    // dump($output);die;
-
-   } 
-    
     public function indexAction(Request $request)
     {
-    //    $value = $this->get(ApplicationService::class)->createNewApplicant('maomddfdaaa','moadaadfdfma',
-    //     'maodasdfama','modfsdfamaa','momaassssdfsa@yahoo.com','78888533564',
-    //     '34238789322432',new \DateTime(),'3000','phone','YES','PHP','NO','MONaAAAd',
-    //     'mySCHsssshsOL',new \DateTime(),new \DateTime(),
-    //      'A+','collegesnagmdd','1-2-23','1-2-23',1,'A+');
-    //     dump($value);die();
-
-        // $em = $this->getDoctrine()->getManager();
-        // $applicantRepo = $em->getRepository('WorkBundle:Application');
-        // $arr = $applicantRepo->findByUserOrEmail('mohamed');
-        
-        // $sou=$c->findAllApplicationDegree('1');
-        // dump($sou);die();
-        // $app =$a->createApplication('maomdaaa','moadaama','maodaama','modfamaa','momaassssa@yahoo.com','08888533564',
-        // '34234329322432',new \DateTime(),'3000','phone','YES','PHP','NO','MONaAAA');
-       
-        // $b = $em->getRepository('WorkBundle:Education')->createEducation($app,
-        // 'mySCHsssssOL',new \DateTime(),new \DateTime(),
-        // 'A+','collegesnamdd','1-2-23','1-2-23',1,'A+');
-
-        // dump($b);die;
-        // return $this->render('application/index.html.twig', array(
-        //     'applications' => $applications,
-        // ));
-
-        
         $em = $this->getDoctrine()->getManager();       
         $pu = new PageUtility($request, $em, 'WorkBundle:Application', 10, 'id');
         return $this->render('application/index.html.twig',[
                'applications' => $pu->getRecords(),
                'pager' => $pu->getDisplayParameters(),
         ]);
-    
-    }
-
-    public function submittedAction(Request $request)
-    {
-        return $this->render('WorkBundle:Default:Submitted.html.twig');
     }
     
-
     /**
      * Creates a new application entity.
      *
      */
     public function newAction(Request $request)
     {
-        try{
-        $application = new Application();        
-        $form = $this->createForm('WorkBundle\Form\ApplicationType', $application);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($application);
-            $em->flush();
-            return $this->redirectToRoute('applicat_done');
+        try
+        {
+          $application = new Application();        
+          $form = $this->createForm('WorkBundle\Form\ApplicationType', $application);
+          $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid())
+            {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($application);
+                $em->flush();
+                return $this->redirectToRoute('applicat_done');
+            }
+         }
+        catch(\Doctrine\ORM\ORMException $e)
+        {
+             $this->get('session')->getFlashBag()->add('error', 'Your custom message');
+             $this->get('logger')->error($e->getMessage());
+             echo "*There is an error please check your input";
+
+          return $this->redirect($request->headers->get('referer'));
+
+        } 
+        catch(\Exception $e)
+        {
+             echo "**There is an error please check your input";
         }
-    }
-    catch(\Doctrine\ORM\ORMException $e){
-        $this->get('session')->getFlashBag()->add('error', 'Your custom message');
-        // or some shortcut that need to be implemented
-        // $this->addFlash('error', 'Custom message');
-        
-        // error logging - need customization
-        $this->get('logger')->error($e->getMessage());
-        //$this->get('logger')->error($e->getTraceAsString());
-        // or some shortcut that need to be implemented
-        // $this->logError($e);
-        // some redirection e. g. to referer
-        echo "*There is an error please check your input";
-        return $this->redirect($request->headers->get('referer'));
-      } 
-    catch(\Exception $e){
-        // other exceptions
-        // flash
-        // logger
-        // redirection
-        echo "**There is an error please check your input";
-        
-    }
-        return $this->render('application/new.html.twig', array(
+          return $this->render('application/new.html.twig', array(
             'application' => $application,
             'form' => $form->createView(),
-        ));
+             ));
     }
 
     /**
@@ -185,6 +108,11 @@ class ApplicationController extends Controller
         ));
     }
 
+    public function submittedAction(Request $request)
+    {
+        return $this->render('WorkBundle:Default:Submitted.html.twig');
+    }
+
     /**
      * Deletes a application entity.
      *
@@ -199,7 +127,7 @@ class ApplicationController extends Controller
             $em->remove($application);
             $em->flush();
         }
-
+        
         return $this->redirectToRoute('applicat_index');
     }
 
@@ -218,4 +146,84 @@ class ApplicationController extends Controller
             ->getForm()
         ;
     }
+
+    public function logoutAction(Request $request)
+    { 
+       $token = $request->headers->get("Authorization");
+       $token = explode("Bearer ", $token);
+    //    dump($token[1]);die;       
+       $repo = $this->getDoctrine()->getRepository("WorkBundle:Blacklist");   
+       $repo->blackToken($token[1]); 
+       return $this->redirectToRoute('thank_you');
+    }
+
+    public function findAction(Request $request,$value)
+    {
+        $val = (string)$value;
+        $applicants = $this->get(ApplicationService::class)
+        ->filterApplicantsByPosition($val);
+
+        return $this->render('application/search.html.twig',[
+               'applications' => $applicants,
+        ]);
+        
+    }
+
+
+    //test actions
+
+    public function listAction(Request $request)
+    {
+        
+        //$em = $this->getDoctrine()->getManager();       
+        //$pu = new PageUtility($request, $em, 'WorkBundle:Application', 2, 'id');
+        // return $this->render('WorkBundle:Pagination:list.html.twig',[
+        //     'tasks' => $pu->getRepository('WorkBundle:Application')
+        //     ->findByUserOrEmail('mohamed'),
+        //     //'tasks' => $pu->getRecords(),
+        //     'pager' => $pu->getDisplayParameters(),
+        // ]);
+
+    }
+    
+    public function testAction()
+    {
+    $em = $this->getDoctrine()->getManager();
+    $applicantRepo = $em->getRepository('WorkBundle:Application');
+    //    dump(get_class_methods($applicantRepo));die;
+     //    dump($applicantRepo->findByUserOrEmail('yahoo'));die;
+     $arr = $applicantRepo->findByUserOrEmail('mohamed');
+     // dump($arr);
+     // $output = $applicantRepo->sortByName($arr);
+     // dump($output);die;
+    }
+    
+    public function testAction2()
+    {
+                //    $value = $this->get(ApplicationService::class)->createNewApplicant('maomddfdaaa','moadaadfdfma',
+        //     'maodasdfama','modfsdfamaa','momaassssdfsa@yahoo.com','78888533564',
+        //     '34238789322432',new \DateTime(),'3000','phone','YES','PHP','NO','MONaAAAd',
+        //     'mySCHsssshsOL',new \DateTime(),new \DateTime(),
+        //      'A+','collegesnagmdd','1-2-23','1-2-23',1,'A+');
+        //     dump($value);die();
+
+        // $em = $this->getDoctrine()->getManager();
+        // $applicantRepo = $em->getRepository('WorkBundle:Application');
+        // $arr = $applicantRepo->findByUserOrEmail('mohamed');
+        
+        // $sou=$c->findAllApplicationDegree('1');
+        // dump($sou);die();
+        // $app =$a->createApplication('maomdaaa','moadaama','maodaama','modfamaa','momaassssa@yahoo.com','08888533564',
+        // '34234329322432',new \DateTime(),'3000','phone','YES','PHP','NO','MONaAAA');
+       
+        // $b = $em->getRepository('WorkBundle:Education')->createEducation($app,
+        // 'mySCHsssssOL',new \DateTime(),new \DateTime(),
+        // 'A+','collegesnamdd','1-2-23','1-2-23',1,'A+');
+
+        // dump($b);die;
+        // return $this->render('application/index.html.twig', array(
+        //     'applications' => $applications,
+        // ));
+    }
+
 }

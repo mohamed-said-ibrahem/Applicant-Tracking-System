@@ -25,3 +25,4 @@ revoke_token:
     path: /api/logout    
     defaults: { _controller: WorkBundle:Application:logout}
     methods: [POST]
+

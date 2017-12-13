@@ -36,3 +36,8 @@ employee_new:
     path:     /new_employee
     defaults: { _controller: "WorkBundle:Employee:new" }
     methods:  [GET, POST]
+
+applicant_search:
+    path:     /search/{value}
+    defaults: { _controller: "WorkBundle:Application:find" }
+    methods:  [GET, POST]
