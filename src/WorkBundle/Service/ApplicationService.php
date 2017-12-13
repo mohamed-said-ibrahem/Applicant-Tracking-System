@@ -70,42 +70,126 @@ class ApplicationService {
         // return $education;
     }
 
+    /**
+     * Search for the applicant by it is id service.
+     *
+     * @param id     applicant id.
+     * 
+     * @throws Some_Exception_Class  there is not exeptions
+     * @author Mohamed Said
+     * 
+     * returns an object from the founded applicant.
+     * findApplicantById is a method of Application Repository.
+     * @return findApplicant($id)
+     */ 
     public function findApplicantById($id)
     {
         return $this->em->getRepository('WorkBundle:Application')
         ->findApplicant($id);
     }
 
+    /**
+     * Search for the applicant by it is name or email service.
+     *
+     * @param input     applicant name or email.
+     * 
+     * @throws Some_Exception_Class  there is not exeptions
+     * @author Mohamed Said
+     * 
+     * returns an object from the founded applicants.
+     * findByNameOrEmail is a method of Application Repository.
+     * @return findByNameOrEmail($input)
+     */ 
     public function findApplicantByNameOrEmail($input)
     {
         return $this->em->getRepository('WorkBundle:Application')
                 ->findByNameOrEmail($input);
     }
     
+    /**
+     * Search for the applicant by it is phone number service.
+     *
+     * @param phone     applicant phone number.
+     * 
+     * @throws Some_Exception_Class  there is not exeptions
+     * @author Mohamed Said
+     * 
+     * returns an object from the founded applicant.
+     * findByPhone is a method of Application Repository.
+     * @return findByPhone($phone)
+     */ 
     public function findApplicantByPhone($phone)
     {
         return $this->em->getRepository('WorkBundle:Application')
         ->findByPhone($phone);
     }
     
+    /**
+     * Filter the applicants by their position service.
+     *
+     * @param position     position filter.
+     * 
+     * @throws Some_Exception_Class  there is not exeptions
+     * @author Mohamed Said
+     * 
+     * returns an object from the founded applicants.
+     * findByPosition is a method of Application Repository.
+     * @return findByPosition($position)
+     */ 
     public function filterApplicantsByPosition($position)
     {
         return $this->em->getRepository('WorkBundle:Application')
                 ->filterByPosition($position);
     }
     
+    /**
+     * Delete service.
+     *
+     * @param id      applicant id.
+     * 
+     * @throws Some_Exception_Class  there is not exeptions
+     * @author Mohamed Said
+     * 
+     * there is no return for this method as it execute a delete operation
+     * deleteApplication is a method of Application Repository.
+     */
     public function deleteApplicant($id)
     {
         $this->em->getRepository('WorkBundle:Application')
         ->deleteApplication($id);
     }
 
+    /**
+     * Find all the applicants from the database service.
+     *
+     * @throws Some_Exception_Class  there is not exeptions
+     * @author Mohamed Said
+     * 
+     * returns an object from all the founded applicants.
+     * findAllApplications is a method of Application Repository.
+     * @return findAllAplications()
+     */ 
     public function findAllApplicants()
     {
         return $this->em->getRepository('WorkBundle:Application')
         ->findAllApplications();   
     }
 
+    /**
+     * logout JWT revoke token service.
+     *
+     * @param token      user token.
+     * 
+     * @throws Some_Exception_Class  there is not exeptions
+     * @author Mohamed Said
+     * 
+     * there is no return for this method 
+     * blackToken is a method of BlackList Repository.
+     * 
+     * NOTE:: this should be removed from here to another service class 
+     * which will be used for the JWT TOKEN services.
+     * NOTE that JWT will be as a seperated layer inside the application.
+     */
     public function logout($token)
     {   
         $repo = $this->em->getRepository("WorkBundle:Blacklist");   
