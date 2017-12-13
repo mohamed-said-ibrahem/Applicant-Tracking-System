@@ -23,6 +23,16 @@ class ApplicationController extends Controller
      *
      */
    
+    /**
+     * Creates new view for the applicants.
+     *
+     * @param request      the request to the action
+     * 
+     * @throws Some_Exception_Class  there is not exeptions
+     * @author Mohamed Said
+     * 
+     * returns an array of the applicants.
+     */ 
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();       
@@ -36,7 +46,13 @@ class ApplicationController extends Controller
     /**
      * Creates a new application entity.
      *
-     */
+     * @param request      the request to the action  .
+     * 
+     * @throws Some_Exception_Class  there is not exeptions
+     * @author Mohamed Said
+     * 
+     * returns if(Success) a redirection to applicant_done Route.
+     */ 
     public function newAction(Request $request)
     {
         try
@@ -74,7 +90,13 @@ class ApplicationController extends Controller
     /**
      * Finds and displays a application entity.
      *
-     */
+     * @param application  an object of the aplication type        .
+     * 
+     * @throws Some_Exception_Class  there is not exeptions
+     * @author Mohamed Said
+     * 
+     * returns if(Success) a view for the applicant.
+     */ 
     public function showAction(Application $application)
     {
         $deleteForm = $this->createDeleteForm($application);
@@ -88,7 +110,14 @@ class ApplicationController extends Controller
     /**
      * Displays a form to edit an existing application entity.
      *
-     */
+     * @param request      the request for the action
+     * @param application  an object of the aplication type
+     * 
+     * @throws Some_Exception_Class  there is not exeptions
+     * @author Mohamed Said
+     * 
+     * returns if(Success) a view for the applicant edit page.
+     */ 
     public function editAction(Request $request, Application $application)
     {
         $deleteForm = $this->createDeleteForm($application);
@@ -108,6 +137,16 @@ class ApplicationController extends Controller
         ));
     }
 
+    /**
+     * Displays a successful submition page.
+     *
+     * @param request      the request for the action
+     * 
+     * @throws Some_Exception_Class  there is not exeptions
+     * @author Mohamed Said
+     * 
+     * returns if(Success) a view for the Submitted page.
+     */ 
     public function submittedAction(Request $request)
     {
         return $this->render('WorkBundle:Default:Submitted.html.twig');
@@ -116,7 +155,13 @@ class ApplicationController extends Controller
     /**
      * Deletes a application entity.
      *
-     */
+     * @param request      the request for the action
+     * 
+     * @throws Some_Exception_Class  there is not exeptions
+     * @author Mohamed Said
+     * 
+     * returns if(Success) a view for all the applicants page.
+     */ 
     public function deleteAction(Request $request, Application $application)
     {
         $form = $this->createDeleteForm($application);
@@ -147,17 +192,17 @@ class ApplicationController extends Controller
         ;
     }
 
-    public function logoutAction(Request $request)
-    { 
-       $token = $request->headers->get("Authorization");
-       $token = explode("Bearer ", $token);
-    //    dump($token[1]);die;       
-       $repo = $this->getDoctrine()->getRepository("WorkBundle:Blacklist");   
-       $repo->blackToken($token[1]); 
-       return $this->redirectToRoute('thank_you');
-    }
-
-    public function findAction(Request $request,$value)
+    /**
+     * find the applicant by it is position.
+     *
+     * @param request     the request for the action
+     * @param value       position for the user
+     * @throws Some_Exception_Class  there is not exeptions
+     * @author Mohamed Said
+     * 
+     * returns if(Success) a view for all the applicants page.
+     */ 
+    public function findByPositionAction(Request $request,$value)
     {
         $val = (string)$value;
         $applicants = $this->get(ApplicationService::class)
@@ -169,6 +214,15 @@ class ApplicationController extends Controller
         
     }
 
+    public function logoutAction(Request $request)
+    { 
+       $token = $request->headers->get("Authorization");
+       $token = explode("Bearer ", $token);
+    //    dump($token[1]);die;       
+       $repo = $this->getDoctrine()->getRepository("WorkBundle:Blacklist");   
+       $repo->blackToken($token[1]); 
+       return $this->redirectToRoute('thank_you');
+    }
 
     //test actions
 

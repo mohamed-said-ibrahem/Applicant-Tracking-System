@@ -39,5 +39,5 @@ employee_new:
 
 applicant_search:
     path:     /search/{value}
-    defaults: { _controller: "WorkBundle:Application:find" }
+    defaults: { _controller: "WorkBundle:Application:findByPosition" }
     methods:  [GET, POST]
