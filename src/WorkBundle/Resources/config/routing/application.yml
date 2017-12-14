@@ -20,4 +20,5 @@ applicat_delete:
 
 thank_you:
     path:     /thank_you
-    defaults: { _controller: WorkBundle:Default:thank }
+    defaults: { _controller: "WorkBundle:Default:thank" }
+    methods:  GET

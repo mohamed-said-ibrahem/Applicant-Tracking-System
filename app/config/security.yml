@@ -95,5 +95,7 @@ security:
         - { path: ^/applicant/[1-9]+/delete$, role: [ROLE_ADMIN,ROLE_SUPER_ADMIN] }
         - { path: ^/applicant, role: [ROLE_ADMIN,ROLE_SUPER_ADMIN] }
         - { path: ^/employee, role: [ROLE_ADMIN,ROLE_SUPER_ADMIN] }
+        - { path: ^/search, role: [ROLE_ADMIN,ROLE_SUPER_ADMIN] }
+        - { path: ^/new_employee, role: [ROLE_ADMIN,ROLE_SUPER_ADMIN] }
 
           # ...
