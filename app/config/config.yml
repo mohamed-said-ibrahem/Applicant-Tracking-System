@@ -70,17 +70,25 @@ swiftmailer:
     password: '%mailer_password%'
     spool: { type: memory }
 
+
 fos_user:
     db_driver: orm 
     firewall_name: main
     user_class: WorkBundle\Entity\User
     # ...
+    service:
+        mailer: fos_user.mailer.twig_swift
     from_email:
         address: example@example.com
         sender_name: You
     registration:
         form:
             type: WorkBundle\Form\RegistrationType
+    resetting:
+        email:
+            from_email:
+                address:        resetting@example.com
+                sender_name:    Demo Resetting
     # profile:
     #    form:
     #        type: WorkBundle\Form\ProfileType

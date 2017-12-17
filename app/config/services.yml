@@ -54,9 +54,9 @@ services:
         tags:
             - { name: form.type, alias: app_user_registration }
    
-    WorkBundle\EventListener\ExceptionListener:
-        tags:
-            - { name: kernel.event_listener, event: kernel.exception }
+    # WorkBundle\EventListener\ExceptionListener:
+    #     tags:
+    #         - { name: kernel.event_listener, event: kernel.exception }
                        
 #    acme_api.event.jwt_authenticated_listener:
 #        class: WorkBundle\EventListener\JWTAuthenticatedListener
