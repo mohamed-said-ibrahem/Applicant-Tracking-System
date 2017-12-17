@@ -26,5 +26,6 @@ revoke_token:
     defaults: { _controller: WorkBundle:Application:logout}
     methods: [POST]
 
+
 captcha_routing:
   resource: "@CaptchaBundle/Resources/config/routing.yml"

@@ -15,7 +15,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use WorkBundle\Entity\User;
-
+use WorkBundle\Entity\Application;
+use WorkBundle\Entity\Education;
+use WorkBundle\Entity\Blacklist;
+use WorkBundle\Repository\BlacklistRepository;
+use WorkBundle\Service\ApplicationService;
+use WorkBundle\Utility\PageUtility;
 
 class SecurityController extends BaseController
 {
@@ -65,10 +70,10 @@ class SecurityController extends BaseController
           if($isValid)
           {
             $token = $this->getToken($user);
-            $response = new Response($this->serialize(['token' => $token]), Response::HTTP_OK);
+            $response = new Response($this->serialize($token), Response::HTTP_OK);
             $response2 = $this->setBaseHeaders($response);   
             // dump($response);die;
-            // dump($response2);die;
+            // dump($response2->getContent());die;
 
           }
         }
@@ -124,7 +129,6 @@ class SecurityController extends BaseController
   }
   
 
-
 /**
  * Returns token for user.
  *
@@ -153,6 +157,17 @@ class SecurityController extends BaseController
       $now->add(new \DateInterval('PT'.$tokenTtl.'S'));
    
       return $now->format('U');
+  }
+
+
+  public function blackTokenLogoutAction(Request $request)
+  { 
+     $token = $request->getContent();
+    //  $token = explode("Bearer ", $token);
+  //    dump($token[1]);die;       
+     $repo = $this->getDoctrine()->getRepository("WorkBundle:Blacklist");   
+     $repo->blackToken($token[1]); 
+     return $this->redirectToRoute('thank_you');
   }
 
 }
