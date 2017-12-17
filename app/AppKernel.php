@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Gesdinet\JWTRefreshTokenBundle\GesdinetJWTRefreshTokenBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Captcha\Bundle\CaptchaBundle\CaptchaBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
             
 
         ];

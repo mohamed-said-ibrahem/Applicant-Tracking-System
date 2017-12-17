@@ -1,7 +1,9 @@
 <?php
  
 namespace WorkBundle\Helper;
- 
+use JMS\Serializer\SerializationContext;
+use JMS\Serializer\Serializer;
+use JMS\Serializer\SerializerBuilder;
 use Symfony\Component\HttpFoundation\Response;
  
 trait ControllerHelper
@@ -32,8 +34,9 @@ trait ControllerHelper
     {
         $context = new SerializationContext();
         $context->setSerializeNull(true);
- 
-        return $this->get('jms_serializer')
-            ->serialize($data, 'json', $context);
+        $serializer = SerializerBuilder::create()->build();
+        
+        $jsonContent =  $serializer->serialize($data, 'json', $context);
+        return $jsonContent;
     }
 }

@@ -16,6 +16,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use WorkBundle\Entity\User;
 
+
 class SecurityController extends BaseController
 {
   use \WorkBundle\Helper\ControllerHelper;
@@ -66,8 +67,9 @@ class SecurityController extends BaseController
             $token = $this->getToken($user);
             $response = new Response($this->serialize(['token' => $token]), Response::HTTP_OK);
             $response2 = $this->setBaseHeaders($response);   
-            dump($response2);die;
-            
+            // dump($response);die;
+            // dump($response2);die;
+
           }
         }
 
