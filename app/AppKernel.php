@@ -20,6 +20,8 @@ class AppKernel extends Kernel
             new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
             new Gesdinet\JWTRefreshTokenBundle\GesdinetJWTRefreshTokenBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Captcha\Bundle\CaptchaBundle\CaptchaBundle(),
+            
 
         ];
 

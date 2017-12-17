@@ -14,6 +14,8 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Captcha\Bundle\CaptchaBundle\Form\Type\CaptchaType;
+
 class RegistrationType extends AbstractType
 {
 
@@ -28,7 +30,11 @@ class RegistrationType extends AbstractType
             'first_options' => array('label' => 'Password: '),
             'second_options' => array('label' => 'Password_Confirmation: '),
             'invalid_message' => 'fos_user.password.mismatch',
-        ));
+        ))
+        ->add('captchaCode', CaptchaType::class, array(
+            'captchaConfig' => 'RegisterCaptcha',
+            'label' => 'Retype the characters from the picture'
+          ));
     }
 
     public function configureOptions(OptionsResolver $resolver)
