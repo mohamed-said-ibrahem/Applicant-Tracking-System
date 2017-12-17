@@ -11,4 +11,16 @@ use WorkBundle\Entity\User;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function findOneByName($input)
+    {
+        $user = $this->createQueryBuilder('a')
+                ->select()
+                ->where('a.username = :username')
+                ->setParameter('username', '%' . $input . '%')
+                ->getQuery()
+                ->getResult();
+
+        return $user;
+    }
 }
