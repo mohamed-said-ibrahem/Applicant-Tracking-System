@@ -12,6 +12,9 @@ use WorkBundle\Entity\Application;
  *
  * @Author Mohamed said.
  */ 
+/**
+ * @Entity(repositoryClass="WorkBundle\Repository\ApplicationRepository")
+ */
 class ApplicationRepository extends \Doctrine\ORM\EntityRepository
 {
 

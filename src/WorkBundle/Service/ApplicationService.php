@@ -3,6 +3,7 @@
 namespace WorkBundle\Service;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use WorkBundle\Entity\Application;
 
 /**
@@ -15,10 +16,12 @@ use WorkBundle\Entity\Application;
 class ApplicationService {
     
     private $em;
+    private $em_2;
     
-    public function __construct(EntityManager $em) 
+    public function __construct(EntityManager $em,EntityManager $em_2) 
     {
-        $this->em = $em;
+        $this->em = $em->getRepository('WorkBundle:Application');
+        $this->em_2 = $em_2->getRepository('WorkBundle:Education');
     }
     
     /**
@@ -58,14 +61,12 @@ class ApplicationService {
     $schoolName,$schoolFrom,$schoolTo,$schoolDegree,$collegeName,$collegeFrom,
     $collageTo,$isGraduated,$graduateDegree)
     {
-       $employee = $this->em->getRepository('WorkBundle:Application')
-                ->createApplication($firstName,$middleName,$lastName,
+       $employee = $this->em->createApplication($firstName,$middleName,$lastName,
                 $address,$email,$phoneNumber,$idCardNumber,$dateAvailable,$desiredSalary,
                 $hiringWay,$interviewedBefore,$appliedPosition,$isWorkedBefore,$signature);
                 
-       $education = $this->em->getRepository('WorkBundle:Education')
-                ->createEducation($employee,$schoolName,$schoolFrom,$schoolTo,
-                $schoolDegree,$collegeName,$collegeFrom,$collageTo,$isGraduated,$graduateDegree);
+       $education = $this->em_2->createEducation($employee,$schoolName,$schoolFrom,$schoolTo,
+            $schoolDegree,$collegeName,$collegeFrom,$collageTo,$isGraduated,$graduateDegree);
                 
         // return $education;
     }
@@ -84,8 +85,7 @@ class ApplicationService {
      */ 
     public function findApplicantById($id)
     {
-        return $this->em->getRepository('WorkBundle:Application')
-        ->findApplicant($id);
+        return $this->em->findApplicant($id);
     }
 
     /**
@@ -102,8 +102,7 @@ class ApplicationService {
      */ 
     public function findApplicantByNameOrEmail($input)
     {
-        return $this->em->getRepository('WorkBundle:Application')
-                ->findByNameOrEmail($input);
+        return $this->em->findByNameOrEmail($input);
     }
     
     /**
@@ -120,8 +119,7 @@ class ApplicationService {
      */ 
     public function findApplicantByPhone($phone)
     {
-        return $this->em->getRepository('WorkBundle:Application')
-        ->findByPhone($phone);
+        return $this->em->findByPhone($phone);
     }
     
     /**
@@ -137,9 +135,8 @@ class ApplicationService {
      * @return findByPosition($position)
      */ 
     public function filterApplicantsByPosition($position)
-    {
-        return $this->em->getRepository('WorkBundle:Application')
-                ->filterByPosition($position);
+    {        
+        return $this->em->filterByPosition($position);
     }
     
     /**
@@ -155,8 +152,7 @@ class ApplicationService {
      */
     public function deleteApplicant($id)
     {
-        $this->em->getRepository('WorkBundle:Application')
-        ->deleteApplication($id);
+        $this->em->deleteApplication($id);
     }
 
     /**
@@ -171,8 +167,7 @@ class ApplicationService {
      */ 
     public function findAllApplicants()
     {
-        return $this->em->getRepository('WorkBundle:Application')
-        ->findAllApplications();   
+        return $this->em->findAllApplications();   
     }
 
     /**

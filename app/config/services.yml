@@ -32,12 +32,23 @@ services:
     WorkBundle\EventListener\UserSubscriber:
         tags:
             - { name: kernel.event_subscriber}    
+    
+    # WorkBundle\Repository\:
+    #     resource: '../../src/WorkBundle/Repository/Application'
+    #     public: true
+
 
     WorkBundle\Service\:
-        resource: '../../src/WorkBundle/Service'
+        resource: '../../src/WorkBundle/Service/'
         public: true
         arguments:
-            $em: '@doctrine.orm.default_entity_manager'
+            $em: '@doctrine.orm.entity_manager'
+    
+    # WorkBundle\Service\:
+    #     resource: '../../src/WorkBundle/Service/'
+    #     public: true
+    #     arguments:
+    #         # $em: '../../src/WorkBundle/Repository/ApplicationRepository'
     
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:

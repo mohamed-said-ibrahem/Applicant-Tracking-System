@@ -211,7 +211,6 @@ class ApplicationController extends Controller
         return $this->render('application/search.html.twig',[
                'applications' => $applicants,
         ]);
-        
     }
 
     public function logoutAction(Request $request)
