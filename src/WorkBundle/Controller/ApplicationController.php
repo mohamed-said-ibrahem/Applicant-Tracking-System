@@ -216,12 +216,14 @@ class ApplicationController extends Controller
 
     public function logoutAction(Request $request)
     { 
-       $token = $request->headers->get("Authorization");
-       $token = explode("Bearer ", $token);
-    //    dump($token[1]);die;       
-       $repo = $this->getDoctrine()->getRepository("WorkBundle:Blacklist");   
-       $repo->blackToken($token[1]); 
-       return $this->redirectToRoute('thank_you');
+        $token = $request;
+        dump($token);die;
+    //    $token = $request->headers->get("Authorization");
+    //    $token = explode("Bearer ", $token);
+    // //    dump($token[1]);die;       
+    //    $repo = $this->getDoctrine()->getRepository("WorkBundle:Blacklist");   
+    //    $repo->blackToken($token[1]); 
+    //    return $this->redirectToRoute('thank_you');
     }
 
     //test actions

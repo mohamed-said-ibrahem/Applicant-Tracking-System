@@ -49,6 +49,7 @@ class PageUtility {
          //current page  elements
         $this->currentPage = $this->request->get('page');
         //default value
+        $this->currentPage = (int)$this->currentPage;
         if(empty($this->currentPage)) {
             $this->currentPage = 1;
         }

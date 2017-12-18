@@ -42,7 +42,7 @@ applicant_search:
     defaults: { _controller: "WorkBundle:Application:findByPosition" }
     methods:  [GET, POST]
 
-logout_token:   
-    path: /logout    
-    defaults: { _controller: WorkBundle:Security:blackTokenLogoutAction}
-    methods: [GET]
+# logout_token:   
+#     path: /logoutt    
+#     defaults: { _controller: "WorkBundle:Security:blackTokenLogout"}
+#     methods: [GET]

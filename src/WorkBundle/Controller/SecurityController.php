@@ -162,11 +162,13 @@ class SecurityController extends BaseController
 
   public function blackTokenLogoutAction(Request $request)
   { 
+
      $token = $request->getContent();
-    //  $token = explode("Bearer ", $token);
-  //    dump($token[1]);die;       
+    //  dump($token);die;
+  //   //  $token = explode("Bearer ", $token);
+  // //    dump($token[1]);die;       
      $repo = $this->getDoctrine()->getRepository("WorkBundle:Blacklist");   
-     $repo->blackToken($token[1]); 
+     $repo->blackToken($token); 
      return $this->redirectToRoute('thank_you');
   }
 
