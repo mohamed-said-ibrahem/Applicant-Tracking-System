@@ -28,11 +28,11 @@ class User extends BaseUser
     return $this->id;
     }
 
-/**
-* @CaptchaAssert\ValidCaptcha(
-*      message = "CAPTCHA validation failed, try again."
-* )
-*/
+// /**
+// * @CaptchaAssert\ValidCaptcha(
+// *      message = "CAPTCHA validation failed, try again."
+// *     groups={"registration","login"} 
+// */
     protected $captchaCode;
     public function getCaptchaCode()
     {
