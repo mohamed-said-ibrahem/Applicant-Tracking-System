@@ -7,52 +7,56 @@ use WorkBundle\Entity\Employee;
 
 class EmployeeService {
     
-    private $em;
+    private $repo;
+    private $repo2;
+    private $repo3;
     
-    public function __construct(EntityManager $em) 
+    public function __construct($repo,$repo2,$repo3) 
     {
-        $this->em = $em->getRepository('WorkBundle:Employee');
+        $this->repo = $repo;
+        $this->repo2 = $repo2;
+        $this->repo3 = $repo3;
     }
 
     public function createNewEmployee($application,$nameArabic,$nameEnglish,$birthDate,
     $address,$homePhone,$mobilePhone,$emergencyContactPerson,$emergencyPersonNumber,
     $emailPersonal,$idCardNumber,$academicDegree,$graduationDate,$joiningDate)
     {
-        return $this->em->createEmployee($application,$nameArabic,$nameEnglish,$birthDate,
+        return $this->repo3->createEmployee($application,$nameArabic,$nameEnglish,$birthDate,
         $address,$homePhone,$mobilePhone,$emergencyContactPerson,$emergencyPersonNumber,
         $emailPersonal,$idCardNumber,$academicDegree,$graduationDate,$joiningDate);
     }
 
     public function findEmployeeByName($employeeName)
     {
-        return $this->em->findByName($employeeName); 
+        return $this->repo3->findByName($employeeName); 
     }
 
     public function findAllEmployees()
     {
-       return $this->em->findEmployees();
+       return $this->repo3->findEmployees();
 
     }
 
     public function findEmployeeByPhone($number)
     {
-        return $this->em->findByPhone($number);  
+        return $this->repo3->findByPhone($number);  
 
     }
 
     public function findEmployeeByPosition($position)
     {
-        return $this->em->findByPosition($position);
+        return $this->repo3->findByPosition($position);
     }
 
     public function deleteEmployee($employeeId)
     { 
-        return $this->em->deleteEmployee($employeeId);  
+        return $this->repo3->deleteEmployee($employeeId);  
     }
 
     public function findEmployeeByEmail($email)
     {
-        return $this->em->findByEmail($email);
+        return $this->repo3->findByEmail($email);
     }
 
 }

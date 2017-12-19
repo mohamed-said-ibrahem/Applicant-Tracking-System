@@ -1,7 +1,6 @@
 # Learn more about services, parameters and containers at
 # https://symfony.com/doc/current/service_container.html
 parameters:
-    #parameter_name: value
 
 services:
     # default configuration for services in *this* file
@@ -37,19 +36,19 @@ services:
     #     resource: '../../src/WorkBundle/Repository/Application'
     #     public: true
 
+    # WorkBundle\Service\:
+    #     class: WorkBundle\Service\ApplicationService
+    #     arguments: ["@=service('doctrine.orm.entity_manager').getRepository('WorkBundle:Application')"]
 
     WorkBundle\Service\:
         resource: '../../src/WorkBundle/Service/'
         public: true
         arguments:
-            $em: '@doctrine.orm.entity_manager'
-    
-    # WorkBundle\Service\:
-    #     resource: '../../src/WorkBundle/Service/'
-    #     public: true
-    #     arguments:
-    #         # $em: '../../src/WorkBundle/Repository/ApplicationRepository'
-    
+            $repo: "@=service('doctrine.orm.entity_manager').getRepository('WorkBundle:Application')"
+            $repo2: "@=service('doctrine.orm.entity_manager').getRepository('WorkBundle:Education')"
+            $repo3: "@=service('doctrine.orm.entity_manager').getRepository('WorkBundle:Employee')"
+
+
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
     #     arguments:
