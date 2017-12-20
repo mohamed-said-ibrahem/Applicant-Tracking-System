@@ -1,0 +1,6 @@
+{% if app.request.cookies.get('_token_jwt') is defined %}
+    {% set token = app.request.cookies.get('_token_jwt') %}
+    {% block javascripts %}
+    <script>localStorage.setItem('token',"{{token}}");</script>
+    {% endblock %}
+{% endif %}

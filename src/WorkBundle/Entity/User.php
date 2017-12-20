@@ -43,4 +43,24 @@ class User extends BaseUser
     {
       $this->captchaCode = $captchaCode;
     }
+
+    //constrains for the password
+    /**
+     * @var string
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 50,
+     *      minMessage = "PASSWORD MUST BE AT LEAST 10 CHARS",
+     *      maxMessage = "PASSWORD MUST BE AT MOST 50 CHARS"
+     * )
+     * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
+     * 
+     */
+    protected $plainPassword;
+
 }
