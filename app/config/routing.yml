@@ -29,3 +29,11 @@ revoke_token:
 
 captcha_routing:
   resource: "@CaptchaBundle/Resources/config/routing.yml"
+
+logout_check:
+    path: /check_logout
+    defaults: {_controller: WorkBundle:Security:logoutCheck}
+
+ajax:
+   path:     /ajax_request
+   defaults: { _controller: WorkBundle:Security:blackTokenLogout }

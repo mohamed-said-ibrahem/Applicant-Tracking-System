@@ -1,0 +1,15 @@
+<script>
+var $token = window.localStorage.getItem("token");
+function loadDoc() {
+  var xhttp;
+  if (window.XMLHttpRequest) {
+    xhttp = new XMLHttpRequest();
+    } else {
+    xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xhttp.onreadystatechange = function() {
+  };
+  xhttp.open("POST", "ajax", $token);
+  xhttp.send();
+}
+</script>

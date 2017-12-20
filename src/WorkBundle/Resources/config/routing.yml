@@ -43,6 +43,6 @@ applicant_search:
     methods:  [GET, POST]
 
 # logout_token:   
-#     path: /logoutt    
+#     path: /logout    
 #     defaults: { _controller: "WorkBundle:Security:blackTokenLogout"}
 #     methods: [GET]

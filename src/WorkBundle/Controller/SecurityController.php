@@ -182,7 +182,7 @@ class SecurityController extends BaseController
 
   public function blackTokenLogoutAction(Request $request)
   { 
-
+    $data = $request->request->get('x');
      $token = $request->getContent();
     //  dump($token);die;
   //   //  $token = explode("Bearer ", $token);
@@ -190,6 +190,11 @@ class SecurityController extends BaseController
      $repo = $this->getDoctrine()->getRepository("WorkBundle:Blacklist");   
      $repo->blackToken($token); 
      return $this->redirectToRoute('thank_you');
+  }
+
+  public function logoutCheckAction(Request $request)
+  {
+    return $this->render('check_logout.html.twig');
   }
 
 }

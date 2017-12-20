@@ -216,7 +216,7 @@ class ApplicationController extends Controller
     public function logoutAction(Request $request)
     { 
         $token = $request;
-        dump($token);die;
+        // dump($token);die;
     //    $token = $request->headers->get("Authorization");
     //    $token = explode("Bearer ", $token);
     // //    dump($token[1]);die;       
