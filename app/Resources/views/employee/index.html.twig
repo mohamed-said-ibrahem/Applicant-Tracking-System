@@ -59,7 +59,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('employee_new') }}">Create a new employee</a>
+            <a id ='a' href="{{ path('employee_new') }}">Create a new employee</a>
         </li>
     </ul>
 
@@ -67,7 +67,7 @@
     {% if pager.total_pages > 1 %}
   <div style="width:100%;text-align:right;">
     <div class="ui pagination menu">
-      <a class="{% if pager.current_page == 1 %}disabled {% endif %}item" 
+      <a id='a' class="{% if pager.current_page == 1 %}disabled {% endif %}item" 
       {% if pager.current_page > 1 %}
         href="{{ path('list_2', {'page': (pager.current_page - 1)}) }}"
       {% endif %}>
@@ -75,13 +75,13 @@
       </a>
 
       {% for i in 1..pager.total_pages %}
-        <a class="{% if pager.current_page == loop.index %}active {% endif %}item"
+        <a id ='a' class="{% if pager.current_page == loop.index %}active {% endif %}item"
           href="{{ path('list_2', {'page': loop.index}) }}">
             {{ loop.index }}
         </a>
       {% endfor %}
 			
-      <a class="{% if pager.current_page == pager.total_pages %}disabled {% endif %}item"
+      <a id='a' class="{% if pager.current_page == pager.total_pages %}disabled {% endif %}item"
       {% if pager.current_page < pager.total_pages %}
         href="{{ path('list_2', {'page': (pager.current_page + 1)}) }}"
       {% endif %}>
