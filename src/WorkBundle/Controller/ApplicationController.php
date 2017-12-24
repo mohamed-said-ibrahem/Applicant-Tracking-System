@@ -215,70 +215,11 @@ class ApplicationController extends Controller
 
     public function logoutAction(Request $request)
     { 
-        $token = $request;
-        // dump($token);die;
-    //    $token = $request->headers->get("Authorization");
-    //    $token = explode("Bearer ", $token);
-    // //    dump($token[1]);die;       
-    //    $repo = $this->getDoctrine()->getRepository("WorkBundle:Blacklist");   
-    //    $repo->blackToken($token[1]); 
-    //    return $this->redirectToRoute('thank_you');
-    }
-
-    //test actions
-
-    public function listAction(Request $request)
-    {
-        
-        //$em = $this->getDoctrine()->getManager();       
-        //$pu = new PageUtility($request, $em, 'WorkBundle:Application', 2, 'id');
-        // return $this->render('WorkBundle:Pagination:list.html.twig',[
-        //     'tasks' => $pu->getRepository('WorkBundle:Application')
-        //     ->findByUserOrEmail('mohamed'),
-        //     //'tasks' => $pu->getRecords(),
-        //     'pager' => $pu->getDisplayParameters(),
-        // ]);
-
-    }
-    
-    public function testAction()
-    {
-    $em = $this->getDoctrine()->getManager();
-    $applicantRepo = $em->getRepository('WorkBundle:Application');
-    //    dump(get_class_methods($applicantRepo));die;
-     //    dump($applicantRepo->findByUserOrEmail('yahoo'));die;
-     $arr = $applicantRepo->findByUserOrEmail('mohamed');
-     // dump($arr);
-     // $output = $applicantRepo->sortByName($arr);
-     // dump($output);die;
-    }
-    
-    public function testAction2()
-    {
-                //    $value = $this->get(ApplicationService::class)->createNewApplicant('maomddfdaaa','moadaadfdfma',
-        //     'maodasdfama','modfsdfamaa','momaassssdfsa@yahoo.com','78888533564',
-        //     '34238789322432',new \DateTime(),'3000','phone','YES','PHP','NO','MONaAAAd',
-        //     'mySCHsssshsOL',new \DateTime(),new \DateTime(),
-        //      'A+','collegesnagmdd','1-2-23','1-2-23',1,'A+');
-        //     dump($value);die();
-
-        // $em = $this->getDoctrine()->getManager();
-        // $applicantRepo = $em->getRepository('WorkBundle:Application');
-        // $arr = $applicantRepo->findByUserOrEmail('mohamed');
-        
-        // $sou=$c->findAllApplicationDegree('1');
-        // dump($sou);die();
-        // $app =$a->createApplication('maomdaaa','moadaama','maodaama','modfamaa','momaassssa@yahoo.com','08888533564',
-        // '34234329322432',new \DateTime(),'3000','phone','YES','PHP','NO','MONaAAA');
-       
-        // $b = $em->getRepository('WorkBundle:Education')->createEducation($app,
-        // 'mySCHsssssOL',new \DateTime(),new \DateTime(),
-        // 'A+','collegesnamdd','1-2-23','1-2-23',1,'A+');
-
-        // dump($b);die;
-        // return $this->render('application/index.html.twig', array(
-        //     'applications' => $applications,
-        // ));
+       $token = $request->headers->get("Authorization");
+       $token = explode("Bearer ", $token);
+       $repo = $this->getDoctrine()->getRepository("WorkBundle:Blacklist");   
+       $repo->blackToken($token[1]); 
+       return $this->redirectToRoute('thank_you');
     }
 
 }

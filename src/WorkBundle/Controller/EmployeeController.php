@@ -13,21 +13,13 @@ use WorkBundle\Utility\PageUtility;
  */
 class EmployeeController extends Controller
 {
+    
     /**
      * Lists all employee entities.
      *
      */
     public function indexAction(Request $request)
     {
-       // $em = $this->getDoctrine()->getManager();
-
-       // $employees = $em->getRepository('WorkBundle:Employee')->findByPhone('01004200590');
-       // dump($employees);die;    
-
-        // return $this->render('employee/index.html.twig', array(
-        //     'employees' => $employees,
-        // ));
-
         $em = $this->getDoctrine()->getManager();       
         $pu = new PageUtility($request, $em, 'WorkBundle:Employee', 2, 'id');
         return $this->render('employee/index.html.twig',[
@@ -35,6 +27,7 @@ class EmployeeController extends Controller
                'pager' => $pu->getDisplayParameters(),
         ]);
     }
+
 
     /**
      * Creates a new employee entity.
@@ -57,31 +50,17 @@ class EmployeeController extends Controller
     }
     catch(\Doctrine\ORM\ORMException $e){
         $this->get('session')->getFlashBag()->add('error', 'Your custom message');
-        // or some shortcut that need to be implemented
-        // $this->addFlash('error', 'Custom message');
-        
-        // error logging - need customization
         $this->get('logger')->error($e->getMessage());
-        //$this->get('logger')->error($e->getTraceAsString());
-        // or some shortcut that need to be implemented
-        // $this->logError($e);
-        // some redirection e. g. to referer
         echo "*There is an error please check your input";
         return $this->redirect($request->headers->get('referer'));
       }
-      catch(\Exception $e){
-        // other exceptions
-        // flash
-        // logger
-        // redirection
-        echo "**There is an error please check your input";
-        
-    } 
+      catch(\Exception $e){echo "**There is an error please check your input";} 
         return $this->render('employee/new.html.twig', array(
             'employee' => $employee,
             'form' => $form->createView(),
         ));
     }
+
 
     /**
      * Finds and displays a employee entity.
@@ -97,6 +76,7 @@ class EmployeeController extends Controller
         ));
     }
 
+
     /**
      * Displays a form to edit an existing employee entity.
      *
@@ -110,7 +90,8 @@ class EmployeeController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('employee_edit', array('id' => $employee->getId()));
+            return $this->redirectToRoute('employee_edit',
+             array('id' => $employee->getId()));
         }
 
         return $this->render('employee/edit.html.twig', array(
@@ -119,6 +100,7 @@ class EmployeeController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
 
     /**
      * Deletes a employee entity.
@@ -138,6 +120,7 @@ class EmployeeController extends Controller
         return $this->redirectToRoute('employee_index');
     }
 
+
     /**
      * Creates a form to delete a employee entity.
      *
@@ -148,7 +131,8 @@ class EmployeeController extends Controller
     private function createDeleteForm(Employee $employee)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('employee_delete', array('id' => $employee->getId())))
+            ->setAction($this->generateUrl('employee_delete',
+            array('id' => $employee->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

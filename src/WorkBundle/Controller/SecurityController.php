@@ -74,35 +74,8 @@ class SecurityController extends BaseController
            setcookie("_token_jwt","$token",time()+9999);
         }
         }
-
         return $this->redirectToRoute('fos_user_security_check', [
           'request' => $request,], 307);}
-            // dump($token);die;
-            // return $this->render('WorkBundle:Default:thank.html.twig', array(
-              // 'token' => $token,
-          // ));
-          // $_SESSION['token'] = $token;
-
-                      //dump($request);die;
-           // echo "<script>localStorage.setItem('token1','658');</script>";
-         
-            
-          //   return $this->render('WorkBundle:Default:test.html.twig', array(
-          //     'token' => $token,
-          // ));
-            // echo $token;die;
-            // $response = new Response($this->serialize($token), Response::HTTP_OK);
-            // $response2 = $this->setBaseHeaders($response);   
-            // dump($response);die;
-                //    $token = explode("Bearer ", $token);
-
-            // echo $response2->getContent();
-
-            // echo "<br>";
-            // dump($response2->getContent());die;
-            // dump($token);die;
-
-
        else {
         // Captcha validation failed, set an invalid captcha exception in $authErrorKey attribute
         $invalidCaptchaEx = new InvalidCaptchaException('CAPTCHA validation failed, try again.');
@@ -165,6 +138,7 @@ class SecurityController extends BaseController
               ]);
   }
 
+
   /**
  * Returns token expiration datetime.
  *
@@ -180,13 +154,11 @@ class SecurityController extends BaseController
   }
 
 
+
   public function blackTokenLogoutAction(Request $request)
   { 
     $data = $request->request->get('x');
-     $token = $request->getContent();
-    //  dump($token);die;
-  //   //  $token = explode("Bearer ", $token);
-  // //    dump($token[1]);die;       
+     $token = $request->getContent();    
      $repo = $this->getDoctrine()->getRepository("WorkBundle:Blacklist");   
      $repo->blackToken($token); 
      return $this->redirectToRoute('thank_you');
