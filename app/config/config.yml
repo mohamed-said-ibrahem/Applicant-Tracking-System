@@ -90,6 +90,8 @@ fos_user:
                 address:        resetting@example.com
                 sender_name:    Reset your Password
             template:   email/password_resetting.email.twig
+        token_ttl: 30
+
 
     # profile:
     #    form:

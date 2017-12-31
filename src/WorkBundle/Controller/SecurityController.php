@@ -26,69 +26,34 @@ class SecurityController extends BaseController
 {
   use \WorkBundle\Helper\ControllerHelper;
   
-  public function loginAction(Request $request)
-  {
-    global $token;
-    /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
-    $session = $request->getSession();
+  public function recapatchaCheck(Request $request){
+    $recaptcha = new ReCaptcha('6LftWT0UAAAAAIvF7gU8qscf-Vc5ZhkTTLBv490U');
+    $resp = $recaptcha->verify($request->request
+    ->get('g-recaptcha-response'), $request->getClientIp());
+    return $resp;
+  }
 
-    if (class_exists('\Symfony\Component\Security\Core\Security')) {
-      $authErrorKey = Security::AUTHENTICATION_ERROR;
-      $lastUsernameKey = Security::LAST_USERNAME;
-    } else {
-      // BC for SF < 2.6
-      $authErrorKey = SecurityContextInterface::AUTHENTICATION_ERROR;
-      $lastUsernameKey = SecurityContextInterface::LAST_USERNAME;
-    }
+  public function getUserInfo(Request $request){
+    $username = $request->request->get('_username');
+    $password = $request->request->get('_password');
+    $user = $this->getDoctrine()
+    ->getRepository('WorkBundle:User')
+    ->findOneBy(['username' => $username]);
+    return $user;
+  }
 
-    // get captcha object instance
-    $captcha = $this->get('captcha')->setConfig('LoginCaptcha');
-    if ($request->isMethod('POST')) {
-      $recaptcha = new ReCaptcha('6LftWT0UAAAAAIvF7gU8qscf-Vc5ZhkTTLBv490U');
-      $resp = $recaptcha->verify($request->request
-      ->get('g-recaptcha-response'), $request->getClientIp());
-      if (!$resp->isSuccess()) {
-        // Do something if the submit wasn't valid ! Use the message to show something
-        $message = "The reCAPTCHA wasn't entered correctly. Go back and try it again.";
-        echo $message;
-      }else{
-      // validate the user-entered Captcha code when the form is submitted
-      $code = $request->request->get('captchaCode');
-      $isHuman = $captcha->Validate($code);
-      if ($isHuman) {
-        // Captcha validation passed, check username and password
-
-        // LOGIC FOR JWT AUTH "MY LOGIC :)"
-        $username = $request->request->get('_username');
-        $password = $request->request->get('_password');
-        $user = $this->getDoctrine()
-        ->getRepository('WorkBundle:User')
-        ->findOneBy(['username' => $username]);
-        if ($user) 
-        {
-          $isValid = $this->get('security.password_encoder')
-          ->isPasswordValid($user, $password);
-          if($isValid)
-          {
-            $token = $this->getToken($user);
-           setcookie("_token_jwt","$token",time()+9999);
-        }
-        }
-        return $this->redirectToRoute('fos_user_security_check', [
-          'request' => $request,], 307);}
-       else {
-        // Captcha validation failed, set an invalid captcha exception in $authErrorKey attribute
-        $invalidCaptchaEx = new InvalidCaptchaException('CAPTCHA validation failed, try again.');
-        $request->attributes->set($authErrorKey, $invalidCaptchaEx);
-
-        // set last username entered by the user
-        $username = $request->request->get('_username', null, true);
-        $request->getSession()->set($lastUsernameKey, $username);
-      }
+  public function setTokenLocal(Request $request,$user,$password){
+      $isValid = $this->get('security.password_encoder')
+      ->isPasswordValid($user, $password);
+      if($isValid)
+      {
+        $token = $this->getToken($user);
+      setcookie("_token_jwt","$token",time()+9999);
     }
   }
 
-    // get the error if any (works with forward and redirect -- see below)
+  public function checkForErrorType(Request $request,$authErrorKey,$session)
+  {
     if ($request->attributes->has($authErrorKey)) {
       $error = $request->attributes->get($authErrorKey);
     } elseif (null !== $session && $session->has($authErrorKey)) {
@@ -97,38 +62,38 @@ class SecurityController extends BaseController
     } else {
       $error = null;
     }
+    return $error;
+  }
 
-    if (!$error instanceof AuthenticationException) {
-      $error = null; // The value does not come from the security component.
-    }
-
-    // last username entered by the user
-    $lastUsername = (null === $session) ? '' : $session->get($lastUsernameKey);
-
-    if ($this->has('security.csrf.token_manager')) {
+  public function loginAction(Request $request)
+  {   
+      $session = $request->getSession();
+      $authErrorKey = Security::AUTHENTICATION_ERROR;
+      $lastUsernameKey = Security::LAST_USERNAME;
+      $captcha = $this->get('captcha')->setConfig('LoginCaptcha');
+    if ($request->isMethod('POST')) {$resp = $this->recapatchaCheck($request);
+    if (!$resp->isSuccess()) {
+      $message = "The reCAPTCHA wasn't entered correctly. Go back and try it again.";echo $message;}
+    else{
+      $code = $request->request->get('captchaCode');
+      $isHuman = $captcha->Validate($code);
+      $password = $request->request->get('_password');      
+    if ($isHuman) {$user = $this->getUserInfo($request);
+    if ($user) {$this->setTokenLocal($request,$user,$password);}
+    return $this->redirectToRoute('fos_user_security_check',['request' => $request,], 307);}
+    else{
+      $invalidCaptchaEx = new InvalidCaptchaException('CAPTCHA validation failed, try again.');
+      $request->attributes->set($authErrorKey, $invalidCaptchaEx);
+      $username = $request->request->get('_username', null, true);
+      $request->getSession()->set($lastUsernameKey, $username);}}}
+      $error = $this->checkForErrorType($request,$authErrorKey,$session);
+    if (!$error instanceof AuthenticationException) {$error = null;}
+      $lastUsername = (null === $session) ? '' : $session->get($lastUsernameKey);
       $csrfToken = $this->get('security.csrf.token_manager')->getToken('authenticate')->getValue();
-    } else {
-      // BC for SF < 2.4
-      $csrfToken = $this->has('form.csrf_provider')
-        ? $this->get('form.csrf_provider')->generateCsrfToken('authenticate')
-        : null;
-    }
-    return $this->renderLogin(array(
-      'last_username' => $lastUsername,
-      'error' => $error,
-      'csrf_token' => $csrfToken,
-      'captcha_html' => $captcha->Html(),
-    ));
+    return $this->renderLogin(array('last_username' => $lastUsername,'error' => $error,'csrf_token' => $csrfToken,'captcha_html' => $captcha->Html(),));
   }
   
 
-/**
- * Returns token for user.
- *
- * @param User $user
- *
- * @return array
- */
   public function getToken(User $user)
   {
       return $this->container->get('lexik_jwt_authentication.encoder')
@@ -138,12 +103,6 @@ class SecurityController extends BaseController
               ]);
   }
 
-
-  /**
- * Returns token expiration datetime.
- *
- * @return string Unixtmestamp
- */
   private function getTokenExpiryDateTime()
   {
       $tokenTtl = $this->container->getParameter('lexik_jwt_authentication.token_ttl');
@@ -152,8 +111,6 @@ class SecurityController extends BaseController
    
       return $now->format('U');
   }
-
-
 
   public function blackTokenLogoutAction(Request $request)
   { 

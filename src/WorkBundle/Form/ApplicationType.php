@@ -40,16 +40,7 @@ class ApplicationType extends AbstractType
         ->add('interviewed_before',TextType::class,array('attr'=>array('class'=>'form-control col-xs-10 col-sm-5', 'style' => 'margin-bottom:10px')))        
         ->add('applied_position',TextType::class,array('attr'=>array('class'=>'form-control col-xs-10 col-sm-5', 'style' => 'margin-bottom:10px')))
         ->add('is_worked_before',TextType::class,array('attr'=>array('class'=>'form-control col-xs-10 col-sm-5', 'style' => 'margin-bottom:10px')))                
-        ->add('signature',TextType::class,array('attr'=>array('class'=>'form-control col-xs-10 col-sm-5', 'style' => 'margin-bottom:10px')));
-        
-        // ->add('positions', EntityType::class , [
-        //            'class' => 'WorkBundle:Position',
-        //            'query_builder' => function(\Doctrine\ORM\EntityRepository $repo){
-                       
-        //             dump($repo);die;
-        //            }
-        //        ]);
-   
+        ->add('signature',TextType::class,array('attr'=>array('class'=>'form-control col-xs-10 col-sm-5', 'style' => 'margin-bottom:10px')));   
     }
 
     
