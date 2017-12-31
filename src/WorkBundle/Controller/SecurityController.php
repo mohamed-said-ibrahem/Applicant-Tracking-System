@@ -21,10 +21,13 @@ use WorkBundle\Entity\Blacklist;
 use WorkBundle\Repository\BlacklistRepository;
 use WorkBundle\Service\ApplicationService;
 use WorkBundle\Utility\PageUtility;
+use WorkBundle\Exception\WorkBundleException;
+use WorkBundle\Constant\Exceptions;
 
 class SecurityController extends BaseController
 {
   use \WorkBundle\Helper\ControllerHelper;
+  
   
   public function recapatchaCheck(Request $request){
     $recaptcha = new ReCaptcha('6LftWT0UAAAAAIvF7gU8qscf-Vc5ZhkTTLBv490U');
@@ -73,7 +76,7 @@ class SecurityController extends BaseController
       $captcha = $this->get('captcha')->setConfig('LoginCaptcha');
     if ($request->isMethod('POST')) {$resp = $this->recapatchaCheck($request);
     if (!$resp->isSuccess()) {
-      $message = "The reCAPTCHA wasn't entered correctly. Go back and try it again.";echo $message;}
+      $message = new WorkBundleException(Exceptions::INVALID_RECAPATCHA_EXCEPTION);echo $message->getMessage();}
     else{
       $code = $request->request->get('captchaCode');
       $isHuman = $captcha->Validate($code);
@@ -82,7 +85,8 @@ class SecurityController extends BaseController
     if ($user) {$this->setTokenLocal($request,$user,$password);}
     return $this->redirectToRoute('fos_user_security_check',['request' => $request,], 307);}
     else{
-      $invalidCaptchaEx = new InvalidCaptchaException('CAPTCHA validation failed, try again.');
+      $invalidCaptchaEx = new WorkBundleException(Exceptions::INVALID_CAPATCHA_EXCEPTION);
+      $invalidCaptchaEx = $invalidCaptchaEx->getMessage(); echo $invalidCaptchaEx;
       $request->attributes->set($authErrorKey, $invalidCaptchaEx);
       $username = $request->request->get('_username', null, true);
       $request->getSession()->set($lastUsernameKey, $username);}}}
@@ -92,7 +96,6 @@ class SecurityController extends BaseController
       $csrfToken = $this->get('security.csrf.token_manager')->getToken('authenticate')->getValue();
     return $this->renderLogin(array('last_username' => $lastUsername,'error' => $error,'csrf_token' => $csrfToken,'captcha_html' => $captcha->Html(),));
   }
-  
 
   public function getToken(User $user)
   {
