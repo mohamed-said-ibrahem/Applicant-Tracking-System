@@ -3,26 +3,26 @@
 namespace WorkBundle\Controller;
 
 use Captcha\Bundle\CaptchaBundle\Security\Core\Exception\InvalidCaptchaException;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use FOS\UserBundle\Controller\SecurityController as BaseController;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Security\Core\SecurityContextInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Core\SecurityContextInterface;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use ReCaptcha\ReCaptcha; // Include the recaptcha lib
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use WorkBundle\Entity\User;
+use WorkBundle\Repository\BlacklistRepository;
+use WorkBundle\Exception\WorkBundleException;
+use WorkBundle\Service\ApplicationService;
+use WorkBundle\Utility\PageUtility;
+use WorkBundle\Constant\Exceptions;
 use WorkBundle\Entity\Application;
 use WorkBundle\Entity\Education;
 use WorkBundle\Entity\Blacklist;
-use WorkBundle\Repository\BlacklistRepository;
-use WorkBundle\Service\ApplicationService;
-use WorkBundle\Utility\PageUtility;
-use WorkBundle\Exception\WorkBundleException;
-use WorkBundle\Constant\Exceptions;
+use WorkBundle\Entity\User;
+use ReCaptcha\ReCaptcha; 
 
 class SecurityController extends BaseController
 {
@@ -53,9 +53,6 @@ class SecurityController extends BaseController
         $token = $this->getToken($user);
       setcookie("_token_jwt","$token",time()+9999);
       }
-      else{
-        dump("asdsad");die;
-      }
   }
 
   public function checkForErrorType(Request $request,$authErrorKey,$session)
@@ -68,36 +65,7 @@ class SecurityController extends BaseController
     } else {
       $error = null;
     }
-    return $error;
-  }
-
-  public function loginAction(Request $request)
-  {   
-      $message =null;$invalidCaptchaEx=null;    
-      $session = $request->getSession();
-      $authErrorKey = Security::AUTHENTICATION_ERROR;
-      $lastUsernameKey = Security::LAST_USERNAME;
-      $captcha = $this->get('captcha')->setConfig('LoginCaptcha');
-    if ($request->isMethod('POST')) {$resp = $this->recapatchaCheck($request);
-    if (!$resp->isSuccess()) {
-      $message = new WorkBundleException(Exceptions::INVALID_RECAPATCHA_EXCEPTION);$message = $message->getMessage();}
-      $code = $request->request->get('captchaCode');
-      $isHuman = $captcha->Validate($code);
-      $password = $request->request->get('_password');      
-    if ($isHuman) {$user = $this->getUserInfo($request);
-    if ($user) {$this->setTokenLocal($request,$user,$password);}
-    return $this->redirectToRoute('fos_user_security_check',['request' => $request,], 307);}
-    else{
-      $invalidCaptchaEx = new WorkBundleException(Exceptions::INVALID_CAPATCHA_EXCEPTION);
-      $invalidCaptchaEx = $invalidCaptchaEx->getMessage();
-      $request->attributes->set($authErrorKey, $invalidCaptchaEx);
-      $username = $request->request->get('_username', null, true);
-      $request->getSession()->set($lastUsernameKey, $username);}}
-      $error = $this->checkForErrorType($request,$authErrorKey,$session);
-    if (!$error instanceof AuthenticationException) {$error = null;}
-      $lastUsername = (null === $session) ? '' : $session->get($lastUsernameKey);
-      $csrfToken = $this->get('security.csrf.token_manager')->getToken('authenticate')->getValue();
-    return $this->renderLogin(array('last_username' => $lastUsername,'error' => $error,'csrf_token' => $csrfToken,'captcha_html' => $captcha->Html(),'capatcha_error'=> $message,'capatcha_error_2'=> $invalidCaptchaEx,));
+      return $error;
   }
 
   public function getToken(User $user)
@@ -132,4 +100,32 @@ class SecurityController extends BaseController
     return $this->render('check_logout.html.twig');
   }
 
+  public function loginAction(Request $request)
+  {   
+      $message =null;$invalidCaptchaEx=null;    
+      $session = $request->getSession();
+      $authErrorKey = Security::AUTHENTICATION_ERROR;
+      $lastUsernameKey = Security::LAST_USERNAME;
+      $captcha = $this->get('captcha')->setConfig('LoginCaptcha');
+    if ($request->isMethod('POST')) {$resp = $this->recapatchaCheck($request);
+    if (!$resp->isSuccess()) {
+      $message = new WorkBundleException(Exceptions::INVALID_RECAPATCHA_EXCEPTION);$message = $message->getMessage();}
+      $code = $request->request->get('captchaCode');
+      $isHuman = $captcha->Validate($code);
+      $password = $request->request->get('_password');      
+    if ($isHuman) {$user = $this->getUserInfo($request);
+    if ($user) {$this->setTokenLocal($request,$user,$password);}
+    return $this->redirectToRoute('fos_user_security_check',['request' => $request,], 307);}
+    else{
+      $invalidCaptchaEx = new WorkBundleException(Exceptions::INVALID_CAPATCHA_EXCEPTION);
+      $invalidCaptchaEx = $invalidCaptchaEx->getMessage();
+      $request->attributes->set($authErrorKey, $invalidCaptchaEx);
+      $username = $request->request->get('_username', null, true);
+      $request->getSession()->set($lastUsernameKey, $username);}}
+      $error = $this->checkForErrorType($request,$authErrorKey,$session);
+    if (!$error instanceof AuthenticationException) {$error = null;}
+      $lastUsername = (null === $session) ? '' : $session->get($lastUsernameKey);
+      $csrfToken = $this->get('security.csrf.token_manager')->getToken('authenticate')->getValue();
+    return $this->renderLogin(array('last_username' => $lastUsername,'error' => $error,'csrf_token' => $csrfToken,'captcha_html' => $captcha->Html(),'capatcha_error'=> $message,'capatcha_error_2'=> $invalidCaptchaEx,));
+  }
 }

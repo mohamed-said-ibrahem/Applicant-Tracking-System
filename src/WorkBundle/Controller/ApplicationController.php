@@ -55,35 +55,22 @@ class ApplicationController extends Controller
      */ 
     public function newAction(Request $request)
     {
-        try
-        {
-          $application = new Application();        
-          $form = $this->createForm('WorkBundle\Form\ApplicationType', $application);
-          $form->handleRequest($request);
-            if ($form->isSubmitted() && $form->isValid())
-            {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($application);
-                $em->flush();
-                return $this->redirectToRoute('applicat_done');
-            }
-         }
-        catch(\Doctrine\ORM\ORMException $e)
-        {
-             $this->get('session')->getFlashBag()->add('error', 'Your custom message');
-             $this->get('logger')->error($e->getMessage());
-             echo "*There is an error please check your input";
-
-          return $this->redirect($request->headers->get('referer'));
-
-        } 
-        catch(\Exception $e)
-        {
-             echo "**There is an error please check your input";
-        }
+           $exception =null;
+        try{
+           $application = new Application();        
+           $form = $this->createForm('WorkBundle\Form\ApplicationType', $application);
+           $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+           $em = $this->getDoctrine()->getManager();
+           $em->persist($application);
+           $em->flush();
+        return $this->redirectToRoute('applicat_done');}}
+        catch(\Doctrine\ORM\ORMException $e){$exception = $e;} 
+        catch(\Exception $e){$exception = $e;}
           return $this->render('application/new.html.twig', array(
             'application' => $application,
             'form' => $form->createView(),
+            'error' => $exception,
              ));
     }
 

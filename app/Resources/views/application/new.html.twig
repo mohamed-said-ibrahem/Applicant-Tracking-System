@@ -14,13 +14,11 @@
     <h1>Application creation</h1>
     {{ form_start(form) }}
     {% spaceless %}    
-
-       <!-- {{ dump(form.vars["form"].vars["value"])}} -->
-
-<input type="hidden" name="_csrf_token"
-        value="{{ csrf_token('authenticate') }}"
-    >
-    
+    <!-- {{ dump(form.vars["form"].vars["value"])}} -->
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    {% if error %}
+     {{"There is an error please try again"}}
+     {% endif %}  
     {% for label in form %}
     <div style="margin-left: 10px; padding:3px;">{{ form_row(label) }}</div>
     {% endfor %}

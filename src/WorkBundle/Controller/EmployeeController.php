@@ -35,6 +35,7 @@ class EmployeeController extends Controller
      */
     public function newAction(Request $request)
     {
+        $exception = null;
         try{          
         $employee = new Employee();
         $form = $this->createForm('WorkBundle\Form\EmployeeType', $employee);
@@ -48,16 +49,12 @@ class EmployeeController extends Controller
             return $this->redirectToRoute('applicat_done');
         }
     }
-    catch(\Doctrine\ORM\ORMException $e){
-        $this->get('session')->getFlashBag()->add('error', 'Your custom message');
-        $this->get('logger')->error($e->getMessage());
-        echo "*There is an error please check your input";
-        return $this->redirect($request->headers->get('referer'));
-      }
-      catch(\Exception $e){echo "**There is an error please check your input";} 
+    catch(\Doctrine\ORM\ORMException $e){$exception = $e;}
+      catch(\Exception $e){$exception = $e;} 
         return $this->render('employee/new.html.twig', array(
             'employee' => $employee,
             'form' => $form->createView(),
+            'error' => $exception,
         ));
     }
 
