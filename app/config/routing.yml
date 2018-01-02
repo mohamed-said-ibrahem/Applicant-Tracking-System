@@ -38,6 +38,3 @@ ajax:
    path:     /ajax_request
    defaults: { _controller: WorkBundle:Security:blackTokenLogout }
 
-# rout:
-#    path:     /json
-#    defaults: { _controller: WorkBundle:Default:getNotes }    

@@ -7,7 +7,9 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
-
+    page : 4
+    page_default : 2
+    recapacha: "6LftWT0UAAAAAIvF7gU8qscf-Vc5ZhkTTLBv490U"
 framework:
     #esi: ~
     #translator: { fallbacks: ['%locale%'] }

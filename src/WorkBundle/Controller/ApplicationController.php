@@ -12,17 +12,13 @@ use WorkBundle\Service\ApplicationService;
 use WorkBundle\Utility\PageUtility;
 use Symfony\Component\HttpFoundation\Response;
 
+
 /**
- * Application controller.
+ * Application controller class.
  *
- */
+ */ 
 class ApplicationController extends Controller
 {
-    /**
-     * Lists all application entities.
-     *
-     */
-   
     /**
      * Creates new view for the applicants.
      *
@@ -31,12 +27,13 @@ class ApplicationController extends Controller
      * @throws Some_Exception_Class  there is not exeptions
      * @author Mohamed Said
      * 
-     * returns an array of the applicants.
+     * returns an array of the applicants to the view.
      */ 
     public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();       
-        $pu = new PageUtility($request, $em, 'WorkBundle:Application', 10, 'id');
+        $em = $this->getDoctrine()->getManager();
+        $var = $this->getParameter('page');               
+        $pu = new PageUtility($request, $em, 'WorkBundle:Application', $var, 'id');
         return $this->render('application/index.html.twig',[
                'applications' => $pu->getRecords(),
                'pager' => $pu->getDisplayParameters(),
@@ -51,7 +48,7 @@ class ApplicationController extends Controller
      * @throws Some_Exception_Class  there is not exeptions
      * @author Mohamed Said
      * 
-     * returns if(Success) a redirection to applicant_done Route.
+     * returns if(Success) a redirection to applicat_done Route.
      */ 
     public function newAction(Request $request)
     {
@@ -199,14 +196,20 @@ class ApplicationController extends Controller
                'applications' => $applicants,
         ]);
     }
-
-    public function logoutAction(Request $request)
-    { 
-       $token = $request->headers->get("Authorization");
-       $token = explode("Bearer ", $token);
-       $repo = $this->getDoctrine()->getRepository("WorkBundle:Blacklist");   
-       $repo->blackToken($token[1]); 
-       return $this->redirectToRoute('thank_you');
-    }
-
 }
+
+
+
+
+
+
+
+
+    // public function logoutAction(Request $request)
+    // { 
+    //    $token = $request->headers->get("Authorization");
+    //    $token = explode("Bearer ", $token);
+    //    $repo = $this->getDoctrine()->getRepository("WorkBundle:Blacklist");   
+    //    $repo->blackToken($token[1]); 
+    //    return $this->redirectToRoute('thank_you');
+    // }

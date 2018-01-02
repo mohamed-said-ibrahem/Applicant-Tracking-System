@@ -136,7 +136,7 @@ class ApplicationRepository extends \Doctrine\ORM\EntityRepository
     /**
      * Filter the applicants by a specific position.
      *
-     * @param $position   the Apllicant position.
+     * @param position   the Apllicant position.
      * 
      * @throws Some_Exception_Class  there is not exeptions
      * @author Mohamed Said
@@ -160,7 +160,7 @@ class ApplicationRepository extends \Doctrine\ORM\EntityRepository
     /**
      * Delete the applicant with a specific id.
      *
-     * @param $applicationId   the Apllicant id.
+     * @param applicationId   the Apllicant id.
      * 
      * @throws Some_Exception_Class  there is not exeptions
      * @author Mohamed Said
@@ -196,4 +196,3 @@ class ApplicationRepository extends \Doctrine\ORM\EntityRepository
         return $applications;
     }
 }
-

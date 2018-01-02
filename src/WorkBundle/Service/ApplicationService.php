@@ -11,8 +11,6 @@ use WorkBundle\Repository\ApplicationRepository;
 /**
  * Application Service class the main service layer for the Applicants.
  *
- * This service class contains Application&Business logic. 
- *
  * @Author Mohamed said.
  */ 
 class ApplicationService {
@@ -66,9 +64,7 @@ class ApplicationService {
                 $hiringWay,$interviewedBefore,$appliedPosition,$isWorkedBefore,$signature);
                 
        $education = $this->repo2->createEducation($applicant,$schoolName,$schoolFrom,$schoolTo,
-            $schoolDegree,$collegeName,$collegeFrom,$collageTo,$isGraduated,$graduateDegree);
-                
-        // return $education;
+            $schoolDegree,$collegeName,$collegeFrom,$collageTo,$isGraduated,$graduateDegree);           
     }
 
     /**
@@ -140,7 +136,7 @@ class ApplicationService {
     }
     
     /**
-     * Delete service.
+     * Delete application service.
      *
      * @param id      applicant id.
      * 
@@ -169,26 +165,36 @@ class ApplicationService {
     {
         return $this->repo->findAllApplications();   
     }
-
-    /**
-     * logout JWT revoke token service.
-     *
-     * @param token      user token.
-     * 
-     * @throws Some_Exception_Class  there is not exeptions
-     * @author Mohamed Said
-     * 
-     * there is no return for this method 
-     * blackToken is a method of BlackList Repository.
-     * 
-     * NOTE:: this should be removed from here to another service class 
-     * which will be used for the JWT TOKEN services.
-     * NOTE that JWT will be as a seperated layer inside the application.
-     */
-    public function logout($token)
-    {   
-        $repo = $this->repo->getRepository("WorkBundle:Blacklist");   
-        $repo->blackToken($token);   
-    }
-
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+    // /**
+    //  * logout JWT revoke token service.
+    //  *
+    //  * @param token      user token.
+    //  * 
+    //  * @throws Some_Exception_Class  there is not exeptions
+    //  * @author Mohamed Said
+    //  * 
+    //  * there is no return for this method 
+    //  * blackToken is a method of BlackList Repository.
+    //  * 
+    //  * NOTE:: this should be removed from here to another service class 
+    //  * which will be used for the JWT TOKEN services.
+    //  * NOTE that JWT will be as a seperated layer inside the application.
+    //  */
+    // public function logout($token)
+    // {   
+    //     $repo = $this->repo->getRepository("WorkBundle:Blacklist");   
+    //     $repo->blackToken($token);   
+    // }

@@ -24,37 +24,83 @@ use WorkBundle\Entity\Blacklist;
 use WorkBundle\Entity\User;
 use ReCaptcha\ReCaptcha; 
 
+/**
+ * Security controller class.
+ *
+ */ 
 class SecurityController extends BaseController
 {
   use \WorkBundle\Helper\ControllerHelper;
   
+  /**
+  * check for the reCAPATCHA validiation by comparing
+  * public key with the private key.
+  *
+  * @param request      the request to the action.
+  * 
+  * @throws Some_Exception_Class  there is not exeptions.
+  * @author Mohamed Said.
+  * 
+  * returns $resp the validiation response.
+  */  
   public function recapatchaCheck(Request $request){
-    $recaptcha = new ReCaptcha('6LftWT0UAAAAAIvF7gU8qscf-Vc5ZhkTTLBv490U');
+    $var = $this->getParameter('recapacha');
+    $recaptcha = new ReCaptcha($var);
     $resp = $recaptcha->verify($request->request
     ->get('g-recaptcha-response'), $request->getClientIp());
     return $resp;
   }
 
+  /**
+  * check for the user name existence.
+  *
+  * @param request      the request to the action.
+  * 
+  * @throws Some_Exception_Class  there is not exeptions.
+  * @author Mohamed Said.
+  * 
+  * returns $user an object of the user entity.
+  */  
   public function getUserInfo(Request $request){
     $username = $request->request->get('_username');
-    $password = $request->request->get('_password');
     $user = $this->getDoctrine()
     ->getRepository('WorkBundle:User')
     ->findOneBy(['username' => $username]);
     return $user;
   }
 
+  /**
+  * pass the token to a cookie so we can store it at local storage.
+  *
+  * @param request      the request to the action.
+  * 
+  * @throws Some_Exception_Class  there is not exeptions.
+  * @author Mohamed Said.
+  * 
+  * returns $user an object of the user entity.
+  */  
   public function setTokenLocal(Request $request,$user,$password){
-    global $error;    
       $isValid = $this->get('security.password_encoder')
       ->isPasswordValid($user, $password);
       if($isValid)
       {
         $token = $this->getToken($user);
-      setcookie("_token_jwt","$token",time()+9999);
+        setcookie("_token_jwt","$token",time()+9999);
       }
   }
 
+  /**
+  * check for the error type.
+  *
+  * @param request      the request to the action.
+  * @param authErrorKey the authuntication error key.
+  * @param session      the session which may contain an error.
+  *
+  * @throws Some_Exception_Class  there is not exeptions.
+  * @author Mohamed Said.
+  * 
+  * returns $error an error.
+  */  
   public function checkForErrorType(Request $request,$authErrorKey,$session)
   {
     if ($request->attributes->has($authErrorKey)) {
@@ -68,15 +114,32 @@ class SecurityController extends BaseController
       return $error;
   }
 
+  /**
+  * generate the token for the user when the successufl login happens.
+  *
+  * @param user   the login user object.
+  *
+  * @throws Some_Exception_Class  there is not exeptions.
+  * @author Mohamed Said.
+  * 
+  * returns JWT token generated.
+  */ 
   public function getToken(User $user)
   {
       return $this->container->get('lexik_jwt_authentication.encoder')
               ->encode([
                   'username' => $user->getUsername(),
-                  'exp' => $this->getTokenExpiryDateTime(),
-              ]);
+                  'exp' => $this->getTokenExpiryDateTime(),]);
   }
 
+  /**
+  * get the expired date for the JWT token generated.
+  *
+  * @throws Some_Exception_Class  there is not exeptions.
+  * @author Mohamed Said.
+  * 
+  * returns expired date & time for the JWT token so it will be revoked.
+  */ 
   private function getTokenExpiryDateTime()
   {
       $tokenTtl = $this->container->getParameter('lexik_jwt_authentication.token_ttl');
@@ -86,6 +149,15 @@ class SecurityController extends BaseController
       return $now->format('U');
   }
 
+  /**
+  * invoke JWT token generated.
+  * @param request   the request to the action.
+  *
+  * @throws Some_Exception_Class  there is not exeptions.
+  * @author Mohamed Said.
+  * 
+  * returns a redirection to thank you route after the user logout.
+  */ 
   public function blackTokenLogoutAction(Request $request)
   { 
     $data = $request->request->get('x');
@@ -95,11 +167,31 @@ class SecurityController extends BaseController
      return $this->redirectToRoute('thank_you');
   }
 
+  /**
+  * logout action with JWT revoke token.
+  * @param request   the request to the action.
+  *
+  * @throws Some_Exception_Class  there is not exeptions.
+  * @author Mohamed Said.
+  * 
+  * returns a redirection to revoke token Route.
+  */ 
   public function logoutCheckAction(Request $request)
   {
     return $this->render('check_logout.html.twig');
   }
 
+  /**
+  * handle the user login action.
+  * @param request   the request to the action.
+  *
+  * @throws INVALID_RECAPATCHA_EXCEPTION  there is not exeptions.
+  * @throws INVALID_CAPATCHA_EXCEPTION  there is not exeptions.
+  *
+  * @author Mohamed Said.
+  * 
+  * returns failed or success login state.
+  */ 
   public function loginAction(Request $request)
   {   
       $message =null;$invalidCaptchaEx=null;    
@@ -108,15 +200,15 @@ class SecurityController extends BaseController
       $lastUsernameKey = Security::LAST_USERNAME;
       $captcha = $this->get('captcha')->setConfig('LoginCaptcha');
     if ($request->isMethod('POST')) {$resp = $this->recapatchaCheck($request);
-    if (!$resp->isSuccess()) {
+    if (!$resp->isSuccess()) {      
       $message = new WorkBundleException(Exceptions::INVALID_RECAPATCHA_EXCEPTION);$message = $message->getMessage();}
+    else{
       $code = $request->request->get('captchaCode');
       $isHuman = $captcha->Validate($code);
-      $password = $request->request->get('_password');      
+      $password = $request->request->get('_password');
     if ($isHuman) {$user = $this->getUserInfo($request);
     if ($user) {$this->setTokenLocal($request,$user,$password);}
     return $this->redirectToRoute('fos_user_security_check',['request' => $request,], 307);}
-    else{
       $invalidCaptchaEx = new WorkBundleException(Exceptions::INVALID_CAPATCHA_EXCEPTION);
       $invalidCaptchaEx = $invalidCaptchaEx->getMessage();
       $request->attributes->set($authErrorKey, $invalidCaptchaEx);
