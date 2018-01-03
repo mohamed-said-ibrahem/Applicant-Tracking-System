@@ -44,27 +44,26 @@ class SecurityController extends BaseController
   {   
       $invalidReCaptchaExMsg =null;$invalidCaptchaExMsg=null;    
       $captcha = $this->get('captcha')->setConfig('LoginCaptcha');
-    if($request->isMethod('POST'))
-    {
-      if (!($this->recapatchaCheck($request))->isSuccess())
+   if($request->isMethod('POST'))
+   {
+      if (!($this->recapatchaCheck($request->request->get('g-recaptcha-response'),
+      $request->getClientIp()))->isSuccess())
       {$invalidReCaptchaExMsg = (new WorkBundleError(Error::INVALID_RECAPATCHA))->getMessage();}
       if(!($captcha->Validate($request->request->get('captchaCode'))))
       {$invalidCaptchaExMsg = (new WorkBundleError(Error::INVALID_CAPATCHA))->getMessage();}
-      if(is_null($invalidReCaptchaExMsg) && is_null($invalidCaptchaExMsg))
-      {
-        if ($this->getUserInfo($request))
+        if(is_null($invalidReCaptchaExMsg) && is_null($invalidCaptchaExMsg))
         {
-          $this->setTokenLocal($request,$this->getUserInfo($request),$request->request->get('_password'));
+          if ($this->getUserInfo($request->request->get('_username')))
+          {
+            $this->setTokenLocal($this->getUserInfo($request->request->get('_username')),$request->request->get('_password'));
+          }
+         return $this->redirectToRoute('fos_user_security_check',['request' => $request,], 307);        
         }
-        return $this->redirectToRoute('fos_user_security_check',['request' => $request,], 307);        
-      }
-      $request->getSession()->set(Security::LAST_USERNAME,$request->request->get('_username', null, true));
-    }
+   }
       $error = $this->checkForErrorType($request,Security::AUTHENTICATION_ERROR,$request->getSession()); 
-    
     if (!$error instanceof AuthenticationException){$error = null;}
      
-      $lastUsername = (null === $request->getSession()) ? '' : ($request->getSession())->get(Security::LAST_USERNAME);
+      $lastUsername = $request->request->get('_username', null, true);
       $csrfToken = $this->get('security.csrf.token_manager')->getToken('authenticate')->getValue();
     return $this->renderLogin(array('last_username' => $lastUsername,'error' => $error,'csrf_token' => $csrfToken,'captcha_html' => $captcha->Html(),'capatcha_error'=> $invalidReCaptchaExMsg,'capatcha_error_2'=> $invalidCaptchaExMsg,));
   }
@@ -73,33 +72,32 @@ class SecurityController extends BaseController
   * check for the reCAPATCHA validiation by comparing
   * public key with the private key.
   *
-  * @param request      the request to the action.
-  * 
+  * @param recapatchaResponse   recapacha handling response. 
+  * @param clientIp             client ip who has entered the recapacha.
+  *
   * @throws Some_Exception_Class  there is not exeptions.
   * @author Mohamed Said.
   * 
   * returns $resp the validiation response.
   */  
-  private function recapatchaCheck(Request $request){
+  private function recapatchaCheck($recapatchaResponse,$clientIp){
     $var = $this->getParameter('recapacha');
     $recaptcha = new ReCaptcha($var);
-    $resp = $recaptcha->verify($request->request
-    ->get('g-recaptcha-response'), $request->getClientIp());
+    $resp = $recaptcha->verify($recapatchaResponse,$clientIp);
     return $resp;
   }
 
   /**
   * check for the user name existence.
   *
-  * @param request      the request to the action.
+  * @param username      the request to the action.
   * 
   * @throws Some_Exception_Class  there is not exeptions.
   * @author Mohamed Said.
   * 
   * returns $user an object of the user entity.
   */  
-  private function getUserInfo(Request $request){
-    $username = $request->request->get('_username');
+  private function getUserInfo($username){
     $user = $this->getDoctrine()
     ->getRepository('WorkBundle:User')
     ->findOneBy(['username' => $username]);
@@ -109,14 +107,15 @@ class SecurityController extends BaseController
   /**
   * pass the token to a cookie so we can store it at local storage.
   *
-  * @param request      the request to the action.
-  * 
+  * @param user        user who is login now.
+  * @param password    user password.
+  *
   * @throws Some_Exception_Class  there is not exeptions.
   * @author Mohamed Said.
   * 
-  * returns $user an object of the user entity.
+  * there is no return type for this method.
   */  
-  private function setTokenLocal(Request $request,$user,$password){
+  private function setTokenLocal($user,$password){
       $isValid = $this->get('security.password_encoder')
       ->isPasswordValid($user, $password);
       if($isValid)
