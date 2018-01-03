@@ -42,30 +42,45 @@ class SecurityController extends BaseController
   */ 
   public function loginAction(Request $request)
   {   
-      $invalidReCaptchaExMsg =null;$invalidCaptchaExMsg=null;    
-      $captcha = $this->get('captcha')->setConfig('LoginCaptcha');
-   if($request->isMethod('POST'))
-   {
+    $reCaptchaExMsg =null;
+    $captchaExMsg=null;    
+    $captcha = $this->get('captcha')->setConfig('LoginCaptcha');
+    $lastUsername = $request->request->get('_username', null, true);
+    $csrfToken = $this->get('security.csrf.token_manager')->getToken('authenticate')->getValue();
+    $error = $this->checkForErrorType(
+      $request,Security::AUTHENTICATION_ERROR,
+      $request->getSession()
+    ); 
+    
+    if($request->isMethod('POST')) {
       if (!($this->recapatchaCheck($request->request->get('g-recaptcha-response'),
-      $request->getClientIp()))->isSuccess())
-      {$invalidReCaptchaExMsg = (new WorkBundleError(Error::INVALID_RECAPATCHA))->getMessage();}
-      if(!($captcha->Validate($request->request->get('captchaCode'))))
-      {$invalidCaptchaExMsg = (new WorkBundleError(Error::INVALID_CAPATCHA))->getMessage();}
-        if(is_null($invalidReCaptchaExMsg) && is_null($invalidCaptchaExMsg))
-        {
-          if ($this->getUserInfo($request->request->get('_username')))
-          {
-            $this->setTokenLocal($this->getUserInfo($request->request->get('_username')),$request->request->get('_password'));
-          }
-         return $this->redirectToRoute('fos_user_security_check',['request' => $request,], 307);        
+        $request->getClientIp()))->isSuccess()) {
+        $reCaptchaExMsg = (new WorkBundleError(Error::INVALID_RECAPATCHA))->getMessage();
+      }
+      if(!($captcha->Validate($request->request->get('captchaCode')))) {
+        $captchaExMsg = (new WorkBundleError(Error::INVALID_CAPATCHA))->getMessage();
+      }
+      if(is_null($reCaptchaExMsg) && is_null($captchaExMsg)) {
+        if ($this->getUserInfo($request->request->get('_username'))) {
+          $this->setTokenLocal($this->getUserInfo($request->request->get('_username')),$request->request->get('_password'));
         }
-   }
-      $error = $this->checkForErrorType($request,Security::AUTHENTICATION_ERROR,$request->getSession()); 
-    if (!$error instanceof AuthenticationException){$error = null;}
+        return $this->redirectToRoute('fos_user_security_check',['request' => $request,], 307);        
+      }
+    }
+    
+    if (!$error instanceof AuthenticationException) {
+      $error = null;
+    }
      
-      $lastUsername = $request->request->get('_username', null, true);
-      $csrfToken = $this->get('security.csrf.token_manager')->getToken('authenticate')->getValue();
-    return $this->renderLogin(array('last_username' => $lastUsername,'error' => $error,'csrf_token' => $csrfToken,'captcha_html' => $captcha->Html(),'capatcha_error'=> $invalidReCaptchaExMsg,'capatcha_error_2'=> $invalidCaptchaExMsg,));
+    return $this->renderLogin(
+      array(
+        'last_username' => $lastUsername,
+        'error' => $error,
+        'csrf_token' => $csrfToken,
+        'captcha_html' => $captcha->Html(),
+        'capatcha_error'=> $reCaptchaExMsg,
+        'capatcha_error_2'=> $captchaExMsg)
+      );
   }
 
   /**
