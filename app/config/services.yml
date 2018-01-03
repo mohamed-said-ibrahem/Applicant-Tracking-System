@@ -47,6 +47,7 @@ services:
             $repo: "@=service('doctrine.orm.entity_manager').getRepository('WorkBundle:Application')"
             $repo2: "@=service('doctrine.orm.entity_manager').getRepository('WorkBundle:Education')"
             $repo3: "@=service('doctrine.orm.entity_manager').getRepository('WorkBundle:Employee')"
+            $repo4: "@=service('doctrine.orm.entity_manager').getRepository('WorkBundle:User')"
 
 
     # add more services, or override services that need manual wiring
