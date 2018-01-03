@@ -27,7 +27,7 @@ class EmployeeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $var = $this->getParameter('page');       
-        $pu = new PageUtility($request, $em, 'WorkBundle:Employee', $var, 'id');
+        $pu = new PageUtility ($request, $em, 'WorkBundle:Employee', $var, 'id');
         return $this->render('employee/index.html.twig',[
                'employees' => $pu->getRecords(),
                'pager' => $pu->getDisplayParameters(),
@@ -47,20 +47,23 @@ class EmployeeController extends Controller
     public function newAction(Request $request)
     {
         $exception = null;
-      try{          
-        $employee = new Employee();
-        $form = $this->createForm('WorkBundle\Form\EmployeeType', $employee);
-        $form->handleRequest($request);
-      if ($form->isSubmitted() && $form->isValid())
-         {
+      try {          
+         $employee = new Employee();
+         $form = $this->createForm('WorkBundle\Form\EmployeeType', $employee);
+         $form->handleRequest($request);
+       if($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($employee);
             $em->flush();
-      return $this->redirectToRoute('applicat_done');
+          return $this->redirectToRoute('applicat_done');
          }
-         }
-      catch(\Doctrine\ORM\ORMException $e){$exception = $e;}
-      catch(\Exception $e){$exception = $e;} 
+       }
+      catch(\Doctrine\ORM\ORMException $e) {
+          $exception = $e;
+       }
+      catch(\Exception $e) {
+          $exception = $e;
+       } 
       return $this->render('employee/new.html.twig', array(
             'employee' => $employee,
             'form' => $form->createView(),
@@ -108,9 +111,10 @@ class EmployeeController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('employee_edit',
-             array('id' => $employee->getId()));
-        }
+            return $this->redirectToRoute('employee_edit',array(
+                'id' => $employee->getId(),
+            ));
+         }
 
         return $this->render('employee/edit.html.twig', array(
             'employee' => $employee,
@@ -134,11 +138,11 @@ class EmployeeController extends Controller
         $form = $this->createDeleteForm($employee);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($employee);
             $em->flush();
-        }
+         }
 
         return $this->redirectToRoute('employee_index');
     }
@@ -153,10 +157,9 @@ class EmployeeController extends Controller
     private function createDeleteForm(Employee $employee)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('employee_delete',
-            array('id' => $employee->getId())))
+            ->setAction($this->generateUrl('employee_delete',array(
+            'id' => $employee->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

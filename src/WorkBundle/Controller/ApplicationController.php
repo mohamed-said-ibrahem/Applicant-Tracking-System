@@ -53,17 +53,23 @@ class ApplicationController extends Controller
     public function newAction(Request $request)
     {
            $exception =null;
-        try{
+        try {
            $application = new Application();        
            $form = $this->createForm('WorkBundle\Form\ApplicationType', $application);
            $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()){
+          if ($form->isSubmitted() && $form->isValid()) {
            $em = $this->getDoctrine()->getManager();
            $em->persist($application);
            $em->flush();
-        return $this->redirectToRoute('applicat_done');}}
-        catch(\Doctrine\ORM\ORMException $e){$exception = $e;} 
-        catch(\Exception $e){$exception = $e;}
+          return $this->redirectToRoute('applicat_done');
+           }
+        }
+        catch(\Doctrine\ORM\ORMException $e) {
+            $exception = $e;
+         } 
+        catch(\Exception $e) {
+            $exception = $e;
+         }
           return $this->render('application/new.html.twig', array(
             'application' => $application,
             'form' => $form->createView(),
@@ -112,7 +118,7 @@ class ApplicationController extends Controller
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('applicat_edit', array('id' => $application->getId()));
-        }
+         }
 
         return $this->render('application/edit.html.twig', array(
             'application' => $application,
@@ -155,7 +161,7 @@ class ApplicationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($application);
             $em->flush();
-        }
+         }
         
         return $this->redirectToRoute('applicat_index');
     }
@@ -170,7 +176,9 @@ class ApplicationController extends Controller
     private function createDeleteForm(Application $application)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('applicat_delete', array('id' => $application->getId())))
+            ->setAction($this->generateUrl(
+                'applicat_delete',
+                 array('id' => $application->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;
@@ -188,7 +196,7 @@ class ApplicationController extends Controller
      */ 
     public function findByPositionAction(Request $request,$value)
     {
-        $val = (string)$value;
+        $val = (string) $value;
         $applicants = $this->get(ApplicationService::class)
         ->filterApplicantsByPosition($val);
 

@@ -11,11 +11,15 @@ use WorkBundle\Entity\Employee;
  * @Author Mohamed said.
  */ 
 class EmployeeService {
-    private $repo;private $repo2;private $repo3;
+    private $repo;
+    private $repo2;
+    private $repo3;
     
     public function __construct($repo,$repo2,$repo3) 
     {
-        $this->repo = $repo;$this->repo2 = $repo2;$this->repo3 = $repo3;
+        $this->repo = $repo;
+        $this->repo2 = $repo2;
+        $this->repo3 = $repo3;
     }
 
     /**
