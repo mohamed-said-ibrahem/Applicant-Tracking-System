@@ -14,20 +14,17 @@ class UserSubscriber implements EventSubscriberInterface {
         $this->tokenStorage = $tokenStorage;
     }
     
-    public function onKernelRequest(GetResponseEvent $event) {
-        // $to = $event->getToken();
-        // dump($to);die;
+    public function onKernelRequest(GetResponseEvent $event) 
+    {
         $token = $event->getRequest()->headers->get("Authorization");
         $token = explode("Bearer ", $token);        
-        // dump($token);die;
         if($token) {
             $black = $this->em->getRepository("WorkBundle:Blacklist");
             $black = $black->isBlack($token);
             if($black) {
-            echo "Access Denied";
-            die;
-            }
-        }
+                die;
+             }
+         }
     }
     
     public static function getSubscribedEvents()
