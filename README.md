@@ -7,7 +7,7 @@ The application has alot of amazing features such as the page pagination which u
 
 The application is totally secure from CSRF, XSS, SQL injection, Brute-Force and dictionary attacks, 
 
-The application has  JWT (Jason web token) (Generate-Update-Revoke) too which can be used so easily but i dont used it as the main method,
+The application has  JWT (Jason web token) (Generate-Update-Revoke) too which can be used so easily but i dont use it as the main method,
 
 The application can be modified easily to used as an API to fit your requirements.
 
