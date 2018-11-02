@@ -9,7 +9,7 @@ The application is totally secure from CSRF, XSS, SQL injection, Brute-Force and
 
 The application has  JWT (Jason web token) (Generate-Update-Revoke) too which can be used so easily but i dont use it as the main method,
 
-The application can be modified easily to used as an API to fit your requirements.
+The application can be modified easily to be used as an API to fit your requirements.
 
 
 # screenshots
